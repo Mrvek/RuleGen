@@ -13,10 +13,14 @@ public class TemplateBuilderService {
 
     public Boolean checkForNewTemplates() {
         List<TemplateDummy> templates = datapuller.getNewTemplates(TemplateService.getTemplateNames());
+        System.out.println("Checking for new templates...");
         if (templates.isEmpty()) {
             return false;
-        }else {
-            templates.forEach(this::buildTemplate);
+        } else {
+            templates.forEach((td) -> {
+                buildTemplate(td);
+                System.out.println("\tTemplate found: " + td.name);
+            });
             return true;
         }
     }

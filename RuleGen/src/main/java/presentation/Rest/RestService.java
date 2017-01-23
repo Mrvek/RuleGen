@@ -12,6 +12,7 @@ public class RestService {
         keys.add(1);
         BRDataFetch dataFetch = new BRDataFetch();
         String result = dataFetch.getData(keys);
-        System.out.println(result);
+        System.out.println("Generating code...");
+        System.out.println(result + "\n");
     }
 }

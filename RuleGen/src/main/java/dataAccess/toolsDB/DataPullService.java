@@ -12,25 +12,8 @@ import java.util.Map;
  */
 public class DataPullService {
     private DataPull puller = new DataPull();
-    public List<BRDefinition> getData(int primaryKey) {
-        List<BRDefinition> result = new ArrayList<>();
-
-//        temporary data for testing
-        List<String> values = new ArrayList<String>();
-        values.add("number");
-        values.add("1");
-        BRDefinition einz = new BRDefinition("", values, "=", "Oracle 11g", "Compare", "number", null, null, null, null, "table");
-        result.add(einz);
-
-        List<String> valuestoo = new ArrayList<>();
-        valuestoo.add("2");
-        valuestoo.add("4");
-        List<String> triggers = new ArrayList<>();
-        triggers.add("insert");
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("[Message]", "Cruel");
-        BRDefinition zwei = new BRDefinition("", valuestoo, "BETWEEN", "Oracle 11g", "Range", "number", triggers, "HELLO [Message], [Message] WORLD!", tokens, "Error", "table");
-        result.add(zwei);
+    public BRDefinition getData(int primaryKey) {
+        BRDefinition result = puller.getBusinessRule(primaryKey);
         return result;
     }
 

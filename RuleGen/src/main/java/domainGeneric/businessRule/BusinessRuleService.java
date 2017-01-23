@@ -1,7 +1,6 @@
 package domainGeneric.businessRule;
 
 
-
 import dataAccess.toolsDB.BRDefinition;
 import dataAccess.toolsDB.DataPullService;
 import domainGeneric.businessRule.BR.BusinessRule;
@@ -22,34 +21,35 @@ public class BusinessRuleService {
     private DataPullService datapuller = new DataPullService();
 
     public void createBR(int primaryKey) {
-        List<BRDefinition> myData = datapuller.getData(primaryKey);
-        for(BRDefinition BRData: myData) {
-            BRRuleType ruletype = null;
-            switch (BRData.BRRuleType) {
-                case ("Compare"):
-                    ruletype = new Compare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
-                    break;
-                case ("Range"):
-                    ruletype = new Range(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
-                    break;
-            }
-            if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
-                BusinessRule rule = new Constraint(ruletype, BRData.databasetype, BRData.target, BRData.tablename);
-                rules.add(rule);
+        BRDefinition BRData = datapuller.getData(primaryKey);
+        BRRuleType ruletype = null;
 
-            } else {
-                BusinessRule rule = new Trigger(ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
-                rules.add(rule);
-            }
+        switch (BRData.BRRuleType) {
+            case ("Compare"):
+                ruletype = new Compare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
+                break;
+            case ("Range"):
+                ruletype = new Range(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
+                break;
+        }
+
+        if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
+            BusinessRule rule = new Constraint(ruletype, BRData.databasetype, BRData.target, BRData.tablename);
+            rules.add(rule);
+
+        } else {
+            BusinessRule rule = new Trigger(ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
+            rules.add(rule);
         }
     }
+
 
     public String getAllCode() {
         String result = null;
         for (BusinessRule i : rules) {
-            if (result ==  null) {
+            if (result == null) {
                 result = i.getCode();
-            }else {
+            } else {
                 result += "\n\n" + i.getCode();
             }
         }
