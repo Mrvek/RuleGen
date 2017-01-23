@@ -1,0 +1,11 @@
+[{"Name":"Oracle 11g",
+    "OperatorTranslations":{"=":"=="},
+    "Trigger":"CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception",
+    "Warning":" EXCEPTION when E_except then raise_application_error(-2000, ?); END;",
+    "Error":" EXCEPTION when E_except then raise_application_error(-2000, ?); END;",
+    "Constraint":"ALTER TABLE ? ADD CONSTRAINT ? CHECK (?);",
+    "ConstraintCompare":"? ? ?",
+    "TriggerCompare":" BEGIN IF (!(? ? ?)) THEN E_exception; END IF;",
+    "ConstraintRange":"? ? ? AND ?",
+    "TriggerRange":" BEGIN IF(!(? ? ? AND ?)) THEN E_exception; END IF;"
+}]
