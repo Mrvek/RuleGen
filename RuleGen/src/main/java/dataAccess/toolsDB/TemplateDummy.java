@@ -16,4 +16,17 @@ public class TemplateDummy {
     public String triggercompare;
     public String constraintRange;
     public String triggerRange;
+
+    public TemplateDummy(String name, Map<String, String> operatorTranslations, String trigger, String warning, String error, String constraint, String constraintcompare, String triggercompare, String constraintRange, String triggerRange) {
+        this.name = name;
+        this.operatorTranslations = operatorTranslations;
+        this.trigger = trigger;
+        this.warning = warning;
+        this.error = error;
+        this.constraint = constraint;
+        this.constraintcompare = constraintcompare;
+        this.triggercompare = triggercompare;
+        this.constraintRange = constraintRange;
+        this.triggerRange = triggerRange;
+    }
 }

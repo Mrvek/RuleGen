@@ -26,7 +26,7 @@ public class UpdateService {
 
     private boolean checkTime() {
         Calendar checkwith = Calendar.getInstance();
-        if (dateTime.compareTo(checkwith) >= 3600000) {
+        if (dateTime == null || dateTime.compareTo(checkwith) >= 3600000) {
             return true;
         }else return false;
 

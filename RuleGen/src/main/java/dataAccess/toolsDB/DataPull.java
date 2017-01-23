@@ -11,11 +11,13 @@ public class DataPull {
     public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
         List<TemplateDummy> templates = new ArrayList<>();
         config();
-        return null;
+//        TODO: get data out of database
+        return templates;
     }
 
     private void config() {
         if (config == null) {
+            config = new DBConfig();
         }
     }
 }
