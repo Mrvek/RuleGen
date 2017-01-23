@@ -1,23 +1,29 @@
 package taskSpecific.BusinessRuleGenerate;
 
-import domainGeneric.businessRule.BusinessRuleService;
+import dataAccess.DataPushService;
+import domainGeneric.BusinessRuleService;
 import taskSpecific.TemplateUpdate.UpdateService;
 
-import java.awt.*;
 import java.util.List;
 
 /**
  * Created by Mitchell on 18/01/2017.
  */
 public class BRController {
-    private BusinessRuleService service = new BusinessRuleService();
+    private BusinessRuleService BRService = new BusinessRuleService();
+    private DataPushService DPushService = new DataPushService();
+
     public String Generate(List<Integer> i) {
         UpdateService template = new UpdateService();
         template.update();
+        System.out.println("Gathering Business Rules...");
         for (int key : i) {
-            service.createBR(key);
+            BRService.createBR(key);
         }
-        String result = service.getAllCode();
+        System.out.println("");
+        String result = BRService.getAllCode();
+        System.out.println("Pushing code to TargetDatabase...");
+        DPushService.Send(result);
         return result;
     }
 }

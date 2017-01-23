@@ -1,6 +1,6 @@
 package domainGeneric.businessRule.RuleType;
 
-import domainGeneric.Template.TemplateService;
+import domainGeneric.TemplateService;
 
 /**
  * Created by Mitchell on 19/01/2017.

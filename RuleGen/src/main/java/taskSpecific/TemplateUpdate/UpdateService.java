@@ -1,6 +1,6 @@
 package taskSpecific.TemplateUpdate;
 
-import domainGeneric.Template.TemplateBuilderService;
+import domainGeneric.TemplateBuilderService;
 
 import java.util.Calendar;
 
@@ -17,8 +17,9 @@ public class UpdateService {
 
             if (check) {
                 setTime();
+                System.out.println("Check done on: " + dateTime.getTime() + "\n");
             } else {
-                System.out.print("No new templates found");
+                System.out.print("No new templates found\n");
             }
         }
 

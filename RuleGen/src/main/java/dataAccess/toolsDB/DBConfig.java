@@ -23,10 +23,10 @@ public class DBConfig {
             prop.load(reader);
 
             //get the property value and print it out
-            System.out.println("reading configuration for tools database:");
-            System.out.println("database: " + prop.getProperty("database"));
-            System.out.println("dbuser: " + prop.getProperty("dbuser"));
-            System.out.println("dbpassword: " + prop.getProperty("dbpassword"));
+            System.out.println("reading configuration for tools database...");
+            System.out.println("\tdatabase: " + prop.getProperty("database"));
+            System.out.println("\tdbuser: " + prop.getProperty("dbuser"));
+            System.out.println("\tdbpassword: " + prop.getProperty("dbpassword") + "\n");
 
             this.database = prop.getProperty("database");
             this.dbuser = prop.getProperty("dbuser");

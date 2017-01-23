@@ -1,7 +1,8 @@
-package domainGeneric.Template;
+package domainGeneric;
 
-import dataAccess.toolsDB.DataPullService;
+import dataAccess.DataPullService;
 import dataAccess.toolsDB.TemplateDummy;
+import domainGeneric.Template.Template;
 
 import java.util.List;
 
@@ -13,10 +14,14 @@ public class TemplateBuilderService {
 
     public Boolean checkForNewTemplates() {
         List<TemplateDummy> templates = datapuller.getNewTemplates(TemplateService.getTemplateNames());
+        System.out.println("Checking for new templates...");
         if (templates.isEmpty()) {
             return false;
-        }else {
-            templates.forEach(this::buildTemplate);
+        } else {
+            templates.forEach((td) -> {
+                buildTemplate(td);
+                System.out.println("\tTemplate found: " + td.name);
+            });
             return true;
         }
     }
