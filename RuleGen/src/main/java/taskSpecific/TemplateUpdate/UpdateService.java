@@ -1,6 +1,6 @@
 package taskSpecific.TemplateUpdate;
 
-import domainGeneric.Template.TemplateBuilderService;
+import domainGeneric.TemplateBuilderService;
 
 import java.util.Calendar;
 

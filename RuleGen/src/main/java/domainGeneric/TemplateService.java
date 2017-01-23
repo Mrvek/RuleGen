@@ -1,4 +1,6 @@
-package domainGeneric.Template;
+package domainGeneric;
+
+import domainGeneric.Template.Template;
 
 import java.util.ArrayList;
 import java.util.HashMap;

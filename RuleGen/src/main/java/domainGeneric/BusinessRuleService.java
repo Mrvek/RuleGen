@@ -1,8 +1,8 @@
-package domainGeneric.businessRule;
+package domainGeneric;
 
 
 import dataAccess.toolsDB.BRDefinition;
-import dataAccess.toolsDB.DataPullService;
+import dataAccess.DataPullService;
 import domainGeneric.businessRule.BR.BusinessRule;
 import domainGeneric.businessRule.BR.Constraint;
 import domainGeneric.businessRule.BR.Trigger;

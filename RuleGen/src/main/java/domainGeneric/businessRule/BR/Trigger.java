@@ -1,7 +1,7 @@
 package domainGeneric.businessRule.BR;
 
 import domainGeneric.businessRule.RuleType.BRRuleType;
-import domainGeneric.Template.TemplateService;
+import domainGeneric.TemplateService;
 
 import java.util.List;
 import java.util.Map;

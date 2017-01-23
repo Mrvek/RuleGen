@@ -1,0 +1,28 @@
+package dataAccess;
+
+
+
+import dataAccess.toolsDB.BRDefinition;
+import dataAccess.toolsDB.DataPull;
+import dataAccess.toolsDB.TemplateDummy;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Mitchell on 18/01/2017.
+ */
+public class DataPullService {
+    private DataPull puller = new DataPull();
+    public BRDefinition getData(int primaryKey) {
+        BRDefinition result = puller.getBusinessRule(primaryKey);
+        return result;
+    }
+
+    public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
+        List<TemplateDummy> templates = puller.getNewTemplates(templateNames);
+        return templates;
+    }
+}

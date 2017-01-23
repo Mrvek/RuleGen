@@ -1,7 +1,7 @@
 package taskSpecific.BusinessRuleGenerate;
 
-import dataAccess.projectDB.DataPushService;
-import domainGeneric.businessRule.BusinessRuleService;
+import dataAccess.DataPushService;
+import domainGeneric.BusinessRuleService;
 import taskSpecific.TemplateUpdate.UpdateService;
 
 import java.util.List;
@@ -16,10 +16,13 @@ public class BRController {
     public String Generate(List<Integer> i) {
         UpdateService template = new UpdateService();
         template.update();
+        System.out.println("Gathering Business Rules...");
         for (int key : i) {
             BRService.createBR(key);
         }
+        System.out.println("");
         String result = BRService.getAllCode();
+        System.out.println("Pushing code to TargetDatabase...");
         DPushService.Send(result);
         return result;
     }
