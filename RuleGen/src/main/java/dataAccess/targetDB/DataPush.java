@@ -1,4 +1,4 @@
-package main.java.dataAccess.projectDB;
+package dataAccess.targetDB;
 
 /**
  * Created by Mitchell on 18/01/2017.
