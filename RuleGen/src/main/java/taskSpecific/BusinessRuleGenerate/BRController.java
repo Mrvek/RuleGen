@@ -28,8 +28,6 @@ public class BRController {
         System.out.println("Pushing code to TargetDatabase...");
         DPushService.Send(code);
 
-
-
         return result;
     }
 }

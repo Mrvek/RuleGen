@@ -1,5 +1,6 @@
 package presentation;
 
+import org.json.simple.JSONArray;
 import presentation.Rest.BRDataFetch;
 import spark.Response;
 
@@ -17,13 +18,16 @@ public class RestService {
         List<String> keys = new ArrayList<>();
         keys.add("1");
         BRDataFetch dataFetch = new BRDataFetch();
-        String result = dataFetch.getData(keys, "1");
+        JSONArray result = dataFetch.getData(keys, "1");
         System.out.println("Generating code...");
         System.out.println(result + "\n");
 
         post("/hello/:BR", (request, response) -> {
-            Response answer = dataFetch.getBR(request, response);
+            JSONArray answer = dataFetch.getBR(request, response);
             return answer;
+        });
+        after((req, res) -> {
+            res.type("application/json");
         });
 
 //        TODO: REST!

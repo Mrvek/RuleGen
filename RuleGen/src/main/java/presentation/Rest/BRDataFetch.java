@@ -18,7 +18,7 @@ public class BRDataFetch {
         return controller.Generate(keys, projectid);
     }
 
-    public Response getBR(Request request, Response response) {
+    public JSONArray getBR(Request request, Response response) {
         Response result = response;
         String key = request.attribute("BusinessRules");
         String projectid = request.attribute("project");
@@ -26,9 +26,6 @@ public class BRDataFetch {
         keys.add(key);
         JSONArray businessRule = getData(keys, projectid);
 
-
-        return result;
+        return businessRule;
     }
-
-
 }

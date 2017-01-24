@@ -16,6 +16,7 @@ public abstract class BusinessRule {
     protected NameGen name;
     protected String initials;
     protected TemplateService manager;
+    protected String Message = "not yet initiated";
 
 
     public abstract String getCode();
@@ -28,5 +29,7 @@ public abstract class BusinessRule {
         return projectid;
     }
 
-    public abstract String getMessage();
+    public String getMessage() {
+        return Message;
+    }
 }

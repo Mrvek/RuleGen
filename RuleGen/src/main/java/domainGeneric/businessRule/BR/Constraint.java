@@ -7,7 +7,6 @@ import domainGeneric.TemplateService;
  * Created by Mitchell on 18/01/2017.
  */
 public class Constraint extends BusinessRule {
-    private String Message = "not yet initiated";
 
     public Constraint(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String table) {
         this.ruletype = ruletype;
@@ -26,11 +25,7 @@ public class Constraint extends BusinessRule {
     public String getCode() {
         String ruletypecode = ruletype.getConstraintCode();
         String result = manager.getConstraintCode(name.toString(), table, ruletypecode, databasetype, target);
+        Message = "Code Generated";
         return result;
-    }
-
-    @Override
-    public String getMessage() {
-        return Message;
     }
 }

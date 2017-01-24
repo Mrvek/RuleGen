@@ -14,7 +14,6 @@ public class Trigger extends BusinessRule {
     private String ExceptionMessage;
     private Map<String, String> tokens;
     private List<String> trigger;
-    private String Message = "not yet initiated";
 
     public Trigger(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger, String table) {
         this.target = target;
@@ -40,11 +39,7 @@ public class Trigger extends BusinessRule {
         }else {
             result += manager.getErrorCode(tokens, ExceptionMessage, databasetype);
         }
+        Message = "Code Generated";
         return result;
-    }
-
-    @Override
-    public String getMessage() {
-        return Message;
     }
 }
