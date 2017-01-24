@@ -42,7 +42,7 @@ public class StructureDAO extends BaseDAO {
                 table.setName(dbResultSet.getString("table_name"));
                 result.add(table);
             }
-            
+           
         } catch (SQLException ex) {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,9 +75,11 @@ public class StructureDAO extends BaseDAO {
                         break;
                     }
                 }
-                
+
                 attribute.setSupporteddatatype(real_sdt);
                 results.add(attribute);
+                
+                
             }
             
         } catch (SQLException ex) {

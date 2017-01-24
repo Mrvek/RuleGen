@@ -37,6 +37,7 @@ public class TargetAnalysisController {
         ArrayList<Table> tables = sdao.getTables();
         
         for (Table s : tables) {
+            System.out.println("Table: " + s.getName());
             results.put(s, sdao.getAttribute(s, database));
         }
         
