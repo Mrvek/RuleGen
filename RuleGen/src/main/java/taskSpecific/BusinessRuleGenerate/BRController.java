@@ -2,6 +2,7 @@ package taskSpecific.BusinessRuleGenerate;
 
 import dataAccess.DataPushService;
 import domainGeneric.BusinessRuleService;
+import org.json.simple.JSONArray;
 import taskSpecific.TemplateUpdate.UpdateService;
 
 import java.util.List;
@@ -13,17 +14,20 @@ public class BRController {
     private BusinessRuleService BRService = new BusinessRuleService();
     private DataPushService DPushService = new DataPushService();
 
-    public String Generate(List<Integer> i) {
+
+    public JSONArray Generate(List<String> i, String projectid) {
         UpdateService template = new UpdateService();
         template.update();
         System.out.println("Gathering Business Rules...");
-        for (int key : i) {
-            BRService.createBR(key);
+        for (String key : i) {
+            BRService.createBR(key, projectid);
         }
         System.out.println("");
-        String result = BRService.getAllCode();
+        JSONArray result = BRService.getinfo();
+        String code = BRService.getAllCode();
         System.out.println("Pushing code to TargetDatabase...");
-        DPushService.Send(result);
+        DPushService.Send(code);
+
         return result;
     }
 }

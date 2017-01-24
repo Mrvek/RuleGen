@@ -15,7 +15,7 @@ public class Trigger extends BusinessRule {
     private Map<String, String> tokens;
     private List<String> trigger;
 
-    public Trigger(BRRuleType ruletype, String databasetype, String target, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger, String table) {
+    public Trigger(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger, String table) {
         this.target = target;
         this.severity = severity;
         this.ExceptionMessage = exceptionMessage;
@@ -26,6 +26,8 @@ public class Trigger extends BusinessRule {
         this.ruletype = ruletype;
         this.name = new NameGen(ruletype.getShortname(), databasetype);
         this.manager = new TemplateService();
+        this.projectid = projectid;
+        this.primarykey = primarykey;
     }
 
     @Override
@@ -37,6 +39,7 @@ public class Trigger extends BusinessRule {
         }else {
             result += manager.getErrorCode(tokens, ExceptionMessage, databasetype);
         }
+        Message = "Code Generated";
         return result;
     }
 }

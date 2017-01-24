@@ -8,7 +8,7 @@ import domainGeneric.TemplateService;
  */
 public class Constraint extends BusinessRule {
 
-    public Constraint(BRRuleType ruletype, String databasetype, String target, String table) {
+    public Constraint(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String table) {
         this.ruletype = ruletype;
         this.databasetype = databasetype;
         this.target = target;
@@ -16,6 +16,8 @@ public class Constraint extends BusinessRule {
         this.initials = "CSTR";
         this.name = new NameGen(ruletype.getShortname(), databasetype);
         this.manager = new TemplateService();
+        this.projectid = projectid;
+        this.primarykey = primarykey;
     }
 
 
@@ -23,6 +25,7 @@ public class Constraint extends BusinessRule {
     public String getCode() {
         String ruletypecode = ruletype.getConstraintCode();
         String result = manager.getConstraintCode(name.toString(), table, ruletypecode, databasetype, target);
+        Message = "Code Generated";
         return result;
     }
 }

@@ -1,7 +1,11 @@
 package presentation.Rest;
 
+import org.json.simple.JSONArray;
+import spark.Request;
+import spark.Response;
 import taskSpecific.BusinessRuleGenerate.BRController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +14,18 @@ import java.util.List;
 public class BRDataFetch {
     private BRController controller = new BRController();
 
-    public String getData(List<Integer> keys) {
-        return controller.Generate(keys);
+    public JSONArray getData(List<String> keys, String projectid) {
+        return controller.Generate(keys, projectid);
+    }
+
+    public JSONArray getBR(Request request, Response response) {
+        Response result = response;
+        String key = request.attribute("BusinessRules");
+        String projectid = request.attribute("project");
+        List<String> keys = new ArrayList<>();
+        keys.add(key);
+        JSONArray businessRule = getData(keys, projectid);
+
+        return businessRule;
     }
 }

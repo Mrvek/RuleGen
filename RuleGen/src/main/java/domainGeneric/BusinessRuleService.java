@@ -6,9 +6,10 @@ import dataAccess.DataPullService;
 import domainGeneric.businessRule.BR.BusinessRule;
 import domainGeneric.businessRule.BR.Constraint;
 import domainGeneric.businessRule.BR.Trigger;
+import domainGeneric.businessRule.RuleType.AttributeCompare;
 import domainGeneric.businessRule.RuleType.BRRuleType;
-import domainGeneric.businessRule.RuleType.Compare;
-import domainGeneric.businessRule.RuleType.Range;
+import domainGeneric.businessRule.RuleType.AttributeRange;
+import org.json.simple.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,26 +20,27 @@ import java.util.List;
 public class BusinessRuleService {
     private List<BusinessRule> rules = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
+    private BRToJSONConverter jsonConverter;
 
-    public void createBR(int primaryKey) {
-        BRDefinition BRData = datapuller.getData(primaryKey);
+    public void createBR(String primaryKey, String projectid) {
+        BRDefinition BRData = datapuller.getData(primaryKey, projectid);
         BRRuleType ruletype = null;
 
         switch (BRData.BRRuleType) {
-            case ("Compare"):
-                ruletype = new Compare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
+            case ("AttributeCompare"):
+                ruletype = new AttributeCompare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
                 break;
-            case ("Range"):
-                ruletype = new Range(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
+            case ("AttributeRange"):
+                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
                 break;
         }
 
         if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
-            BusinessRule rule = new Constraint(ruletype, BRData.databasetype, BRData.target, BRData.tablename);
+            BusinessRule rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
             rules.add(rule);
 
         } else {
-            BusinessRule rule = new Trigger(ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
+            BusinessRule rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
             rules.add(rule);
         }
     }
@@ -53,6 +55,15 @@ public class BusinessRuleService {
                 result += "\n\n" + i.getCode();
             }
         }
+
+        System.out.println("Pushing code to ToolDatabase...");
+//        TODO: push to toolDatabase
+        System.out.println("ERROR 404: Code Implementation not found!");
         return result;
+    }
+
+    public JSONArray getinfo() {
+        jsonConverter = new BRToJSONConverter(rules);
+        return jsonConverter.getResult();
     }
 }
