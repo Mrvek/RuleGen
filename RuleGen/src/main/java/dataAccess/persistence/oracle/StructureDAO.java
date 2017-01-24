@@ -11,7 +11,6 @@ import domainGeneric.project.Table;
 import domainGeneric.supported_units.SupportedDatabases;
 import domainGeneric.supported_units.SupportedDatatypes;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class StructureDAO extends BaseDAO {
         ArrayList<Table> result = new ArrayList<>();
         
         try (Connection con = super.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT table_name as table_name FROM all_tables where owner = ?");
+            java.sql.PreparedStatement ps = con.prepareStatement("SELECT table_name as table_name FROM all_tables where owner = ?");
             ps.setString(1, super.getDB_USER().toUpperCase());
             ResultSet dbResultSet = ps.executeQuery();
             
@@ -51,23 +50,31 @@ public class StructureDAO extends BaseDAO {
     }
     
     public ArrayList<Attribute> getAttribute(Table table, SupportedDatabases database) {
+        SupportedUnitsDAO sdao = new SupportedUnitsDAO();
         ArrayList<Attribute> results = new ArrayList<>();
         
-        
-        
         try (Connection con = super.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT column_name, data_type from user_tab_columns where table_name = ?");
-            ps.setString(1, table.getName().toUpperCase());
+            java.sql.PreparedStatement ps = con.prepareStatement("SELECT column_name, data_type from user_tab_columns where table_name = ?");
+            ps.setString(1, table.getName());
             ResultSet dbResultSet = ps.executeQuery();
-
+            
             while (dbResultSet.next()) {
                 Attribute attribute = new Attribute();
                 attribute.setName(dbResultSet.getString("column_name"));
                 attribute.setTable(table);
                 
                 String datatypestring = dbResultSet.getString("data_type");
- 
-                SupportedDatatypes real_sdt = new SupportedDatatypes(datatypestring);
+                
+                ArrayList<SupportedDatatypes> sdt = sdao.getSupportedDataTypesByDB(database.getId());
+                
+                SupportedDatatypes real_sdt = null;
+                
+                for (SupportedDatatypes x : sdt) {
+                    if (x.getDatatype().equals(datatypestring)) {
+                        real_sdt = x;
+                        break;
+                    }
+                }
 
                 attribute.setSupporteddatatype(real_sdt);
                 results.add(attribute);
@@ -80,4 +87,4 @@ public class StructureDAO extends BaseDAO {
         }
         return results;
     }
-}   
+}

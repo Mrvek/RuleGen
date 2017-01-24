@@ -5,12 +5,11 @@
  */
 package dataAccess.persistence.oracle;
 
-import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
 import domainGeneric.project.Attribute;
 import domainGeneric.project.Table;
 import domainGeneric.supported_units.SupportedDatabases;
-import domainGeneric.supported_units.SupportedDatatypes;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -33,32 +32,13 @@ public class TargetAnalysisController {
         sdao = new StructureDAO(hostname, port, serviceName, username, password);
     }
     
-    public ArrayList<Table> getTargetDatabaseStructure(SupportedDatabases database) {
-        ArrayList<Table> results = sdao.getTables();
+    public HashMap<Table, ArrayList<Attribute>> getTargetDatabaseStructure(SupportedDatabases database) {
+        HashMap<Table, ArrayList<Attribute>> results = new HashMap<>();
+        ArrayList<Table> tables = sdao.getTables();
         
-        // Insert all attributes from each table.
-        for (Table s : results) {
-            ArrayList<Attribute> atrs = sdao.getAttribute(s, database);
-            
-            for (Attribute a : atrs) {
-                s.addAttribute(a);
-            }
-        }
-        
-        SupportedUnitsDAO sudao = new SupportedUnitsDAO();
-        ArrayList<SupportedDatatypes> sdt = sudao.getSupportedDataTypesByDB(database);
-        
-        //Link all supporteddatatypes with each attribute.
-        for (Table s : results) {
-            for (Attribute x : s.getAllAttributes()) {
-                for (SupportedDatatypes z : sdt) {
-                    if (x.getSupporteddatatype().getDatatype().equals(z.getDatatype())) {
-                        x.setSupporteddatatype(z); //Linking datatype Z with attribute X.
-                        break; //Break when datatype has been linked.
-                    }
-                }
-                        
-            }
+        for (Table s : tables) {
+            System.out.println("Table: " + s.getName());
+            results.put(s, sdao.getAttribute(s, database));
         }
         
         return results;
