@@ -7,6 +7,8 @@ import domainGeneric.TemplateService;
  * Created by Mitchell on 19/01/2017.
  */
 public abstract class BusinessRule {
+    protected String primarykey;
+    protected String projectid;
     protected BRRuleType ruletype;
     protected String databasetype;
     protected String target;
@@ -17,4 +19,14 @@ public abstract class BusinessRule {
 
 
     public abstract String getCode();
+
+    public String getPrimarykey() {
+        return primarykey;
+    }
+
+    public String getProjectid() {
+        return projectid;
+    }
+
+    public abstract String getMessage();
 }

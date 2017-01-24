@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class DataPullService {
     private DataPull puller = new DataPull();
-    public BRDefinition getData(int primaryKey) {
-        BRDefinition result = puller.getBusinessRule(primaryKey);
+    public BRDefinition getData(String primaryKey, String projectid) {
+        BRDefinition result = puller.getBusinessRule(primaryKey, projectid);
         return result;
     }
 

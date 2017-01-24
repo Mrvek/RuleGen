@@ -40,7 +40,7 @@ public class DataPull {
         }
     }
 
-    public BRDefinition getBusinessRule(int primaryKey) {
+    public BRDefinition getBusinessRule(String primaryKey, String projectid) {
 //        Temporary data for testing
         List<String> valuestoo = new ArrayList<>();
         valuestoo.add("2");
