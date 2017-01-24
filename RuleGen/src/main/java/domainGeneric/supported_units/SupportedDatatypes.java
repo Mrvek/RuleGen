@@ -20,6 +20,10 @@ public class SupportedDatatypes {
         this.database = database;
     }
 
+    public SupportedDatatypes(String datatype) {
+        this.datatype = datatype;
+    }
+
     public int getId() {
         return id;
     }
