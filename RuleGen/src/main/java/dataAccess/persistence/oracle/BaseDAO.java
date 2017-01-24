@@ -25,10 +25,10 @@ public class BaseDAO {
         DB_CONNECTION = "jdbc:oracle:thin:@//" + hostname + ":" + port + "/" + serviceName;
         DB_USER = username;
         DB_PASSWORD = password;
-         
+        
     }
     
-    protected static Connection getConnection() {
+    protected Connection getConnection() {
 
         Connection dbConnection = null;
 
@@ -43,7 +43,7 @@ public class BaseDAO {
         }
 
         try {
-
+            
                 dbConnection = DriverManager.getConnection(
                                 DB_CONNECTION, DB_USER,DB_PASSWORD);
                 return dbConnection;
@@ -58,7 +58,7 @@ public class BaseDAO {
 
     }
 
-    public static String getDB_USER() {
+    public String getDB_USER() {
         return DB_USER;
     }
     

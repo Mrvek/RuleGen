@@ -24,9 +24,14 @@ import java.util.logging.Logger;
 public class SupportedUnitsDAO extends BaseDAO {
     
     private static DBConfig dbc = new DBConfig();
+    private static String dbhost = dbc.getDbhost();
+    private static String dbport = dbc.getDbport();
+    private static String dbservicename = dbc.getDbservicename();
+    private static String dbuser = dbc.getDbuser();
+    private static String dbpassword = dbc.getDbpassword();   
     
     public SupportedUnitsDAO() { 
-        super(dbc.getDbhost(), dbc.getDbport(), dbc.getDbservicename(), dbc.getDbuser(), dbc.getDbpassword());
+        super(dbhost, dbport, dbservicename, dbuser, dbpassword);
     }
     
     public ArrayList<SupportedDatabases> getAllSupportedDatabases() {
@@ -74,16 +79,16 @@ public class SupportedUnitsDAO extends BaseDAO {
         return null;
     }
     
-    public ArrayList<SupportedDatatypes> getSupportedDataTypesByDB(int id) {
+    public ArrayList<SupportedDatatypes> getSupportedDataTypesByDB(SupportedDatabases database) {
         ArrayList<SupportedDatatypes> result = new ArrayList<>();
-        
+            
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDDATATYPES.SUPPORTEDDATATYPES_ID as SUPPORTEDDATATYPES_ID," +
                                                                 " SUPPORTEDDATATYPES.DATATYPE as DATATYPE," +
                                                                 " SUPPORTEDDATATYPES.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID " +
                                                                 " from SUPPORTEDDATATYPES SUPPORTEDDATATYPES" +
                                                                 " WHERE SUPPORTEDDATATYPES.SUPPORTEDDATABASES_ID = ?");
-            ps.setInt(1, id);
+            ps.setInt(1, database.getId());
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {

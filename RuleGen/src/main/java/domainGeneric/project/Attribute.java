@@ -44,6 +44,9 @@ public class Attribute {
     }
 
     public void setTable(Table table) {
+        if (!table.getAllAttributes().contains(this)) {
+            table.addAttribute(this);
+        }
         this.table = table;
     }
 

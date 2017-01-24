@@ -5,6 +5,8 @@
  */
 package domainGeneric.project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Matthias
@@ -13,6 +15,7 @@ public class Table {
     private int id;
     private String name;
     private DatabaseSchema databaseSchema;
+    private ArrayList<Attribute> attributes = new ArrayList<>();
 
     public Table(int id, String name, DatabaseSchema databaseSchema) {
         this.id = id;
@@ -41,6 +44,22 @@ public class Table {
 
     public void setDatabaseSchema(DatabaseSchema databaseSchema) {
         this.databaseSchema = databaseSchema;
+    }
+    
+    public void addAttribute(Attribute atr) {
+        if (!attributes.contains(atr)) {
+            attributes.add(atr); 
+        }
+        atr.setTable(this);
+    }
+    
+    public void removeAttribute(Attribute atr) {
+        attributes.remove(atr);
+        atr.setTable(null);
+    }
+    
+    public ArrayList<Attribute> getAllAttributes() {
+        return attributes;
     }
     
 }
