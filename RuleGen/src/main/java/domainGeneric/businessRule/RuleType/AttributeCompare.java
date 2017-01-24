@@ -5,11 +5,11 @@ import domainGeneric.TemplateService;
 /**
  * Created by Mitchell on 18/01/2017.
  */
-public class Compare extends BRRuleType {
+public class AttributeCompare extends BRRuleType {
     private String valueOne;
     private String valueTwo;
 
-    public Compare(String valueOne, String valueTwo, String operator, String databasetype) {
+    public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
         this.valueOne = valueOne;
         this.valueTwo = valueTwo;
         this.operator = operator;

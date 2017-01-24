@@ -2,12 +2,12 @@ package presentation;
 
 import org.json.simple.JSONArray;
 import presentation.Rest.BRDataFetch;
-import spark.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static spark.Spark.*;
+import static spark.Spark.after;
+import static spark.Spark.post;
 
 /**
  * Created by Mitchell on 18/01/2017.

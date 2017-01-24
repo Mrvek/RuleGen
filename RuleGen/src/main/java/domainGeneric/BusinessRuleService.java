@@ -6,9 +6,9 @@ import dataAccess.DataPullService;
 import domainGeneric.businessRule.BR.BusinessRule;
 import domainGeneric.businessRule.BR.Constraint;
 import domainGeneric.businessRule.BR.Trigger;
+import domainGeneric.businessRule.RuleType.AttributeCompare;
 import domainGeneric.businessRule.RuleType.BRRuleType;
-import domainGeneric.businessRule.RuleType.Compare;
-import domainGeneric.businessRule.RuleType.Range;
+import domainGeneric.businessRule.RuleType.AttributeRange;
 import org.json.simple.JSONArray;
 
 import java.util.ArrayList;
@@ -27,11 +27,11 @@ public class BusinessRuleService {
         BRRuleType ruletype = null;
 
         switch (BRData.BRRuleType) {
-            case ("Compare"):
-                ruletype = new Compare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
+            case ("AttributeCompare"):
+                ruletype = new AttributeCompare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
                 break;
-            case ("Range"):
-                ruletype = new Range(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
+            case ("AttributeRange"):
+                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
                 break;
         }
 

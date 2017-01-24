@@ -49,7 +49,7 @@ public class DataPull {
         triggers.add("insert");
         Map<String, String> tokens = new HashMap<>();
         tokens.put("[Message]", "Cruel");
-        BRDefinition definitions = new BRDefinition("1", "", "1", valuestoo, "BETWEEN", "Oracle 11g", "Range", "number", triggers, "HELLO [Message], [Message] WORLD!", tokens, "Error", "table");
+        BRDefinition definitions = new BRDefinition("1", "", "1", valuestoo, "BETWEEN", "Oracle 11g", "AttributeRange", "number", triggers, "HELLO [Message], [Message] WORLD!", tokens, "Error", "table");
         System.out.println("\tBRDefenitions found for a " + definitions.databasetype + " " + definitions.BRRuleType + "Rule");
         return definitions;
     }

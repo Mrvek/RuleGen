@@ -5,7 +5,7 @@ import domainGeneric.TemplateService;
 /**
  * Created by Mitchell on 18/01/2017.
  */
-public class Range extends BRRuleType {
+public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
     private String operator;
@@ -15,7 +15,7 @@ public class Range extends BRRuleType {
     private String target;
 
 
-    public Range(String from, String to, String operator, String databasetype, String target) {
+    public AttributeRange(String from, String to, String operator, String databasetype, String target) {
         this.from = from;
         this.to = to;
         this.operator = operator;
