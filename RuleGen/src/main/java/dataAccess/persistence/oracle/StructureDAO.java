@@ -5,6 +5,11 @@
  */
 package dataAccess.persistence.oracle;
 
+import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
+import domainGeneric.project.Attribute;
+import domainGeneric.project.Table;
+import domainGeneric.supported_units.SupportedDatabases;
+import domainGeneric.supported_units.SupportedDatatypes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +29,8 @@ public class StructureDAO extends BaseDAO {
         super(hostname, port, serviceName, username, password);
     }
     
-    public ArrayList<String> getTables() {
-        ArrayList<String> result = new ArrayList<>();
+    public ArrayList<Table> getTables() {
+        ArrayList<Table> result = new ArrayList<>();
         
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("SELECT table_name as table_name FROM all_tables where owner = ?");
@@ -33,7 +38,9 @@ public class StructureDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                result.add(dbResultSet.getString("table_name"));
+                Table table = new Table();
+                table.setName(dbResultSet.getString("table_name"));
+                result.add(table);
             }
             
         } catch (SQLException ex) {
@@ -42,15 +49,35 @@ public class StructureDAO extends BaseDAO {
         return result;
     }
     
-    public Map<String, String> getColumns(String tablename) {
-        Map<String, String> results = new HashMap<>();
+    public ArrayList<Attribute> getAttribute(Table table, SupportedDatabases database) {
+        SupportedUnitsDAO sdao = new SupportedUnitsDAO();
+        ArrayList<Attribute> results = new ArrayList<>();
+        
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("SELECT column_name, data_type from user_tab_columns where table_name = ?");
-            ps.setString(1, tablename);
+            ps.setString(1, table.getName());
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                results.put(dbResultSet.getString("column_name"), dbResultSet.getString("data_type"));
+                Attribute attribute = new Attribute();
+                attribute.setName(dbResultSet.getString("column_name"));
+                attribute.setTable(table);
+                
+                String datatypestring = dbResultSet.getString("data_type");
+                
+                ArrayList<SupportedDatatypes> sdt = sdao.getSupportedDataTypesByDB(database.getId());
+                
+                SupportedDatatypes real_sdt = null;
+                
+                for (SupportedDatatypes x : sdt) {
+                    if (x.getDatatype().equals(datatypestring)) {
+                        real_sdt = x;
+                        break;
+                    }
+                }
+                
+                attribute.setSupporteddatatype(real_sdt);
+                results.add(attribute);
             }
             
         } catch (SQLException ex) {

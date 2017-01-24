@@ -10,9 +10,13 @@ import java.util.Properties;
  * Created by Mitchell on 23/01/2017.
  */
 public class DBConfig {
-    public String database;
-    public String dbuser;
-    public String dbpassword;
+    private String database;
+    private String dbuser;
+    private String dbpassword;
+    private String dbport;
+    private String dbservicename;
+    private String dbhost;
+    
     private String path = "src" + File.separator + "main" + File.separator + "java" + File.separator + "dataAccess" + File.separator + "toolsDB" + File.separator + "ToolDBConfig.properties";
 
     public DBConfig() {
@@ -31,10 +35,37 @@ public class DBConfig {
             this.database = prop.getProperty("database");
             this.dbuser = prop.getProperty("dbuser");
             this.dbpassword = prop.getProperty("dbpassword");
+            this.dbport = prop.getProperty("dbport");
+            this.dbservicename = prop.getProperty("dbservicename");
+            this.dbhost = prop.getProperty("dbhost");
 
         }
         catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public String getDbuser() {
+        return dbuser;
+    }
+
+    public String getDbpassword() {
+        return dbpassword;
+    }
+
+    public String getDbport() {
+        return dbport;
+    }
+
+    public String getDbservicename() {
+        return dbservicename;
+    }
+
+    public String getDbhost() {
+        return dbhost;
     }
 }

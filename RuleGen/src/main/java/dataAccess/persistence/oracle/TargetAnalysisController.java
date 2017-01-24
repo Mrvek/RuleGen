@@ -5,9 +5,11 @@
  */
 package dataAccess.persistence.oracle;
 
+import domainGeneric.project.Attribute;
+import domainGeneric.project.Table;
+import domainGeneric.supported_units.SupportedDatabases;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -30,12 +32,12 @@ public class TargetAnalysisController {
         sdao = new StructureDAO(hostname, port, serviceName, username, password);
     }
     
-    public HashMap<String, Map<String, String>> getTargetDatabaseStructure() {
-        HashMap<String, Map<String, String>> results = new HashMap<String, Map<String, String>>();
-        ArrayList<String> tables = sdao.getTables();
+    public HashMap<Table, ArrayList<Attribute>> getTargetDatabaseStructure(SupportedDatabases database) {
+        HashMap<Table, ArrayList<Attribute>> results = new HashMap<>();
+        ArrayList<Table> tables = sdao.getTables();
         
-        for (String s : tables) {
-            results.put(s, sdao.getColumns(s));
+        for (Table s : tables) {
+            results.put(s, sdao.getAttribute(s, database));
         }
         
         return results;
