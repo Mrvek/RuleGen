@@ -5,8 +5,8 @@
  */
 package dataAccess.persistence.oracle;
 
-import domainGeneric.project.Attribute;
-import domainGeneric.project.Table;
+import dataAccess.dto.project.Attribute;
+import dataAccess.dto.project.Table;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

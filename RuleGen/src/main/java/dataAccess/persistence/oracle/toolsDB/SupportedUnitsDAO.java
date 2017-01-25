@@ -6,10 +6,10 @@
 package dataAccess.persistence.oracle.toolsDB;
 
 import dataAccess.persistence.oracle.BaseDAO;
-import dataAccess.persistence.oracle.StructureDAO;
+import dataAccess.persistence.oracle.targetDB.StructureDAO;
 import dataAccess.toolsDB.DBConfig;
-import domainGeneric.supported_units.SupportedDatabases;
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.supported_units.SupportedDatabases;
+import dataAccess.dto.supported_units.SupportedDatatypes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
