@@ -1,13 +1,13 @@
 package domainGeneric;
 
 
-import dataAccess.dto.businessrules.BRToJSONConverter;
+import dto.businessrules.BRToJSONConverter;
 import domainGeneric.businessrule.ruletype.AttributeRange;
 import domainGeneric.businessrule.ruletype.AttributeList;
 import domainGeneric.businessrule.ruletype.AttributeCompare;
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.businessrule.ruletype.AttributeOther;
-import dataAccess.dto.businessrules.BRDefinition;
+import dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
 import domainGeneric.businessrule.br.CodeType;
 import domainGeneric.businessrule.br.Constraint;
@@ -31,13 +31,13 @@ public class BusinessRuleService {
 
         switch (BRData.BRRuleType) {
             case ("AttributeCompare"):
-                ruletype = new AttributeCompare(BRData.tablename, BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
+                ruletype = new AttributeCompare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
                 break;
             case ("AttributeRange"):
-                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target, BRData.tablename);
+                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.tablename);
                 break;
             case ("AttributeList"):
-                ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.tablename, BRData.target, BRData.values);
+                ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.target, BRData.values);
                 break;
             case ("AttributeOther"):
                 ruletype = new AttributeOther(BRData.operator, BRData.databasetype, BRData.values.get(0));

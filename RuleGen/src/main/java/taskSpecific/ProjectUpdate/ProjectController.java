@@ -5,8 +5,8 @@
  */
 package taskSpecific.ProjectUpdate;
 
-import dataAccess.dto.project.Table;
-import dataAccess.dto.supported_units.SupportedDatabases;
+import dto.project.Table;
+import dto.supported_units.SupportedDatabases;
 import dataAccess.persistence.oracle.targetdb.TargetAnalysisService;
 import dataAccess.persistence.oracle.toolsdb.ProjectService;
 import java.util.ArrayList;

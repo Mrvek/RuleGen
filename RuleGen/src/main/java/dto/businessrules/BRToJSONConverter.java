@@ -1,4 +1,4 @@
-package dataAccess.dto.businessrules;
+package dto.businessrules;
 
 import domainGeneric.businessrule.br.CodeType;
 import org.json.JSONArray;

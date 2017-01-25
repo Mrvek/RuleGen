@@ -2,9 +2,9 @@ package dataAccess;
 
 
 
-import dataAccess.dto.businessrules.BRDefinition;
+import dto.businessrules.BRDefinition;
 import dataAccess.toolsdb.DataPull;
-import dataAccess.dto.template.TemplateDummy;
+import dto.template.TemplateDummy;
 
 import java.util.List;
 

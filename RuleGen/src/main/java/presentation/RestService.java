@@ -20,7 +20,7 @@ public class RestService {
         keys.add("1");
         JSONArray result = new BRDataFetch().getData(keys, "1");
         System.out.println("Generating code...");
-        System.out.println(result + "\n");
+        System.out.println("returning: " + result + "\n");
 
         get("/hello/BR", (request, response) -> {
             JSONArray answer = new BRDataFetch().getBR(request, response);

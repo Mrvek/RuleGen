@@ -1,7 +1,7 @@
 package dataAccess.toolsdb;
 
-import dataAccess.dto.businessrules.BRDefinition;
-import dataAccess.dto.template.TemplateDummy;
+import dto.businessrules.BRDefinition;
+import dto.template.TemplateDummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

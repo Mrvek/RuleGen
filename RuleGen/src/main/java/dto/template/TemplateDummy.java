@@ -1,4 +1,4 @@
-package dataAccess.dto.template;
+package dto.template;
 
 import java.util.Map;
 

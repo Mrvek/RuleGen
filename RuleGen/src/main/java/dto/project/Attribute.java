@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess.dto.project;
+package dto.project;
 
-import dataAccess.dto.supported_units.SupportedDatatypes;
+import dto.supported_units.SupportedDatatypes;
 
 /**
  *
