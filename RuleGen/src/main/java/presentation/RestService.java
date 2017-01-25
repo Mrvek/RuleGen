@@ -15,7 +15,6 @@ import static spark.Spark.*;
 public class RestService {
     public static void main(String args[]) {
         get("/hello", (req, res) -> "Hello World");
-        BRDataFetch dataFetch = new BRDataFetch();
 
        /* List<String> keys = new ArrayList<>();
         keys.add("1");
@@ -24,7 +23,7 @@ public class RestService {
         System.out.println(result + "\n"); */
 
         get("/hello/BR", (request, response) -> {
-            JSONArray answer = dataFetch.getBR(request, response);
+            JSONArray answer = new BRDataFetch().getBR(request, response);
             return answer;
         });
 
