@@ -2,9 +2,9 @@ package dataAccess;
 
 
 
-import dataAccess.toolsDB.BRDefinition;
-import dataAccess.toolsDB.DataPull;
-import dataAccess.toolsDB.TemplateDummy;
+import dataAccess.toolsdb.BRDefinition;
+import dataAccess.toolsdb.DataPull;
+import dataAccess.toolsdb.TemplateDummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

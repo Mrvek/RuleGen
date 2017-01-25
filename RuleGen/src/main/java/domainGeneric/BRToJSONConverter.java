@@ -1,6 +1,6 @@
 package domainGeneric;
 
-import domainGeneric.businessRule.BR.BusinessRule;
+import dataAccess.dto.businessrule.br.CodeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,8 +13,8 @@ import java.util.List;
 public class BRToJSONConverter {
     private JSONArray result = new JSONArray();
 
-    public BRToJSONConverter(List<BusinessRule> rules) {
-        for (BusinessRule br : rules) {
+    public BRToJSONConverter(List<CodeType> rules) {
+        for (CodeType br : rules) {
             JSONObject info = new JSONObject();
             info.put("key", br.getPrimarykey());
             info.put("project", br.getProjectid());

@@ -1,6 +1,6 @@
 package domainGeneric;
 
-import domainGeneric.Template.Template;
+import dataAccess.dto.template.Template;
 
 import java.util.ArrayList;
 import java.util.HashMap;

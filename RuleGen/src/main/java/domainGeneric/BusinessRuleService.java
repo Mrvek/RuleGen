@@ -1,12 +1,16 @@
 package domainGeneric;
 
 
-import dataAccess.toolsDB.BRDefinition;
+import dataAccess.dto.businessrule.ruletype.AttributeRange;
+import dataAccess.dto.businessrule.ruletype.AttributeList;
+import dataAccess.dto.businessrule.ruletype.AttributeCompare;
+import dataAccess.dto.businessrule.ruletype.BRRuleType;
+import dataAccess.dto.businessrule.ruletype.AttributeOther;
+import dataAccess.toolsdb.BRDefinition;
 import dataAccess.DataPullService;
-import domainGeneric.businessRule.BR.BusinessRule;
-import domainGeneric.businessRule.BR.Constraint;
-import domainGeneric.businessRule.BR.Trigger;
-import domainGeneric.businessRule.RuleType.*;
+import dataAccess.dto.businessrule.br.CodeType;
+import dataAccess.dto.businessrule.br.Constraint;
+import dataAccess.dto.businessrule.br.Trigger;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ import java.util.List;
  * Created by Mitchell on 18/01/2017.
  */
 public class BusinessRuleService {
-    private List<BusinessRule> rules = new ArrayList<>();
+    private List<CodeType> rules = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
     private BRToJSONConverter jsonConverter;
 
@@ -40,11 +44,11 @@ public class BusinessRuleService {
         }
 
         if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
-            BusinessRule rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
+            CodeType rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
             rules.add(rule);
 
         } else {
-            BusinessRule rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
+            CodeType rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
             rules.add(rule);
         }
     }
@@ -52,7 +56,7 @@ public class BusinessRuleService {
 
     public String getAllCode() {
         String result = null;
-        for (BusinessRule i : rules) {
+        for (CodeType i : rules) {
             if (result == null) {
                 result = i.getCode();
             } else {
