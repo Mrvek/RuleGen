@@ -64,10 +64,11 @@ public class BusinessRuleService {
                 result += "\n\n" + i.getCode();
             }
         }
+        System.out.println("\t Generated: " + result);
 
         System.out.println("Pushing code to ToolDatabase...");
 //        TODO: push to toolDatabase
-        System.out.println("ERROR 404: Code Implementation not found!");
+        System.out.println("\tERROR 404: Code Implementation not found!");
         return result;
     }
 

@@ -19,7 +19,6 @@ public class RestService {
         List<String> keys = new ArrayList<>();
         keys.add("1");
         JSONArray result = new BRDataFetch().getData(keys, "1");
-        System.out.println("Generating code...");
         System.out.println("returning: " + result + "\n");
 
         get("/hello/BR", (request, response) -> {
@@ -31,6 +30,6 @@ public class RestService {
             res.type("application/json");
         });
 
-//        TODO: REST!
+//        TODO: REST for targetDB Analysis!
     }
 }
