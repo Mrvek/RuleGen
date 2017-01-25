@@ -13,6 +13,7 @@ public class BRDefinition {
     public List<String> values;
     public String operator;
     public String databasetype;
+    public String databaseshortname;
     public String BRRuleType;
     public String target;
     public List<String> trigger;

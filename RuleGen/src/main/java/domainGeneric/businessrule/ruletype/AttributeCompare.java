@@ -8,13 +8,11 @@ import domainGeneric.TemplateService;
 public class AttributeCompare extends BRRuleType {
     private String Target;
     private String CompareWith;
-    private String table;
 
-    public AttributeCompare(String table, String valueOne, String valueTwo, String operator, String databasetype) {
+    public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
         super(operator, new TemplateService(), databasetype, "CMPR");
         this.Target = valueOne;
         this.CompareWith = valueTwo;
-        this.table = table;
     }
 
 
@@ -25,6 +23,6 @@ public class AttributeCompare extends BRRuleType {
 
     @Override
     public String getTriggerCode() {
-        return manager.getRuleTypeCompareTriggerCode(table, databasetype, Target, operator, CompareWith);
+        return manager.getRuleTypeCompareTriggerCode(databasetype, Target, operator, CompareWith);
     }
 }

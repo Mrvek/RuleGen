@@ -91,10 +91,9 @@ public class Template {
     }
 
 
-    public String getRuleTypeCompareTriggerCode(String table, String target, String operator, String compareWith) {
+    public String getRuleTypeCompareTriggerCode(String target, String operator, String compareWith) {
         String result = ruleTypeCompareTriggerCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\{Table}", table);
         result = result.replaceFirst("\\{Operator}", operator);
         result = result.replaceFirst("\\{Target}", target);
         result = result.replaceFirst("\\?", compareWith);
@@ -111,11 +110,10 @@ public class Template {
         return result;
     }
 
-    public String getRuleTypeRangeTriggerCode(String first, String operator, String second, String target, String table) {
+    public String getRuleTypeRangeTriggerCode(String first, String operator, String second, String target) {
         String result = ruleTypeRangeTriggerCode;
         operator = this.translateOperator(operator);
         result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{Table}", table);
         result = result.replaceFirst("\\{Operator}", operator);
         result = result.replaceFirst("\\{From}", first);
         result = result.replaceFirst("\\{To}", second);
@@ -144,10 +142,9 @@ public class Template {
         return result;
     }
 
-    public String getRuleTypeListTriggerCode(String table, String target, String operator, List<String> values) {
+    public String getRuleTypeListTriggerCode(String target, String operator, List<String> values) {
         operator = translateOperator(operator);
         String result = ruleTypeListTriggerCode;
-        result = result.replaceFirst("\\{Table}", table);
         result = result.replaceFirst("\\{Target}", target);
         result = result.replaceFirst("\\{Operator}", operator);
         String value = createValuesList(values);
