@@ -1,8 +1,9 @@
 package domainGeneric;
 
 import domainGeneric.businessRule.BR.BusinessRule;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class BRToJSONConverter {
             info.put("key", br.getPrimarykey());
             info.put("project", br.getProjectid());
             info.put("message", br.getMessage());
-            result.add(info);
+            result.put(info);
 //            TODO: get these parameters
         }
     }
