@@ -2,14 +2,11 @@ package dataAccess;
 
 
 
-import dataAccess.toolsdb.BRDefinition;
+import dataAccess.dto.businessrules.BRDefinition;
 import dataAccess.toolsdb.DataPull;
-import dataAccess.toolsdb.TemplateDummy;
+import dataAccess.dto.template.TemplateDummy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Mitchell on 18/01/2017.

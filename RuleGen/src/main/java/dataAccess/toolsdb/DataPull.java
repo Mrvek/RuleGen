@@ -1,5 +1,8 @@
 package dataAccess.toolsdb;
 
+import dataAccess.dto.businessrules.BRDefinition;
+import dataAccess.dto.template.TemplateDummy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +24,8 @@ public class DataPull {
             optranslators.put("=", "==");
             TemplateDummy data = new TemplateDummy("Oracle 11g", optranslators,
                     "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception; ",
-                    "EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
-                    "EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
+                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
+                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
                     "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?); ",
                     "{Target} {Operator} ?",
                     "I_passed := :NEW.{Target} {Operator} ?; ",
