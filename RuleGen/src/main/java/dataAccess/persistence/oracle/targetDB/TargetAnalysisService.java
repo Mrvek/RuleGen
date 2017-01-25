@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess.persistence.oracle;
+package dataAccess.persistence.oracle.targetDB;
 
 import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
-import domainGeneric.project.Attribute;
-import domainGeneric.project.Table;
-import domainGeneric.supported_units.SupportedDatabases;
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.project.Attribute;
+import dataAccess.dto.project.Table;
+import dataAccess.dto.supported_units.SupportedDatabases;
+import dataAccess.dto.supported_units.SupportedDatatypes;
 import java.util.ArrayList;
 
 /**
  *
  * @author Matthias
  */
-public class TargetAnalysisController {
+public class TargetAnalysisService {
     private String hostname;
     private String port;
     private String serviceName;
@@ -24,7 +24,7 @@ public class TargetAnalysisController {
     private String password;
     private StructureDAO sdao;
 
-    public TargetAnalysisController(String hostname, String port, String serviceName, String username, String password) {
+    public TargetAnalysisService(String hostname, String port, String serviceName, String username, String password) {
         this.hostname = hostname;
         this.port = port;
         this.serviceName = serviceName;

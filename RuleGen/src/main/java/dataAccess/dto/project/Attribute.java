@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domainGeneric.project;
+package dataAccess.dto.project;
 
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.supported_units.SupportedDatatypes;
 
 /**
  *

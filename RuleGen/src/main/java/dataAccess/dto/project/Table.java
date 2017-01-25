@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domainGeneric.project;
+package dataAccess.dto.project;
 
 import java.util.ArrayList;
 
@@ -38,6 +38,10 @@ public class Table {
         return databaseSchema;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }

@@ -6,15 +6,15 @@
 package dataAccess.persistence;
 
 
-import dataAccess.persistence.oracle.StructureDAO;
-import dataAccess.persistence.oracle.TargetAnalysisController;
+import dataAccess.persistence.oracle.targetDB.StructureDAO;
+import dataAccess.persistence.oracle.targetDB.TargetAnalysisService;
 import dataAccess.persistence.oracle.toolsDB.ProjectDAO;
 import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
-import domainGeneric.project.Attribute;
-import domainGeneric.project.DatabaseSchema;
-import domainGeneric.project.Table;
-import domainGeneric.supported_units.SupportedDatabases;
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.project.Attribute;
+import dataAccess.dto.project.DatabaseSchema;
+import dataAccess.dto.project.Table;
+import dataAccess.dto.supported_units.SupportedDatabases;
+import dataAccess.dto.supported_units.SupportedDatatypes;
 import java.util.ArrayList;
 
 
@@ -27,7 +27,7 @@ public class Test {
     
     
     public static void main(String[] args) {
-        TargetAnalysisController tac = new TargetAnalysisController("ondora02.hu.nl", "8521", "cursus02.hu.nl", "tosad_2016_2a_team3_target", "tosad_2016_2a_team3_target");
+        TargetAnalysisService tac = new TargetAnalysisService("ondora02.hu.nl", "8521", "cursus02.hu.nl", "tosad_2016_2a_team3_target", "tosad_2016_2a_team3_target");
         SupportedDatabases sdbs = new SupportedDatabases(1, "Oracle 12c");
         
 //        ArrayList<Table> a = tac.getTargetDatabaseStructure(sdbs);

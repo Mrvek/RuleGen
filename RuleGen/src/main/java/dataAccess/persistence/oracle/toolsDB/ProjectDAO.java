@@ -6,12 +6,12 @@
 package dataAccess.persistence.oracle.toolsDB;
 
 import dataAccess.persistence.oracle.BaseDAO;
-import dataAccess.persistence.oracle.StructureDAO;
+import dataAccess.persistence.oracle.targetDB.StructureDAO;
 import dataAccess.toolsDB.DBConfig;
-import domainGeneric.project.Attribute;
-import domainGeneric.project.DatabaseSchema;
-import domainGeneric.project.Table;
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.project.Attribute;
+import dataAccess.dto.project.DatabaseSchema;
+import dataAccess.dto.project.Table;
+import dataAccess.dto.supported_units.SupportedDatatypes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,17 +41,15 @@ public class ProjectDAO extends BaseDAO {
         
         try (Connection con = super.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select \"table\".TABLE_ID as TABLE_ID," +
-                                                                "    \"table\".DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
-                                                                "    \"table\".NAME as NAME," +
-                                                                " DATABASESCHEMA.NAME as SNAME " +
-                                                                " from DATABASESCHEMA DATABASESCHEMA," +
-                                                                "    ATTRIBUTE ATTRIBUTE," +
-                                                                "    \"table\" \"table\"," +
-                                                                "    PROJECT PROJECT " +
-                                                                " where PROJECT.DATABASESCHEMA_ID=DATABASESCHEMA.DATABASESCHEMA_ID" +
-                                                                "    and \"table\".TABLE_ID=ATTRIBUTE.TABLE_ID\n" +
-                                                                "    and DATABASESCHEMA.DATABASESCHEMA_ID=\"table\".DATABASESCHEMA_ID" +
-                                                                "	and PROJECT.PROJECT_ID = ?");
+                                                        "    \"table\".DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
+                                                        "    \"table\".NAME as NAME," +
+                                                        "    DATABASESCHEMA.NAME as SNAME" +
+                                                        " from DATABASESCHEMA DATABASESCHEMA," +
+                                                        "    PROJECT PROJECT," +
+                                                        "    \"table\" \"table\" " +
+                                                        " where \"table\".DATABASESCHEMA_ID=PROJECT.DATABASESCHEMA_ID" +
+                                                        "    and \"table\".DATABASESCHEMA_ID=DATABASESCHEMA.DATABASESCHEMA_ID" +
+                                                        "	and PROJECT.PROJECT_ID = ?");
             ps.setInt(1, project_id);
             ResultSet dbResultSet = ps.executeQuery();
             
@@ -106,11 +104,50 @@ public class ProjectDAO extends BaseDAO {
         
     }
     
+    public int getSchemaId(int project_id) {
+        int schema_id = 0;
+        
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select PROJECT.DATABASESCHEMA_ID as DATABASESCHEMA_ID" +
+                                                        " from PROJECT PROJECT" +
+                                                        " WHERE PROJECT.PROJECT_ID = ?");
+            ps.setInt(1, project_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                schema_id = dbResultSet.getInt("DATABASESCHEMA_ID");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return schema_id;
+    }
+    
+    public boolean projectExists(int project_id) {
+        boolean result = false;
+        
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select PROJECT.DATABASESCHEMA_ID as DATABASESCHEMA_ID" +
+                                                        " from PROJECT PROJECT" +
+                                                        " WHERE PROJECT.PROJECT_ID = ?");
+            ps.setInt(1, project_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                result = true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public void insertTables(int database_schema_id, ArrayList<Table> tables) {
         try (Connection con = super.getConnection()) {
-            
             for (Table table : tables) {
-                PreparedStatement ps = con.prepareStatement("INSERT INTO TABLE (DATABASESCHEMA_ID, NAME) VALUES (?, ?)");
+                PreparedStatement ps = con.prepareStatement("INSERT INTO \"table\" (DATABASESCHEMA_ID, NAME) VALUES (?, ?)");
                 ps.setInt(1, database_schema_id);
                 ps.setString(2, table.getName());
                 

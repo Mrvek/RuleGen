@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess.persistence.oracle;
+package dataAccess.persistence.oracle.targetDB;
 
 import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
-import domainGeneric.project.Attribute;
-import domainGeneric.project.Table;
-import domainGeneric.supported_units.SupportedDatabases;
-import domainGeneric.supported_units.SupportedDatatypes;
+import dataAccess.dto.project.Attribute;
+import dataAccess.dto.project.Table;
+import dataAccess.dto.supported_units.SupportedDatabases;
+import dataAccess.dto.supported_units.SupportedDatatypes;
+import dataAccess.persistence.oracle.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

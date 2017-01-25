@@ -1,6 +1,5 @@
 package presentation.Rest;
 
-
 import org.json.JSONArray;
 import spark.Request;
 import spark.Response;
