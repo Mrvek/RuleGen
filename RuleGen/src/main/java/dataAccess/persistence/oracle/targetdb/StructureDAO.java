@@ -5,7 +5,6 @@
  */
 package dataAccess.persistence.oracle.targetdb;
 
-import dataAccess.persistence.oracle.toolsdb.SupportedUnitsDAO;
 import dataAccess.dto.project.Attribute;
 import dataAccess.dto.project.Table;
 import dataAccess.dto.supported_units.SupportedDatabases;
@@ -16,8 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

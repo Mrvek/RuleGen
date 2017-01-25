@@ -6,10 +6,10 @@
 package dataAccess.persistence;
 
 
-import dataAccess.persistence.oracle.targetDB.StructureDAO;
-import dataAccess.persistence.oracle.targetDB.TargetAnalysisService;
-import dataAccess.persistence.oracle.toolsDB.ProjectDAO;
-import dataAccess.persistence.oracle.toolsDB.SupportedUnitsDAO;
+import dataAccess.persistence.oracle.targetdb.StructureDAO;
+import dataAccess.persistence.oracle.targetdb.TargetAnalysisService;
+import dataAccess.persistence.oracle.toolsdb.ProjectDAO;
+import dataAccess.persistence.oracle.toolsdb.SupportedUnitsDAO;
 import dataAccess.dto.project.Attribute;
 import dataAccess.dto.project.DatabaseSchema;
 import dataAccess.dto.project.Table;

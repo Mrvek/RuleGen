@@ -1,16 +1,17 @@
 package domainGeneric;
 
 
-import dataAccess.dto.businessrule.ruletype.AttributeRange;
-import dataAccess.dto.businessrule.ruletype.AttributeList;
-import dataAccess.dto.businessrule.ruletype.AttributeCompare;
-import dataAccess.dto.businessrule.ruletype.BRRuleType;
-import dataAccess.dto.businessrule.ruletype.AttributeOther;
-import dataAccess.toolsdb.BRDefinition;
+import dataAccess.dto.businessrules.BRToJSONConverter;
+import domainGeneric.businessrule.ruletype.AttributeRange;
+import domainGeneric.businessrule.ruletype.AttributeList;
+import domainGeneric.businessrule.ruletype.AttributeCompare;
+import domainGeneric.businessrule.ruletype.BRRuleType;
+import domainGeneric.businessrule.ruletype.AttributeOther;
+import dataAccess.dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
-import dataAccess.dto.businessrule.br.CodeType;
-import dataAccess.dto.businessrule.br.Constraint;
-import dataAccess.dto.businessrule.br.Trigger;
+import domainGeneric.businessrule.br.CodeType;
+import domainGeneric.businessrule.br.Constraint;
+import domainGeneric.businessrule.br.Trigger;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
