@@ -9,7 +9,7 @@ import domainGeneric.businessRule.BR.Trigger;
 import domainGeneric.businessRule.RuleType.AttributeCompare;
 import domainGeneric.businessRule.RuleType.BRRuleType;
 import domainGeneric.businessRule.RuleType.AttributeRange;
-import org.json.simple.JSONArray;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
