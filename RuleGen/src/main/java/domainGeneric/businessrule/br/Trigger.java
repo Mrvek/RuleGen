@@ -15,19 +15,12 @@ public class Trigger extends CodeType {
     private Map<String, String> tokens;
     private List<String> trigger;
 
-    public Trigger(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger, String table) {
-        this.target = target;
+    public Trigger(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String message, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger) {
+        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "TRG", new TemplateService(), message);
         this.severity = severity;
-        this.ExceptionMessage = exceptionMessage;
+        ExceptionMessage = exceptionMessage;
         this.tokens = tokens;
         this.trigger = trigger;
-        this.table = table;
-        this.databasetype = databasetype;
-        this.ruletype = ruletype;
-        this.name = new NameGen(ruletype.getShortname(), databasetype);
-        this.manager = new TemplateService();
-        this.projectid = projectid;
-        this.primarykey = primarykey;
     }
 
     @Override

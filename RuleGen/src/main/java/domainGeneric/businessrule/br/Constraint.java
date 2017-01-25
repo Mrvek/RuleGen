@@ -8,18 +8,9 @@ import domainGeneric.TemplateService;
  */
 public class Constraint extends CodeType {
 
-    public Constraint(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String table) {
-        this.ruletype = ruletype;
-        this.databasetype = databasetype;
-        this.target = target;
-        this.table = table;
-        this.initials = "CSTR";
-        this.name = new NameGen(ruletype.getShortname(), databasetype);
-        this.manager = new TemplateService();
-        this.projectid = projectid;
-        this.primarykey = primarykey;
+    public Constraint(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String message) {
+        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "CSTR", new TemplateService(), message);
     }
-
 
     @Override
     public String getCode() {
