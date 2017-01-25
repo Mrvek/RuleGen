@@ -16,11 +16,11 @@ public class RestService {
     public static void main(String args[]) {
         get("/hello", (req, res) -> "Hello World");
 
-       /* List<String> keys = new ArrayList<>();
+        List<String> keys = new ArrayList<>();
         keys.add("1");
-        JSONArray result = dataFetch.getData(keys, "1");
+        JSONArray result = new BRDataFetch().getData(keys, "1");
         System.out.println("Generating code...");
-        System.out.println(result + "\n"); */
+        System.out.println(result + "\n");
 
         get("/hello/BR", (request, response) -> {
             JSONArray answer = new BRDataFetch().getBR(request, response);

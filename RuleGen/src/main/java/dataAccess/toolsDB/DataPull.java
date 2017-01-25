@@ -20,14 +20,18 @@ public class DataPull {
             Map<String, String> optranslators = new HashMap<>();
             optranslators.put("=", "==");
             TemplateDummy data = new TemplateDummy("Oracle 11g", optranslators,
-                    "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception",
-                    " EXCEPTION when E_except then raise_application_error(-2000, ?); END;",
-                    "EXCEPTION when E_except then raise_application_error(-2000, ?); END;",
-                    "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?);",
-                    "? ? ?",
-                    " BEGIN IF (!(? ? ?)) THEN E_exception; END IF;",
-                    "? ? ? AND ?",
-                    " BEGIN IF(!(? ? ? AND ?)) THEN E_exception; END IF;");
+                    "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception; ",
+                    "EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
+                    "EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
+                    "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?); ",
+                    "{Target} {Operator} ?",
+                    "I_passed := :NEW.{Target} {Operator} ?; ",
+                    "{Target} {Operator} ? and ?",
+                    "I_passed := :NEW.{Target} {Operator} ? and ?; ",
+                    "?",
+                    "I_passed := ? ",
+                    "{Target} {Operator} (?)",
+                    "I_passed := :NEW.{Target} {Operator} (?) ");
             templates.add(data);
         }
 

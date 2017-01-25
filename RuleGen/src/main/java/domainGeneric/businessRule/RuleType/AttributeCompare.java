@@ -6,29 +6,25 @@ import domainGeneric.TemplateService;
  * Created by Mitchell on 18/01/2017.
  */
 public class AttributeCompare extends BRRuleType {
-    private String valueOne;
-    private String valueTwo;
+    private String Target;
+    private String CompareWith;
+    private String table;
 
-    public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
-        super(operator, new TemplateService(), databasetype, "CPR");
-        this.valueOne = valueOne;
-        this.valueTwo = valueTwo;
+    public AttributeCompare(String table, String valueOne, String valueTwo, String operator, String databasetype) {
+        super(operator, new TemplateService(), databasetype, "CMPR");
+        this.Target = valueOne;
+        this.CompareWith = valueTwo;
+        this.table = table;
     }
 
-    @Override
-    public String getShortname() {
-        return shortname;
-    }
 
     @Override
     public String getConstraintCode() {
-        String result = manager.getRuleTypeCompareConstraintCode(databasetype, valueOne, operator, valueTwo);
-        return result;
+        return manager.getRuleTypeCompareConstraintCode(databasetype, Target, operator, CompareWith);
     }
 
     @Override
     public String getTriggerCode() {
-        String result = manager.getRuleTypeCompareTriggerCode(databasetype, valueOne, operator, valueTwo);
-        return result;
+        return manager.getRuleTypeCompareTriggerCode(table, databasetype, Target, operator, CompareWith);
     }
 }

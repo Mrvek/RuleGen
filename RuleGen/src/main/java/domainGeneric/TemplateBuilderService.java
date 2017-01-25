@@ -28,7 +28,7 @@ public class TemplateBuilderService {
 
     private void buildTemplate(TemplateDummy td) {
         Template template = new Template(td.trigger, td.warning, td.error, td.constraint, td.constraintcompare,
-                td.triggercompare, td.constraintRange, td.triggerRange, td.operatorTranslations);
+                td.triggercompare, td.constraintRange, td.triggerRange, td.operatorTranslations, td.constraintOther, td.triggerOther, td.constraintList, td.triggerList);
 
         TemplateService.resetTemplates();
         TemplateService.addTemplate(td.name, template);

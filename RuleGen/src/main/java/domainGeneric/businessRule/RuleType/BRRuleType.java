@@ -18,7 +18,9 @@ public abstract class BRRuleType {
         this.shortname = shortname;
     }
 
-    public abstract String getShortname();
+    public String getShortname() {
+        return shortname;
+    }
     public abstract String getConstraintCode();
     public abstract String getTriggerCode();
 }

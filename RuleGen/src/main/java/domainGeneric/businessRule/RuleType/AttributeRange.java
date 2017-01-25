@@ -8,31 +8,25 @@ import domainGeneric.TemplateService;
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
-    private TemplateService manager = new TemplateService();
     private String target;
+    private String table;
 
 
-    public AttributeRange(String from, String to, String operator, String databasetype, String target) {
+    public AttributeRange(String from, String to, String operator, String databasetype, String target, String table) {
         super(operator, new TemplateService(), databasetype, "RNG");
         this.from = from;
         this.to = to;
         this.target = target;
-    }
-
-    @Override
-    public String getShortname() {
-        return shortname;
+        this.table = table;
     }
 
     @Override
     public String getConstraintCode() {
-        String result = manager.getRuleTypeRangeConstraintCode(databasetype, from, operator, to);
-        return result;
+        return manager.getRuleTypeRangeConstraintCode(databasetype, target , from, operator, to);
     }
 
     @Override
     public String getTriggerCode() {
-        String result = manager.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target);
-        return result;
+        return manager.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target, table);
     }
 }

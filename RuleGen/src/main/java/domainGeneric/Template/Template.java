@@ -16,8 +16,12 @@ public class Template {
     private String ruleTypeRangeConstraintCode;
     private String ruleTypeRangeTriggerCode;
     private Map<String, String> operatorTraslations;
+    private String ruleTypeOtherConstraintCode;
+    private String ruleTypeOtherTriggerCode;
+    private String ruleTypeListConstraintCode;
+    private String ruleTypeListTriggerCode;
 
-    public Template(String triggerCode, String warningCode, String errorCode, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTraslations) {
+    public Template(String triggerCode, String warningCode, String errorCode, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTraslations, String ruleTypeOtherConstraintCode, String ruleTypeOtherTriggerCode, String ruleTypeListConstraintCode, String ruleTypeListTriggerCode) {
         this.triggerCode = triggerCode;
         this.warningCode = warningCode;
         this.errorCode = errorCode;
@@ -27,6 +31,10 @@ public class Template {
         this.ruleTypeRangeConstraintCode = ruleTypeRangeConstraintCode;
         this.ruleTypeRangeTriggerCode = ruleTypeRangeTriggerCode;
         this.operatorTraslations = operatorTraslations;
+        this.ruleTypeOtherConstraintCode = ruleTypeOtherConstraintCode;
+        this.ruleTypeOtherTriggerCode = ruleTypeOtherTriggerCode;
+        this.ruleTypeListConstraintCode = ruleTypeListConstraintCode;
+        this.ruleTypeListTriggerCode = ruleTypeListTriggerCode;
     }
 
     public String getTriggerCode(String triggerName, List<String> triggermoment, String tableName) {
@@ -73,42 +81,90 @@ public class Template {
         return result;
     }
 
-    public String getRuleTypeCompareConstraintCode(String first, String operator, String second) {
+    public String getRuleTypeCompareConstraintCode(String target, String operator, String compareWith) {
         String result = ruleTypeCompareConstraintCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\?", first);
-        result = result.replaceFirst("\\?", operator);
-        result = result.replaceFirst("\\?", second);
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\?", compareWith);
         return result;
     }
 
 
-    public String getRuleTypeCompareTriggerCode(String first, String operator, String second) {
+    public String getRuleTypeCompareTriggerCode(String table, String target, String operator, String compareWith) {
         String result = ruleTypeCompareTriggerCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\?", operator);
-        result = result.replaceFirst("\\?", first);
-        result = result.replaceFirst("\\?", second);
+        result = result.replaceFirst("\\{Table}", table);
+        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\?", compareWith);
         return result;
     }
 
-    public String getRuleTypeRangeConstraintCode(String first, String operator, String second) {
+    public String getRuleTypeRangeConstraintCode(String target , String first, String operator, String second) {
         String result = ruleTypeRangeConstraintCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\?", first);
-        result = result.replaceFirst("\\?", operator);
-        result = result.replaceFirst("\\?", second);
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{From}", first);
+        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{To}", second);
         return result;
     }
 
-    public String getRuleTypeRangeTriggerCode(String first, String operator, String second, String target) {
+    public String getRuleTypeRangeTriggerCode(String first, String operator, String second, String target, String table) {
         String result = ruleTypeRangeTriggerCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\?", target);
-        result = result.replaceFirst("\\?", operator);
-        result = result.replaceFirst("\\?", first);
-        result = result.replaceFirst("\\?", second);
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{Table}", table);
+        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{From}", first);
+        result = result.replaceFirst("\\{To}", second);
         return result;
+    }
+
+    public String getRuleTypeOtherConstraintCode(String booleanStatement) {
+        String result = ruleTypeOtherConstraintCode;
+        result = result.replaceFirst("\\?", booleanStatement);
+        return result;
+    }
+
+    public String getRuleTypeOtherTriggerCode(String booleanStatement) {
+        String result = ruleTypeOtherTriggerCode;
+        result = result.replaceFirst("\\?", booleanStatement);
+        return result;
+    }
+
+    public String getRuleTypeListConstraintCode(String target, List<String> values, String operator) {
+        operator = translateOperator(operator);
+        String result = ruleTypeListConstraintCode;
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{Operator}", operator);
+        String value = createValuesList(values);
+        result = result.replaceFirst("\\?", value);
+        return result;
+    }
+
+    public String getRuleTypeListTriggerCode(String table, String target, String operator, List<String> values) {
+        operator = translateOperator(operator);
+        String result = ruleTypeListTriggerCode;
+        result = result.replaceFirst("\\{Table}", table);
+        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{Operator}", operator);
+        String value = createValuesList(values);
+        result = result.replaceFirst("\\?", value);
+        return result;
+    }
+
+    private String createValuesList(List<String> values) {
+        String value = "";
+        for (String V : values) {
+            if (value.isEmpty()) {
+                value += V;
+            }else {
+                value += "," + V;
+            }
+        }
+        return value;
     }
 
     private String translateOperator(String operator) {
