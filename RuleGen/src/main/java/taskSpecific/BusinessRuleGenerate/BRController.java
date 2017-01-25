@@ -2,7 +2,7 @@ package taskSpecific.BusinessRuleGenerate;
 
 import dataAccess.DataPushService;
 import domainGeneric.BusinessRuleService;
-import org.json.simple.JSONArray;
+import org.json.JSONArray;
 import taskSpecific.TemplateUpdate.UpdateService;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package dataAccess.persistence;
+package dataAccess.persistence.oracle;
 
 
 import dataAccess.persistence.oracle.TargetAnalysisController;
@@ -20,9 +20,9 @@ public class Test {
         TargetAnalysisController tac = new TargetAnalysisController("ondora02.hu.nl", "8521", "cursus02.hu.nl", "tosad_2016_2a_team3_target", "tosad_2016_2a_team3_target");
         SupportedDatabases sdbs = new SupportedDatabases(1, "Oracle 12c");
 
-        HashMap<Table, ArrayList<Attribute>> a = tac.getTargetDatabaseStructure(sdbs);
+        ArrayList<Table> a = tac.getTargetDatabaseStructure(sdbs);
 
-        for (Table t : a.keySet()) {
+        for (Table t : a) {
             System.out.println(t.getName());
         }
 

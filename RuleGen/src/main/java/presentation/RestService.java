@@ -1,31 +1,33 @@
 package presentation;
 
-import org.json.simple.JSONArray;
+import org.json.JSONArray;
 import presentation.Rest.BRDataFetch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.after;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 /**
  * Created by Mitchell on 18/01/2017.
  */
 public class RestService {
     public static void main(String args[]) {
-
-        List<String> keys = new ArrayList<>();
-        keys.add("1");
+        get("/hello", (req, res) -> "Hello World");
         BRDataFetch dataFetch = new BRDataFetch();
+
+       /* List<String> keys = new ArrayList<>();
+        keys.add("1");
         JSONArray result = dataFetch.getData(keys, "1");
         System.out.println("Generating code...");
-        System.out.println(result + "\n");
+        System.out.println(result + "\n"); */
 
-        post("/hello/:BR", (request, response) -> {
+        get("/hello/BR", (request, response) -> {
             JSONArray answer = dataFetch.getBR(request, response);
             return answer;
         });
+
         after((req, res) -> {
             res.type("application/json");
         });

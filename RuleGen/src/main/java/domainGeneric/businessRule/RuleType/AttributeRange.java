@@ -8,21 +8,15 @@ import domainGeneric.TemplateService;
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
-    private String operator;
-    private String shortname = "RNG";
-    private String databasetype;
     private TemplateService manager = new TemplateService();
     private String target;
 
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
+        super(operator, new TemplateService(), databasetype, "RNG");
         this.from = from;
         this.to = to;
-        this.operator = operator;
-        this.databasetype = databasetype;
         this.target = target;
-        this.shortname = "RNG";
-        this.manager = new TemplateService();
     }
 
     @Override

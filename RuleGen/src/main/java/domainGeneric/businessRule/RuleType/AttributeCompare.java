@@ -10,12 +10,9 @@ public class AttributeCompare extends BRRuleType {
     private String valueTwo;
 
     public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
+        super(operator, new TemplateService(), databasetype, "CPR");
         this.valueOne = valueOne;
         this.valueTwo = valueTwo;
-        this.operator = operator;
-        this.databasetype = databasetype;
-        this.shortname = "CPR";
-        this.manager = new TemplateService();
     }
 
     @Override
