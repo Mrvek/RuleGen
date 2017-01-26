@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Matthias
  */
-public class StructureDAO extends BaseDAO {
+public class StructureDAO extends StructurebaseDAO {
          
     public StructureDAO() {
         super();

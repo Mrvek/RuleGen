@@ -66,9 +66,9 @@ public class StructureChangeAlgorithm {
             }
         }
         
-//        for (Table t : incorrectTables.keySet()) {
-//            System.out.println("Incorrect table: " + t.getName() + " " + errorMap.get(incorrectTables.get(t)));
-//        }
+        for (Table t : incorrectTables.keySet()) {
+            System.out.println("Incorrect table: " + t.getName() + " " + errorMap.get(incorrectTables.get(t)));
+        }
         return incorrectTables;
     }
     
@@ -129,9 +129,9 @@ public class StructureChangeAlgorithm {
             }
         }
         
-//        for (Attribute t : incorrectAttributes.keySet()) {
-//            System.out.println("Incorrect attribute: " + t.getName() + " " + errorMap.get(incorrectAttributes.get(t)));
-//        }
+        for (Attribute t : incorrectAttributes.keySet()) {
+            System.out.println("Incorrect attribute: " + t.getName() + " " + errorMap.get(incorrectAttributes.get(t)));
+        }
         return incorrectAttributes;
     }
     
