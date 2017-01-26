@@ -5,10 +5,10 @@
  */
 package dataAccess.persistence.oracle.targetdb;
 
-import dataAccess.dto.project.Attribute;
-import dataAccess.dto.project.Table;
-import dataAccess.dto.supported_units.SupportedDatabases;
-import dataAccess.dto.supported_units.SupportedDatatypes;
+import dto.project.Attribute;
+import dto.project.Table;
+import dto.supported_units.SupportedDatabases;
+import dto.supported_units.SupportedDatatypes;
 import dataAccess.persistence.oracle.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

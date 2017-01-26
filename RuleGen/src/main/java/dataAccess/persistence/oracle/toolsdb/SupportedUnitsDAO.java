@@ -8,8 +8,9 @@ package dataAccess.persistence.oracle.toolsdb;
 import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 import dataAccess.toolsdb.DBConfig;
-import dataAccess.dto.supported_units.SupportedDatabases;
-import dataAccess.dto.supported_units.SupportedDatatypes;
+import dto.supported_units.SupportedDatabases;
+import dto.supported_units.SupportedDatatypes;
+import dto.supported_units.SupportedOperators;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,4 +129,45 @@ public class SupportedUnitsDAO extends BaseDAO {
         return null;
     }
     
+    public ArrayList<SupportedOperators> getAllSupportedOperators() {
+        ArrayList<SupportedOperators> result = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+            java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDOPERATORS.SUPPORTEDOPERATORS_ID as SUPPORTEDOPERATORS_ID," +
+                                                                "    SUPPORTEDOPERATORS.OPERATOR as OPERATOR" +
+                                                                " from SUPPORTEDOPERATORS SUPPORTEDOPERATORS");
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                SupportedOperators supoperator = new SupportedOperators(dbResultSet.getInt("SUPPORTEDOPERATORS_ID"), 
+                                                                  dbResultSet.getString("OPERATOR"));
+                result.add(supoperator);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public SupportedOperators getSupportedOperator(int id) {
+        
+        try (Connection con = super.getConnection()) {
+            java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDOPERATORS.SUPPORTEDOPERATORS_ID as SUPPORTEDOPERATORS_ID," +
+                                                                "    SUPPORTEDOPERATORS.OPERATOR as OPERATOR" +
+                                                                " from SUPPORTEDOPERATORS SUPPORTEDOPERATORS" +
+                                                                " where SUPPORTEDOPERATORS.SUPPORTEDOPERATORS_ID = ?");
+            ps.setInt(1, id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                SupportedOperators supoperator = new SupportedOperators(dbResultSet.getInt("SUPPORTEDOPERATORS_ID"), 
+                                                                  dbResultSet.getString("OPERATOR"));
+                return supoperator;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

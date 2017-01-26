@@ -8,10 +8,12 @@ package dataAccess.persistence.oracle.toolsdb;
 import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 import dataAccess.toolsdb.DBConfig;
-import dataAccess.dto.project.Attribute;
-import dataAccess.dto.project.DatabaseSchema;
-import dataAccess.dto.project.Table;
-import dataAccess.dto.supported_units.SupportedDatatypes;
+import dto.project.Attribute;
+import dto.project.DatabaseSchema;
+import dto.project.Project;
+import dto.project.Table;
+import dto.supported_units.SupportedDatabases;
+import dto.supported_units.SupportedDatatypes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,7 +56,7 @@ public class ProjectDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                DatabaseSchema dbs = new DatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"), dbResultSet.getString("SNAME"));
+                DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID")); //Still working?
                 Table database = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"), dbs);
                                                                             
                 result.add(database);
@@ -173,6 +175,166 @@ public class ProjectDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public DatabaseSchema getDatabaseSchema (int databaseSchema_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select DATABASESCHEMA.DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
+                                                        "    DATABASESCHEMA.NAME as NAME," +
+                                                        "    DATABASESCHEMA.CHARACTERSET as CHARACTERSET," +
+                                                        "    DATABASESCHEMA.DBUSER as DBUSER," +
+                                                        "    DATABASESCHEMA.DBPASSWORD as DBPASSWORD," +
+                                                        "    DATABASESCHEMA.DBPORT as DBPORT," +
+                                                        "    DATABASESCHEMA.DBSERVICENAME as DBSERVICENAME," +
+                                                        "    DATABASESCHEMA.DBHOST as DBHOST " +
+                                                        " from DATABASESCHEMA DATABASESCHEMA" +
+                                                        " WHERE DATABASESCHEMA.DATABASESCHEMA_ID = ?");
+            ps.setInt(1, databaseSchema_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                
+                DatabaseSchema dbs = new DatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"), 
+                        dbResultSet.getString("NAME"), 
+                        dbResultSet.getString("CHARACTERSET"), 
+                        dbResultSet.getString("DBUSER"), 
+                        dbResultSet.getString("DBPASSWORD"), 
+                        dbResultSet.getString("DBPORT"), 
+                        dbResultSet.getString("DBSERVICENAME"), 
+                        dbResultSet.getString("DBHOST"));
+                return dbs;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Table getTable (int table_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select \"table\".TABLE_ID as TABLE_ID," +
+                                                        "    \"table\".DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
+                                                        "    \"table\".NAME as NAME " +
+                                                        " from \"table\" \"table\"" +
+                                                        " WHERE \"table\".TABLE_ID = ?");
+            ps.setInt(1, table_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
+                Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"),dbs);
+                
+                ArrayList<Attribute> atr = this.getAllAttributes(dbResultSet.getInt("TABLE_ID"));
+                for (Attribute x : atr) {
+                    table.addAttribute(x);
+                }
+ 
+                return table;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    //Specific use for method getTable() and getAttribute()
+    private ArrayList<Attribute> getAllAttributes (int table_id) {
+        ArrayList<Attribute> result = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select ATTRIBUTE.ATTRIBUTE_ID as ATTRIBUTE_ID," +
+                                                        "    ATTRIBUTE.TABLE_ID as TABLE_ID," +
+                                                        "    ATTRIBUTE.SUPPORTEDDATATYPES_ID as SUPPORTEDDATATYPES_ID," +
+                                                        "    ATTRIBUTE.NAME as NAME " +
+                                                        " from ATTRIBUTE ATTRIBUTE" +
+                                                        " WHERE ATTRIBUTE.TABLE_ID = ?");
+            ps.setInt(1, table_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
+                SupportedDatatypes supdatatype = sdao.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
+                
+                Attribute attribute = new Attribute(dbResultSet.getInt("ATTRIBUTE_ID"), dbResultSet.getString("NAME"), supdatatype);
+                
+                result.add(attribute);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public Attribute getAttribute (int atr_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select ATTRIBUTE.ATTRIBUTE_ID as ATTRIBUTE_ID," +
+                                                        "    ATTRIBUTE.SUPPORTEDDATATYPES_ID as SUPPORTEDDATATYPES_ID," +
+                                                        "    ATTRIBUTE.NAME as NAME," +
+                                                        "    \"table\".TABLE_ID as TABLE_ID," +
+                                                        "    \"table\".DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
+                                                        "    \"table\".NAME as NAME " +
+                                                        " from \"table\" \"table\"," +
+                                                        "    ATTRIBUTE ATTRIBUTE " +
+                                                        " where ATTRIBUTE.TABLE_ID=\"table\".TABLE_ID" +
+                                                        " and ATTRIBUTE.ATTRIBUTE_ID = ?");
+            ps.setInt(1, atr_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
+                SupportedDatatypes supdatatype = sdao.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
+                DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
+                Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"), dbs);
+                
+                ArrayList<Attribute> atr = this.getAllAttributes(dbResultSet.getInt("TABLE_ID"));
+                for (Attribute x : atr) {
+                    table.addAttribute(x);
+                }
+                
+                Attribute attribute = new Attribute(dbResultSet.getInt("ATTRIBUTE_ID"), dbResultSet.getString("NAME"), table, supdatatype);
+                
+                return attribute;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Project getProject (int project_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select PROJECT.PROJECT_ID as PROJECT_ID," +
+                                                        "    PROJECT.PROJECTNAME as PROJECTNAME," +
+                                                        "    PROJECT.ABBREVIATION as ABBREVIATION," +
+                                                        "    PROJECT.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
+                                                        "    PROJECT.USERNAME as USERNAME," +
+                                                        "    PROJECT.DATABASESCHEMA_ID as DATABASESCHEMA_ID " +
+                                                        " from PROJECT PROJECT" +
+                                                        " WHERE PROJECT.PROJECT_ID = ?");
+            ps.setInt(1, project_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
+                SupportedDatabases sdb = sdao.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID"));
+                DatabaseSchema ds = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
+                
+                Project project = new Project(dbResultSet.getInt("PROJECT_ID"),
+                                              dbResultSet.getString("PROJECTNAME"),
+                                              dbResultSet.getString("ABBREVIATION"),
+                                            dbResultSet.getString("USERNAME"),
+                                               sdb, ds);
+                
+                return project;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }

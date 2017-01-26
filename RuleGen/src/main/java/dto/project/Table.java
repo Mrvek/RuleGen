@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess.dto.project;
+package dto.project;
 
 import java.util.ArrayList;
 
@@ -65,5 +65,5 @@ public class Table {
     public ArrayList<Attribute> getAllAttributes() {
         return attributes;
     }
-    
+
 }

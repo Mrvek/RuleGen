@@ -1,13 +1,13 @@
 package domainGeneric;
 
 
-import dataAccess.dto.businessrules.BRToJSONConverter;
+import dto.businessrules.BRToJSONConverter;
 import domainGeneric.businessrule.ruletype.AttributeRange;
 import domainGeneric.businessrule.ruletype.AttributeList;
 import domainGeneric.businessrule.ruletype.AttributeCompare;
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.businessrule.ruletype.AttributeOther;
-import dataAccess.dto.businessrules.BRDefinition;
+import dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
 import domainGeneric.businessrule.br.CodeType;
 import domainGeneric.businessrule.br.Constraint;

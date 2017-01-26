@@ -1,4 +1,4 @@
-package dataAccess.dto.businessrules;
+package dto.businessrules;
 
 import java.util.List;
 import java.util.Map;
