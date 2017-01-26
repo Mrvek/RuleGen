@@ -1,4 +1,4 @@
-package domainGeneric.businessrule.br;
+package domainGeneric.businessrule.CType;
 
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.TemplateService;

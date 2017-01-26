@@ -9,9 +9,9 @@ import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.businessrule.ruletype.AttributeOther;
 import dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
-import domainGeneric.businessrule.br.CodeType;
-import domainGeneric.businessrule.br.Constraint;
-import domainGeneric.businessrule.br.Trigger;
+import domainGeneric.businessrule.CType.CodeType;
+import domainGeneric.businessrule.CType.Constraint;
+import domainGeneric.businessrule.CType.Trigger;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
@@ -44,6 +44,7 @@ public class BusinessRuleService {
                 break;
         }
 
+//        TODO: Proper check for constraints
         if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
             CodeType rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
             rules.add(rule);
