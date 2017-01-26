@@ -6,6 +6,7 @@
 package dataAccess.persistence.oracle.targetdb;
 
 import dto.project.Attribute;
+import dto.project.DatabaseSchema;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
@@ -24,8 +25,8 @@ import java.util.logging.Logger;
  */
 public class StructureDAO extends BaseDAO {
          
-    public StructureDAO(String hostname, String port, String serviceName, String username, String password) {
-        super(hostname, port, serviceName, username, password);
+    public StructureDAO() {
+        super();
     }
     
     public ArrayList<Table> getTables() {

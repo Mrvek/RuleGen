@@ -7,7 +7,7 @@ package dataAccess.persistence.oracle.toolsdb;
 
 import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
-import dataAccess.toolsdb.DBConfig;
+import dto.project.DatabaseSchema;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
 import dto.supported_units.SupportedOperators;
@@ -24,15 +24,9 @@ import java.util.logging.Logger;
  */
 public class SupportedUnitsDAO extends BaseDAO {
     
-    private static DBConfig dbc = new DBConfig();
-    private static String dbhost = dbc.getDbhost();
-    private static String dbport = dbc.getDbport();
-    private static String dbservicename = dbc.getDbservicename();
-    private static String dbuser = dbc.getDbuser();
-    private static String dbpassword = dbc.getDbpassword();   
-    
-    public SupportedUnitsDAO() { 
-        super(dbhost, dbport, dbservicename, dbuser, dbpassword);
+   
+    public SupportedUnitsDAO(){ 
+        super();
     }
     
     public ArrayList<SupportedDatabases> getAllSupportedDatabases() {

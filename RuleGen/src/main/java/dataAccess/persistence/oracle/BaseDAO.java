@@ -9,22 +9,26 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import dataAccess.persistence.oracle.toolsdb.DBConfig;
+import dto.project.DatabaseSchema;
+
 /**
  *
  * @author Matthias
  */
 public class BaseDAO {
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static String DB_CONNECTION;
-    private static String DB_USER;
-    private static String DB_PASSWORD;
+	private static DatabaseSchema dbc = DBConfig.DBConfigToSchema();	
+    private String DB_CONNECTION;
+    private String DB_USER;
+    private String DB_PASSWORD;
     
-    public BaseDAO(String hostname, String port, String serviceName, String username, String password) {
+    public BaseDAO() {
         // Established with the Thin-style Service Name Syntax
         // jdbc:oracle:thin: + @//host_name:port_number/service_name
-        DB_CONNECTION = "jdbc:oracle:thin:@//" + hostname + ":" + port + "/" + serviceName;
-        DB_USER = username;
-        DB_PASSWORD = password;
+        DB_CONNECTION = "jdbc:oracle:thin:@//" + dbc.getDbhost() + ":" + dbc.getDbport() + "/" + dbc.getDbservicename();
+        DB_USER = dbc.getDbuser();
+        DB_PASSWORD = dbc.getDbpassword();
         
     }
     

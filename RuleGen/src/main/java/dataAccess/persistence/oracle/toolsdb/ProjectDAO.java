@@ -7,7 +7,6 @@ package dataAccess.persistence.oracle.toolsdb;
 
 import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
-import dataAccess.toolsdb.DBConfig;
 import dto.project.Attribute;
 import dto.project.DatabaseSchema;
 import dto.project.Project;
@@ -25,12 +24,11 @@ import java.util.logging.Logger;
 /**
  *
  * @author Matthias
- */
+ */ 
 public class ProjectDAO extends BaseDAO {
-    private static DatabaseSchema dbc = DBConfig.DBConfigToSchema();
-    
+   
     public ProjectDAO() { 
-        super(dbc.getDbhost(), dbc.getDbport(), dbc.getDbservicename(), dbc.getDbuser(), dbc.getDbpassword());
+        super();
     }
     
     public ArrayList<Table> getAllTablesFromProject(int project_id) {
@@ -140,7 +138,7 @@ public class ProjectDAO extends BaseDAO {
         }
         return result;
     }
-    
+    //TODO Boolean?
     public void insertTables(int database_schema_id, ArrayList<Table> tables) {
         try (Connection con = super.getConnection()) {
             for (Table table : tables) {

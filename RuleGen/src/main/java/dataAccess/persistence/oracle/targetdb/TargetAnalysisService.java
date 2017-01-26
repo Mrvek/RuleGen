@@ -7,6 +7,7 @@ package dataAccess.persistence.oracle.targetdb;
 
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsDAO;
 import dto.project.Attribute;
+import dto.project.DatabaseSchema;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
@@ -17,20 +18,10 @@ import java.util.ArrayList;
  * @author Matthias
  */
 public class TargetAnalysisService {
-    private String hostname;
-    private String port;
-    private String serviceName;
-    private String username;
-    private String password;
     private StructureDAO sdao;
 
-    public TargetAnalysisService(String hostname, String port, String serviceName, String username, String password) {
-        this.hostname = hostname;
-        this.port = port;
-        this.serviceName = serviceName;
-        this.username = username;
-        this.password = password;
-        sdao = new StructureDAO(hostname, port, serviceName, username, password);
+    public TargetAnalysisService() {
+        sdao = new StructureDAO();
     }
     
     public ArrayList<Table> getTargetDatabaseStructure(SupportedDatabases database) {

@@ -17,7 +17,7 @@ import dto.project.Table;
 import dto.supported_units.SupportedOperators;
 import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
-import dataAccess.toolsdb.DBConfig;
+
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,17 +31,10 @@ import java.util.logging.Logger;
  *
  * @author Matthias
  */
-public class BusinessRuleDAO extends BaseDAO {
-    
-    private static DBConfig dbc = new DBConfig();
-    private static String dbhost = dbc.getDbhost();
-    private static String dbport = dbc.getDbport();
-    private static String dbservicename = dbc.getDbservicename();
-    private static String dbuser = dbc.getDbuser();
-    private static String dbpassword = dbc.getDbpassword();   
+public class BusinessRuleDAO extends BaseDAO { 
     
     public BusinessRuleDAO() { 
-        super(dbhost, dbport, dbservicename, dbuser, dbpassword);
+        super();
     }
     
     public Category getCategory(int cat_id) {

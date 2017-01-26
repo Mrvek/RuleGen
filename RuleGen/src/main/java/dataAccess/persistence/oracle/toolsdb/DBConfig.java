@@ -1,4 +1,4 @@
-package dataAccess.toolsdb;
+package dataAccess.persistence.oracle.toolsdb;
 
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +14,8 @@ import dto.project.DatabaseSchema;
 public class DBConfig {
     
 	//TODO MitchellCheck
-    private static String path = "src" + File.separator + "main" + File.separator + "java" + File.separator + "dataAccess" + File.separator + "toolsDB" + File.separator + "ToolDBConfig.properties";
+	//TODO Maak een lijst en dan itereer later
+    private static String path = "src" + File.separator + "main" + File.separator + "java" + File.separator + "dataAccess" + File.separator + "persistence" + File.separator + "oracle" + File.separator + "toolsdb" + File.separator + "ToolDBConfig.properties";
     //TODO needs better name probably lol
     public static DatabaseSchema DBConfigToSchema() {
     	DatabaseSchema dbs = null; 

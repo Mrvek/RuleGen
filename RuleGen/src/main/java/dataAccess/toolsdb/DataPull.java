@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dataAccess.persistence.oracle.toolsdb.DBConfig;
+
 /**
  * Created by Mitchell on 18/01/2017.
  */

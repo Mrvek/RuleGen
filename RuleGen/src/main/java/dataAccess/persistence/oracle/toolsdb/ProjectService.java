@@ -5,6 +5,7 @@
  */
 package dataAccess.persistence.oracle.toolsdb;
 
+import dto.project.DatabaseSchema;
 import dto.project.Table;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * @author Matthias
  */
 public class ProjectService {
-    private ProjectDAO pdao;
+    private ProjectDAO pdao; 
 
     public ProjectService() {
         pdao = new ProjectDAO();
