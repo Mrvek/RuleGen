@@ -19,8 +19,8 @@ public class Test {
 
     @Before
     public void setUp() {
-        projectId = "3";
-        brIds.add("10");
+        projectId = "36";
+        brIds.add("74");
     }
 
     @org.junit.Test
