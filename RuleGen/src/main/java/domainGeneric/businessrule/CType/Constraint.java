@@ -1,5 +1,6 @@
 package domainGeneric.businessrule.CType;
 
+import domainGeneric.businessrule.NameGen;
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.TemplateService;
 
@@ -8,8 +9,8 @@ import domainGeneric.TemplateService;
  */
 public class Constraint extends CodeType {
 
-    public Constraint(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String message) {
-        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "CSTR", new TemplateService(), message);
+    public Constraint(String projectid, String primarykey, BRRuleType ruletype, String databasetype, String target, String table) {
+        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "CSTR", new TemplateService());
     }
 
     @Override

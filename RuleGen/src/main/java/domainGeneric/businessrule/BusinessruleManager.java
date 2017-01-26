@@ -1,26 +1,21 @@
-package domainGeneric;
+package domainGeneric.businessrule;
 
-
-import dto.businessrules.BRToJSONConverter;
-import domainGeneric.businessrule.ruletype.AttributeRange;
-import domainGeneric.businessrule.ruletype.AttributeList;
-import domainGeneric.businessrule.ruletype.AttributeCompare;
-import domainGeneric.businessrule.ruletype.BRRuleType;
-import domainGeneric.businessrule.ruletype.AttributeOther;
-import dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
 import domainGeneric.businessrule.CType.CodeType;
 import domainGeneric.businessrule.CType.Constraint;
 import domainGeneric.businessrule.CType.Trigger;
+import domainGeneric.businessrule.ruletype.*;
+import dto.businessrules.BRDefinition;
+import dto.businessrules.BRToJSONConverter;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mitchell on 18/01/2017.
+ * Created by Mitchell on 26/01/2017.
  */
-public class BusinessRuleService {
+public class BusinessruleManager {
     private List<CodeType> rules = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
     private BRToJSONConverter jsonConverter;
@@ -50,7 +45,7 @@ public class BusinessRuleService {
             rules.add(rule);
 
         } else {
-            CodeType rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger, BRData.tablename);
+            CodeType rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger);
             rules.add(rule);
         }
     }
