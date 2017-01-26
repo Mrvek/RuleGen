@@ -9,6 +9,8 @@ import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dataAccess.persistence.oracle.targetdb.TargetAnalysisService;
 import dataAccess.persistence.oracle.toolsdb.ProjectService;
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 /**
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 public class ProjectController {
     
-    public void initialiseProject(int project_id) {
+    public JSONArray initialiseProject(int project_id) {
         TargetAnalysisService tac = new TargetAnalysisService("ondora02.hu.nl", 
                                                                     "8521", 
                                                                     "cursus02.hu.nl", 
@@ -29,9 +31,11 @@ public class ProjectController {
         
         ProjectService pc = new ProjectService();
         pc.updateProject(project_id, targetTables);
+        return null;
     }
     
-    public void updateProject() {
+    public JSONArray updateProject() {
         System.out.println("Not Ready");
+        return null;
     }
 }

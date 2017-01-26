@@ -1,6 +1,7 @@
 package domainGeneric;
 
 import dataAccess.DataPullService;
+import domainGeneric.template.TemplateManager;
 import dto.template.TemplateDummy;
 import domainGeneric.template.Template;
 
@@ -13,7 +14,7 @@ public class TemplateBuilderService {
     private DataPullService datapuller = new DataPullService();
 
     public Boolean checkForNewTemplates() {
-        List<TemplateDummy> templates = datapuller.getNewTemplates(TemplateService.getTemplateNames());
+        List<TemplateDummy> templates = datapuller.getNewTemplates(TemplateManager.getTemplateNames());
         System.out.println("Checking for new templates...");
         if (templates.isEmpty()) {
             return false;
@@ -30,7 +31,7 @@ public class TemplateBuilderService {
         Template template = new Template(td.trigger, td.warning, td.error, td.constraint, td.constraintcompare,
                 td.triggercompare, td.constraintRange, td.triggerRange, td.operatorTranslations, td.constraintOther, td.triggerOther, td.constraintList, td.triggerList);
 
-        TemplateService.resetTemplates();
-        TemplateService.addTemplate(td.name, template);
+        TemplateManager.resetTemplates();
+        TemplateManager.addTemplate(td.name, template);
     }
 }

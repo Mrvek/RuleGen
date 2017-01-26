@@ -2,6 +2,7 @@ package presentation;
 
 import org.json.JSONArray;
 import presentation.Rest.BRDataFetch;
+import presentation.Rest.ProjectDataFetch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,16 @@ public class RestService {
 
         get("/hello/BR", (request, response) -> {
             JSONArray answer = new BRDataFetch().getBR(request, response);
+            return answer;
+        });
+
+        get("/project/new", (request, response) -> {
+            JSONArray answer = new ProjectDataFetch().initialise(request, response);
+            return answer;
+        });
+
+        get("/project/update", (request, response) -> {
+            JSONArray answer = new ProjectDataFetch().update(request, response);
             return answer;
         });
 

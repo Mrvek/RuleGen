@@ -1,7 +1,7 @@
 package taskSpecific.BusinessRuleGenerate;
 
 import dataAccess.DataPushService;
-import domainGeneric.BusinessRuleService;
+import domainGeneric.BusinessruleService;
 import org.json.JSONArray;
 import taskSpecific.TemplateUpdate.UpdateService;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Mitchell on 18/01/2017.
  */
 public class BRController {
-    private BusinessRuleService BRService = new BusinessRuleService();
+    private BusinessruleService BRService = new BusinessruleService();
     private DataPushService DPushService = new DataPushService();
 
 

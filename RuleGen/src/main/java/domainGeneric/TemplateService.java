@@ -1,6 +1,7 @@
 package domainGeneric;
 
 import domainGeneric.template.Template;
+import domainGeneric.template.TemplateManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,80 +12,53 @@ import java.util.Map;
  * Created by Mitchell on 18/01/2017.
  */
 public class TemplateService {
-    static private Map<String, Template> templates = new HashMap<>();
-
-    static void addTemplate(String DBType, Template template) {
-        templates.put(DBType, template);
-    }
-
-    static void resetTemplates() {
-        templates.clear();
-    }
-
+    private TemplateManager factory = new TemplateManager();
 
     public String getConstraintCode(String name, String table, String ruletypecode, String databasetype, String target) {
-        Template t = templates.get(databasetype);
-        return t.getConstraintCode(name, table, ruletypecode, target);
+        return factory.getConstraintCode(name, table, ruletypecode,databasetype, target);
     }
 
     public String getRuleTypeCompareConstraintCode(String databasetype, String target, String operator, String compareWith) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeCompareConstraintCode(target, operator, compareWith);
+        return factory.getRuleTypeCompareConstraintCode(databasetype, target, operator, compareWith);
     }
 
     public String getRuleTypeCompareTriggerCode(String databasetype, String Target, String operator, String compareWith) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeCompareTriggerCode(Target, operator, compareWith);
+        return factory.getRuleTypeCompareTriggerCode(databasetype, Target, operator, compareWith);
     }
 
     public String getRuleTypeRangeConstraintCode(String databasetype, String target , String from, String operator, String to) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeRangeConstraintCode(target , from, operator, to);
+        return factory.getRuleTypeRangeConstraintCode(databasetype, target , from, operator, to);
     }
 
     public String getRuleTypeRangeTriggerCode(String databasetype, String from, String operator, String to, String target) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeRangeTriggerCode(from, operator, to, target);
+        return factory.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target);
     }
 
     public String getTriggerCode(List<String> trigger, String name, String table, String databasetype) {
-        Template t = templates.get(databasetype);
-        return t.getTriggerCode(name, trigger, table);
+        return factory.getTriggerCode(trigger, name, table, databasetype);
     }
 
     public String getWarningCode(Map<String, String> tokens, String exceptionMessage, String databasetype) {
-        Template t = templates.get(databasetype);
-        return t.getWarningCode(exceptionMessage, tokens);
+        return factory.getWarningCode(tokens, exceptionMessage, databasetype);
     }
 
     public String getErrorCode(Map<String, String> tokens, String exceptionMessage, String databasetype) {
-        Template t = templates.get(databasetype);
-        return t.getErrorCode(exceptionMessage, tokens);
-    }
-
-    public static List<String> getTemplateNames() {
-        List<String> names = new ArrayList<>();
-        names.addAll(templates.keySet());
-        return names;
+        return factory.getErrorCode(tokens, exceptionMessage, databasetype);
     }
 
     public String getRuleTypeOtherConstraintCode(String databasetype, String booleanStatement) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeOtherConstraintCode(booleanStatement);
+        return factory.getRuleTypeOtherConstraintCode(databasetype, booleanStatement);
     }
 
     public String getRuleTypeOtherTriggerCode(String databasetype, String booleanStatement) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeOtherTriggerCode(booleanStatement);
+        return factory.getRuleTypeOtherTriggerCode(databasetype, booleanStatement);
     }
 
     public String getRuleTypeListConstraintCode(String databasetype, String target, List<String> values, String operator) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeListConstraintCode(target, values, operator);
+        return factory.getRuleTypeListConstraintCode(databasetype, target, values, operator);
     }
 
     public String getRuleTypeListTriggerCode(String databasetype, String target, String operator, List<String> values) {
-        Template t = templates.get(databasetype);
-        return t.getRuleTypeListTriggerCode(target, operator, values);
+        return factory.getRuleTypeListTriggerCode(databasetype, target, operator, values);
     }
 }

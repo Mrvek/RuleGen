@@ -1,5 +1,6 @@
 package domainGeneric.businessrule.CType;
 
+import domainGeneric.businessrule.NameGen;
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.TemplateService;
 
@@ -15,8 +16,8 @@ public class Trigger extends CodeType {
     private Map<String, String> tokens;
     private List<String> trigger;
 
-    public Trigger(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String message, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger) {
-        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "TRG", new TemplateService(), message);
+    public Trigger(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String severity, String exceptionMessage, Map<String, String> tokens, List<String> trigger) {
+        super(primarykey, projectid, ruletype, databasetype, target, table, new NameGen(ruletype.getShortname(), databasetype), "TRG", new TemplateService());
         this.severity = severity;
         ExceptionMessage = exceptionMessage;
         this.tokens = tokens;
