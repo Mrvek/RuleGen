@@ -5,7 +5,6 @@
  */
 package dataAccess.persistence.oracle.toolsdb;
 
-import dto.project.Attribute;
 import dto.project.Table;
 import java.util.ArrayList;
 

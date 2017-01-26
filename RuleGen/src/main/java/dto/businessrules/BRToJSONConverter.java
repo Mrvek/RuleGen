@@ -1,6 +1,6 @@
 package dto.businessrules;
 
-import domainGeneric.businessrule.br.CodeType;
+import domainGeneric.businessrule.CType.CodeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

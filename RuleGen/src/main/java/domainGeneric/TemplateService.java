@@ -32,9 +32,9 @@ public class TemplateService {
         return t.getRuleTypeCompareConstraintCode(target, operator, compareWith);
     }
 
-    public String getRuleTypeCompareTriggerCode(String table, String databasetype, String Target, String operator, String compareWith) {
+    public String getRuleTypeCompareTriggerCode(String databasetype, String Target, String operator, String compareWith) {
         Template t = templates.get(databasetype);
-        return t.getRuleTypeCompareTriggerCode(table, Target, operator, compareWith);
+        return t.getRuleTypeCompareTriggerCode(Target, operator, compareWith);
     }
 
     public String getRuleTypeRangeConstraintCode(String databasetype, String target , String from, String operator, String to) {
@@ -42,9 +42,9 @@ public class TemplateService {
         return t.getRuleTypeRangeConstraintCode(target , from, operator, to);
     }
 
-    public String getRuleTypeRangeTriggerCode(String databasetype, String from, String operator, String to, String target, String table) {
+    public String getRuleTypeRangeTriggerCode(String databasetype, String from, String operator, String to, String target) {
         Template t = templates.get(databasetype);
-        return t.getRuleTypeRangeTriggerCode(from, operator, to, target, table);
+        return t.getRuleTypeRangeTriggerCode(from, operator, to, target);
     }
 
     public String getTriggerCode(List<String> trigger, String name, String table, String databasetype) {
@@ -83,8 +83,8 @@ public class TemplateService {
         return t.getRuleTypeListConstraintCode(target, values, operator);
     }
 
-    public String getRuleTypeListTriggerCode(String databasetype, String table, String target, String operator, List<String> values) {
+    public String getRuleTypeListTriggerCode(String databasetype, String target, String operator, List<String> values) {
         Template t = templates.get(databasetype);
-        return t.getRuleTypeListTriggerCode(table, target, operator, values);
+        return t.getRuleTypeListTriggerCode(target, operator, values);
     }
 }

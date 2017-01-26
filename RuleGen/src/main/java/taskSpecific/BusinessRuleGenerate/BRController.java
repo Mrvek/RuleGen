@@ -22,9 +22,9 @@ public class BRController {
         for (String key : i) {
             BRService.createBR(key, projectid);
         }
+        String code = BRService.getAllCode();
         System.out.println("");
         JSONArray result = BRService.getinfo();
-        String code = BRService.getAllCode();
         System.out.println("Pushing code to TargetDatabase...");
         DPushService.Send(code);
 

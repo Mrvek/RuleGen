@@ -1,4 +1,4 @@
-package domainGeneric.businessrule.br;
+package domainGeneric.businessrule.CType;
 
 /**
  * Created by Mitchell on 18/01/2017.

@@ -1,4 +1,4 @@
-package domainGeneric.businessrule.br;
+package domainGeneric.businessrule.CType;
 
 import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.TemplateService;
@@ -18,6 +18,18 @@ public abstract class CodeType {
     protected TemplateService manager;
     protected String Message = "not yet initiated";
 
+    public CodeType(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, NameGen name, String initials, TemplateService manager, String message) {
+        this.primarykey = primarykey;
+        this.projectid = projectid;
+        this.ruletype = ruletype;
+        this.databasetype = databasetype;
+        this.target = target;
+        this.table = table;
+        this.name = name;
+        this.initials = initials;
+        this.manager = manager;
+        Message = message;
+    }
 
     public abstract String getCode();
 

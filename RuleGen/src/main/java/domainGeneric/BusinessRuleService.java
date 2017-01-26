@@ -9,9 +9,9 @@ import domainGeneric.businessrule.ruletype.BRRuleType;
 import domainGeneric.businessrule.ruletype.AttributeOther;
 import dto.businessrules.BRDefinition;
 import dataAccess.DataPullService;
-import domainGeneric.businessrule.br.CodeType;
-import domainGeneric.businessrule.br.Constraint;
-import domainGeneric.businessrule.br.Trigger;
+import domainGeneric.businessrule.CType.CodeType;
+import domainGeneric.businessrule.CType.Constraint;
+import domainGeneric.businessrule.CType.Trigger;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
@@ -31,19 +31,20 @@ public class BusinessRuleService {
 
         switch (BRData.BRRuleType) {
             case ("AttributeCompare"):
-                ruletype = new AttributeCompare(BRData.tablename, BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
+                ruletype = new AttributeCompare(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype);
                 break;
             case ("AttributeRange"):
-                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target, BRData.tablename);
+                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.tablename);
                 break;
             case ("AttributeList"):
-                ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.tablename, BRData.target, BRData.values);
+                ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.target, BRData.values);
                 break;
             case ("AttributeOther"):
                 ruletype = new AttributeOther(BRData.operator, BRData.databasetype, BRData.values.get(0));
                 break;
         }
 
+//        TODO: Proper check for constraints
         if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
             CodeType rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
             rules.add(rule);
@@ -64,10 +65,11 @@ public class BusinessRuleService {
                 result += "\n\n" + i.getCode();
             }
         }
+        System.out.println("\t Generated: " + result);
 
         System.out.println("Pushing code to ToolDatabase...");
 //        TODO: push to toolDatabase
-        System.out.println("ERROR 404: Code Implementation not found!");
+        System.out.println("\tERROR 404: Code Implementation not found!");
         return result;
     }
 
