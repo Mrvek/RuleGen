@@ -20,11 +20,7 @@ import java.util.ArrayList;
 public class ProjectController {
     
     public JSONArray initialiseProject(int project_id) {
-        TargetAnalysisService tac = new TargetAnalysisService("ondora02.hu.nl", 
-                                                                    "8521", 
-                                                                    "cursus02.hu.nl", 
-                                                                    "tosad_2016_2a_team3_target", 
-                                                                    "tosad_2016_2a_team3_target"); //TODO: do something!?
+        TargetAnalysisService tac = new TargetAnalysisService(); //TODO: do something!?
         
         SupportedDatabases database = new SupportedDatabases(1, "Oracle 12c"); //TODO: do something!?
         ArrayList<Table> targetTables = tac.getTargetDatabaseStructure(database);

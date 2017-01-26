@@ -3,7 +3,6 @@ package dataAccess.persistence.oracle;
 import java.util.ArrayList;
 
 import dataAccess.persistence.oracle.toolsdb.BusinessRuleDAO;
-import dataAccess.persistence.oracle.toolsdb.DBConfig;
 import dataAccess.persistence.oracle.toolsdb.ProjectDAO;
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsDAO;
 import dto.businessrules.BusinessValues;
@@ -99,6 +98,9 @@ public class BaseService {
 	}
 	public boolean insertTrigger(GeneratedTrigger generatedtrigger) {
 		return brdao.insertTrigger(generatedtrigger);
-	}	
+	}
+        public boolean setBusinessRuleName (int businessrule_id, String name) {
+            return brdao.setBusinessRuleName(businessrule_id, name);
+        }
 	
 }

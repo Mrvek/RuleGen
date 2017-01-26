@@ -202,4 +202,21 @@ public class BusinessRuleDAO extends BaseDAO {
         return false;
     }
     
+    public boolean setBusinessRuleName (int businessrule_id, String name) {
+        try (Connection con = super.getConnection()) {
+            
+            PreparedStatement ps = con.prepareStatement("UPDATE BUSINESSRULE SET NAME = ? WHERE BUSINESSRULE_ID = ? ");
+            ps.setString(1, name);
+            ps.setInt(2, businessrule_id);
+
+            return ps.executeUpdate() == 1;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    
 }
