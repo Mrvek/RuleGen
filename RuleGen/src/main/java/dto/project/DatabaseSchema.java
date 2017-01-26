@@ -30,8 +30,8 @@ public class DatabaseSchema {
         this.dbhost = dbhost;
     }
 
-    public DatabaseSchema() {
-    }
+//    public DatabaseSchema() {
+//    }
 
     public int getId() {
         return id;
@@ -73,7 +73,7 @@ public class DatabaseSchema {
         this.dbpassword = dbpassword;
     }
 
-    public String getDpport() {
+    public String getDbport() {
         return dpport;
     }
 

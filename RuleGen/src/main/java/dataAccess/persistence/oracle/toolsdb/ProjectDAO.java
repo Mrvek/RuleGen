@@ -27,15 +27,10 @@ import java.util.logging.Logger;
  * @author Matthias
  */
 public class ProjectDAO extends BaseDAO {
-    private static DBConfig dbc = new DBConfig();
-    private static String dbhost = dbc.getDbhost();
-    private static String dbport = dbc.getDbport();
-    private static String dbservicename = dbc.getDbservicename();
-    private static String dbuser = dbc.getDbuser();
-    private static String dbpassword = dbc.getDbpassword();   
+    private static DatabaseSchema dbc = DBConfig.DBConfigToSchema();
     
     public ProjectDAO() { 
-        super(dbhost, dbport, dbservicename, dbuser, dbpassword);
+        super(dbc.getDbhost(), dbc.getDbport(), dbc.getDbservicename(), dbc.getDbuser(), dbc.getDbpassword());
     }
     
     public ArrayList<Table> getAllTablesFromProject(int project_id) {
