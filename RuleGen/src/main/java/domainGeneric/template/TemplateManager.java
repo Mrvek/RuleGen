@@ -11,11 +11,11 @@ import java.util.Map;
 public class TemplateManager {
     static private Map<String, Template> templates = new HashMap<>();
 
-    static void addTemplate(String DBType, Template template) {
+    public static void addTemplate(String DBType, Template template) {
         templates.put(DBType, template);
     }
 
-    static void resetTemplates() {
+    public static void resetTemplates() {
         templates.clear();
     }
 
