@@ -63,10 +63,15 @@ public class DataPull {
         String target = "YOLO";
         String tablename = "HOLO";
         for (BusinessValues V : values) {
-            if (V.getType() == "Attribute") {
+            if (V.getType().equals("Attribute")) {
 //                target = V.getAttribute().getName();
 //                tablename = V.getAttribute().getTable().getName();
-            }else{
+            } if(V.getType().equals("Min")){
+                valuables.add(V.getValue());
+            }
+        }
+        for (BusinessValues V : values) {
+            if (V.getType().equals("Max")) {
                 valuables.add(V.getValue());
             }
         }
@@ -81,7 +86,7 @@ public class DataPull {
         tokens.put("[HI]", "HAPPY");
         String severity = "Warning";
 
-        BRDefinition definitions = new BRDefinition(projectid, jdbc, primaryKey, valuables, operator, databasetype.getDatabasetype(), "AttributeCompare", target, triggers, exception, tokens, severity, tablename);
+        BRDefinition definitions = new BRDefinition(projectid, jdbc, primaryKey, valuables, operator, databasetype.getDatabasetype(), "AttributeRange", target, triggers, exception, tokens, severity, tablename);
 
 
 

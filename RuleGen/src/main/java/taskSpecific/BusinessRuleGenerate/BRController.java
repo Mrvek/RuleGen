@@ -24,6 +24,7 @@ public class BRController {
         for (String key : BRIds) {
             BRService.createBR(key, projectid);
             String code = BRService.getCodeforKey(key);
+            System.out.println("\tGenerated Code for projectid "+projectid+ ": " + code + "\n");
             System.out.println("Pushing code results to ToolDatabase...");
             String BRName = BRService.getName(key);
             DPullService.pushCode(code, key, projectid, BRName);
