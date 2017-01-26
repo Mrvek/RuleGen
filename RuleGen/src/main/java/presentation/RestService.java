@@ -18,8 +18,8 @@ public class RestService {
         get("/hello", (req, res) -> "Hello World");
 
         List<String> keys = new ArrayList<>();
-        keys.add("1");
-        JSONArray result = new BRDataFetch().getData(keys, "1");
+        keys.add("10");
+        JSONArray result = new BRDataFetch().getData(keys, "3");
         System.out.println("returning: " + result + "\n");
 
         get("/hello/BR", (request, response) -> {

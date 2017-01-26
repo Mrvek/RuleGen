@@ -44,4 +44,8 @@ public abstract class CodeType {
     public String getMessage() {
         return Message;
     }
+
+    public String getName() {
+        return name.toString();
+    }
 }

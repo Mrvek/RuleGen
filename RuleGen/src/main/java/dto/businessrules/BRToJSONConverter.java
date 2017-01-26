@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mitchell on 24/01/2017.
@@ -13,8 +14,9 @@ import java.util.List;
 public class BRToJSONConverter {
     private JSONArray result = new JSONArray();
 
-    public BRToJSONConverter(List<CodeType> rules) {
-        for (CodeType br : rules) {
+    public BRToJSONConverter(Map<String, CodeType> rules) {
+        for (String bro : rules.keySet()) {
+            CodeType br = rules.get(bro);
             JSONObject info = new JSONObject();
             info.put("key", br.getPrimarykey());
             info.put("project", br.getProjectid());

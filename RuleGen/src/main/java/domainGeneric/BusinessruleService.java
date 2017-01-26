@@ -22,4 +22,12 @@ public class BusinessruleService {
     public JSONArray getinfo() {
         return factory.getinfo();
     }
+
+    public String getCodeforKey(String key) {
+        return factory.getCodeforRule(key);
+    }
+
+    public String getName(String key) {
+        return factory.getName(key);
+    }
 }
