@@ -278,8 +278,7 @@ public class ProjectDAO extends BaseDAO {
             while (dbResultSet.next()) {
                 SupportedUnitsDAO sdao = new SupportedUnitsDAO();
                 SupportedDatatypes supdatatype = sdao.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
-                DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
-                Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"), dbs);
+                Table table = this.getTable(dbResultSet.getInt("TABLE_ID"));
                 
                 ArrayList<Attribute> atr = this.getAllAttributes(dbResultSet.getInt("TABLE_ID"));
                 for (Attribute x : atr) {
