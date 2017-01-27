@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 /**
  * Created by Mitchell on 18/01/2017.
@@ -24,7 +24,7 @@ public class AttributeRange extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
+    public String getProcedureCode() {
         return manager.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target);
     }
 }

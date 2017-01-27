@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 /**
  * Created by Mitchell on 25/01/2017.
@@ -19,7 +19,7 @@ public class AttributeOther extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
+    public String getProcedureCode() {
         return manager.getRuleTypeOtherTriggerCode(databasetype, booleanStatement);
     }
 }

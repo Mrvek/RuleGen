@@ -1,4 +1,4 @@
-package unstableTESTGround;
+package unstableTESTGround.template;
 
 import dataAccess.DataPullService;
 import dto.template.TemplateDummy;

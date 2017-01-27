@@ -1,12 +1,7 @@
 package unstableTESTGround.businessrule.trigger;
 
-import unstableTESTGround.TemplateService;
-import unstableTESTGround.businessrule.trigger.tablePackage.Procedure;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Mitchell on 26/01/2017.

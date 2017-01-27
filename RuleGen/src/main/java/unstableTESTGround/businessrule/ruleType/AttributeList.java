@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class AttributeList extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
+    public String getProcedureCode() {
         return manager.getRuleTypeListTriggerCode(databasetype, target, operator, values);
     }
 }

@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 /**
  * Created by Mitchell on 19/01/2017.
@@ -22,5 +22,7 @@ public abstract class BRRuleType {
         return shortname;
     }
     public abstract String getConstraintCode();
-    public abstract String getTriggerCode();
+    public abstract String getProcedureCode();
+    public abstract String getParameterCode();
+    public abstract String getDeclarationCode();
 }

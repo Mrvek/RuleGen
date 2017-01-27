@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.trigger.tablePackage;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.ruleType.BRRuleType;
 
 import java.util.Map;

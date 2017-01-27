@@ -1,4 +1,4 @@
-package unstableTESTGround;
+package unstableTESTGround.template;
 
 import unstableTESTGround.template.TemplateManager;
 

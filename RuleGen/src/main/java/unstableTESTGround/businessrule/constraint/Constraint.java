@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.constraint;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.ruleType.BRRuleType;
 
 /**

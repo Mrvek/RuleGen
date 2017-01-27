@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 /**
  * Created by Mitchell on 18/01/2017.
@@ -10,7 +10,7 @@ public class AttributeCompare extends BRRuleType {
     private String CompareWith;
 
     public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
-        super(operator, new TemplateService(), databasetype, "CMPR");
+        super(operator, new TemplateService(), databasetype, "ACMP");
         this.Target = valueOne;
         this.CompareWith = valueTwo;
     }
@@ -22,7 +22,7 @@ public class AttributeCompare extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
+    public String getProcedureCode() {
         return manager.getRuleTypeCompareTriggerCode(databasetype, Target, operator, CompareWith);
     }
 }

@@ -4,13 +4,13 @@ package unstableTESTGround.businessrule;
  * Created by Mitchell on 18/01/2017.
  */
 public class NameGen {
-    private String initials = "brg";
+    private String initials = "BRG";
 
     public String getTriggerName(String databaseName, String tableName) {
         String name = initials + "_" +
                 databaseName + "_" +
                 tableName + "_" +
-                "trigger";
+                "TRIGGER";
         return name;
     }
 
@@ -27,7 +27,7 @@ public class NameGen {
         String name = initials + "_" +
                 databaseName + "_" +
                 tableName + "_" +
-                "package";
+                "PACKAGE";
         return name;
     }
 }
