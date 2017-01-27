@@ -58,14 +58,14 @@ public class Test {
         sca.checkTables(); //Change sysout blocks in SCA in order to display output.
         sca.checkAttributes(); //Change sysout blocks in SCA in order to display output.
 
-        BaseService bs = new BaseService();
-        Businessrule brs = bs.getBusinessrule(74);
-        ArrayList<BusinessValues> values = bs.getAllBusinessValues(brs);
-        
-        for (BusinessValues x : values) {
-            System.out.println("" + x.getType() + " " + x.getValue() + " " + x.getBusinessrule().getBusinessruletype().getCategory().getType()
-                                        + " " + x.getBusinessrule().getBusinessruletype().getType());    
-        }
+//        BaseService bs = new BaseService();
+//        Businessrule brs = bs.getBusinessrule(74);
+//        ArrayList<BusinessValues> values = bs.getAllBusinessValues(brs);
+//
+//        for (BusinessValues x : values) {
+//            System.out.println("" + x.getType() + " " + x.getValue() + " " + x.getBusinessrule().getBusinessruletype().getCategory().getType()
+//                                        + " " + x.getBusinessrule().getBusinessruletype().getType());
+//        }
 
     }
 }

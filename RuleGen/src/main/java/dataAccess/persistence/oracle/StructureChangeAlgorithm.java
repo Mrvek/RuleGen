@@ -40,7 +40,7 @@ public class StructureChangeAlgorithm {
             boolean exists = false;
             for (Table z : toolsTables) {
                 if (x.getName().toUpperCase().equals(z.getName().toUpperCase())) {
-                    //Table does still exist!
+                    //TriggerOnTable does still exist!
                     exists = true;
                     break;
                 }
@@ -55,7 +55,7 @@ public class StructureChangeAlgorithm {
             boolean exists = false;
             for (Table z : targetTables) {
                 if (x.getName().toUpperCase().equals(z.getName().toUpperCase())) {
-                    //Table does still exist!
+                    //TriggerOnTable does still exist!
                     exists = true;
                     break;
                 }
@@ -95,7 +95,7 @@ public class StructureChangeAlgorithm {
                         if (!exists) {
                             incorrectAttributes.put(y, error);
                         }
-                        break; //Table was found and compared, get back to other attributes.
+                        break; //TriggerOnTable was found and compared, get back to other attributes.
                     }
                     
                 }
@@ -122,7 +122,7 @@ public class StructureChangeAlgorithm {
                         if (!exists) {
                             incorrectAttributes.put(y, error);
                         }
-                        break; //Table was found and compared, get back to other attributes.
+                        break; //TriggerOnTable was found and compared, get back to other attributes.
                     }
                     
                 }

@@ -36,4 +36,16 @@ public class Trigger extends CodeType {
         Message = "Code Generated";
         return result;
     }
+
+    public String getDeclerationCode() {
+        return "HELLO WORLD";
+    }
+
+    public String getValidationCode() {
+        return null;
+    }
+
+    public String getExceptionCode() {
+        return null;
+    }
 }

@@ -3,8 +3,8 @@ package taskSpecific.BusinessRuleGenerate;
 import java.util.ArrayList;
 import java.util.List;
 import junit.framework.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 
 import static org.junit.Assert.assertTrue;
@@ -28,13 +28,13 @@ public class Test {
         String result = controller.Generate(brIds, projectId).toString();
         JSONArray array = new JSONArray();
         JSONObject obj = new JSONObject();
-        obj.put("project","10");
+        obj.put("project","74");
         obj.put("message","Code Generated");
-        obj.put("key","3");
-        array.add(obj);
+        obj.put("key","36");
+        array.put(obj);
 
         System.out.println("JsonReturnvalue: "+result);
-        assertTrue(result.equals(String.valueOf(array.toJSONString())));
+        assertTrue(result.equals(String.valueOf(array.toString())));
     }
 
 
