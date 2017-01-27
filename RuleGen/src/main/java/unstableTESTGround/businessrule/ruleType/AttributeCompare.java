@@ -9,10 +9,10 @@ public class AttributeCompare extends BRRuleType {
     private String Target;
     private String CompareWith;
 
-    public AttributeCompare(String valueOne, String valueTwo, String operator, String databasetype) {
+    public AttributeCompare(String target, String compareWith, String operator, String databasetype) {
         super(operator, new TemplateService(), databasetype, "ACMP");
-        this.Target = valueOne;
-        this.CompareWith = valueTwo;
+        this.Target = target;
+        this.CompareWith = compareWith;
     }
 
 
@@ -25,4 +25,10 @@ public class AttributeCompare extends BRRuleType {
     public String getProcedureCode() {
         return manager.getRuleTypeCompareTriggerCode(databasetype, Target, operator, CompareWith);
     }
+
+    @Override
+    public String getParameterCode() {
+        return null;
+    }
+
 }

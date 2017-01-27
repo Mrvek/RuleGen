@@ -28,4 +28,9 @@ public class AttributeList extends BRRuleType {
     public String getProcedureCode() {
         return manager.getRuleTypeListTriggerCode(databasetype, target, operator, values);
     }
+
+    @Override
+    public String getParameterCode() {
+        return manager.getParameterRuletTypeCode(databasetype, target);
+    }
 }

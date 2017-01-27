@@ -4,74 +4,130 @@ import dataAccess.DataPullService;
 import dto.businessrules.BRDefinition;
 import dto.businessrules.BRToJSONConverter;
 import org.json.JSONArray;
-import unstableTESTGround.businessrule.constraint.CodeType;
+import org.json.JSONObject;
 import unstableTESTGround.businessrule.constraint.Constraint;
-import unstableTESTGround.businessrule.constraint.Trigger;
 import unstableTESTGround.businessrule.ruleType.*;
+import unstableTESTGround.businessrule.trigger.TriggerOnTable;
+import unstableTESTGround.businessrule.trigger.tablePackage.Procedure;
+import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Mitchell on 26/01/2017.
  */
 public class BusinessruleManager {
-//    private List<CodeType> rules = new ArrayList<>();
-    private Map<String, CodeType> rules = new HashMap<>();
+    private Map<TriggerOnTable, TablePackage> triggers = new HashMap<>();
+    private List<Constraint> constraintList = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
     private BRToJSONConverter jsonConverter;
+    private NameGen nameGen = new NameGen();
+    private String projectID;
 
     public void createBR(String primaryKey, String projectid) {
         BRDefinition BRData = datapuller.getData(primaryKey, projectid);
+        this.projectID = projectid;
+        BRRuleType ruletype = createRuleType(BRData);
+
+        if (BRData.trigger == null || BRData.Severity == null || BRData.exceptionMessage == null || BRData.tokens.isEmpty() || BRData.trigger == null) {
+            Constraint constraint = new Constraint(BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename, nameGen.getConstraintName(BRData.databaseshortname, BRData.tablename, ruletype.getShortname(), BRData.target));
+            constraintList.add(constraint);
+
+        } else {
+            Procedure procedure = new Procedure();
+            TablePackage tablePackage = createOrGetPackage(BRData);
+            tablePackage.addProcedure(BRData.trigger, procedure);
+            TriggerOnTable trigger = createOrGetTrigger(BRData);
+            if (!triggers.get(trigger).equals(tablePackage)) {
+                triggers.put(trigger, tablePackage);
+            }
+        }
+    }
+
+    private TriggerOnTable createOrGetTrigger(BRDefinition brData) {
+        for (TriggerOnTable trigger : triggers.keySet()) {
+            if (trigger.getTable().equals(brData.tablename))
+                return  trigger;
+        }
+        return new TriggerOnTable();
+    }
+
+    private TablePackage createOrGetPackage(BRDefinition brData) {
+        for (TablePackage tablePackage : triggers.values()) {
+            if (tablePackage.getTable().equals(brData.tablename)) {
+                return tablePackage;
+            }
+        }
+        return new TablePackage();
+    }
+
+    private BRRuleType createRuleType(BRDefinition BRData) {
         BRRuleType ruletype = null;
 
         switch (BRData.BRRuleType) {
-            case ("AttributeCompare"):
+            case ("ACMP"):
                 ruletype = new AttributeCompare(BRData.target, BRData.values.get(1), BRData.operator, BRData.databasetype);
                 break;
-            case ("AttributeRange"):
+            case ("ARNG"):
                 ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
                 break;
-            case ("AttributeList"):
+            case ("ALIS"):
                 ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.target, BRData.values);
                 break;
-            case ("AttributeOther"):
-                ruletype = new AttributeOther(BRData.operator, BRData.databasetype, BRData.values.get(0));
+            case ("AOTH"):
+                ruletype = new AttributeOther(BRData.operator, BRData.databasetype, BRData.values.get(0), BRData.target);
                 break;
         }
-
-//        TODO: Proper check for constraints
-        if (BRData.trigger == null || BRData.trigger.isEmpty() || BRData.Severity == null) {
-            CodeType rule = new Constraint(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename);
-            rules.put(primaryKey, rule);
-
-        } else {
-            CodeType rule = new Trigger(BRData.projectid, BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename, BRData.Severity, BRData.exceptionMessage, BRData.tokens, BRData.trigger);
-            rules.put(primaryKey, rule);
-        }
+        return ruletype;
     }
 
 
     public String getAllCode() {
-        String result = null;
-        for (String i : rules.keySet()) {
-            if (result == null) {
-                result = rules.get(i).getCode();
-            } else {
-                result += "\n\n" + rules.get(i).getCode();
-            }
+        String code = "";
+        for (Constraint constraint : constraintList) {
+            code += constraint.getCode() + "\n";
         }
-        System.out.println("\t Generated: " + result);
+        code += "\n";
 
-        System.out.println("Pushing code to ToolDatabase...");
-//        TODO: push to toolDatabase
-        System.out.println("\tERROR 404: Code Implementation not found!");
-        return result;
+        for (TablePackage TPackage : triggers.values()) {
+            code = TPackage.getCode() + "\n\n";
+        }
+        code += "\n";
+
+        for (TriggerOnTable trigger : triggers.keySet()) {
+            code += trigger.getCode() + "\n\n";
+        }
+        System.out.println("\t Generated: " + code);
+        return code;
     }
 
     public JSONArray getinfo() {
-        jsonConverter = new BRToJSONConverter(rules);
-        return jsonConverter.getResult();
+        JSONArray information = new JSONArray();
+        JSONObject projectInfo = new JSONObject();
+        projectInfo.put("projectID", projectID);
+
+        JSONArray constraintInfo = new JSONArray();
+        for (Constraint constraint : constraintList) {
+            constraintInfo.put(constraint.getInfo());
+        }
+        projectInfo.put("Constraints", constraintInfo);
+
+        JSONArray triggerInfo = new JSONArray();
+        for (TriggerOnTable trigger : triggers.keySet()) {
+            triggerInfo.put(trigger.getInfo());
+        }
+        projectInfo.put("Triggers", triggerInfo);
+
+        JSONArray packageInfo = new JSONArray();
+        for (TablePackage TPackage : triggers.values()) {
+            packageInfo.put(TPackage.getInfo());
+        }
+        projectInfo.put("Packages", packageInfo);
+
+        return information;
     }
 
     public String getCodeforRule(String key) {

@@ -27,4 +27,9 @@ public class AttributeRange extends BRRuleType {
     public String getProcedureCode() {
         return manager.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target);
     }
+
+    @Override
+    public String getParameterCode() {
+        return manager.getParameterRuletTypeCode(databasetype, target);
+    }
 }

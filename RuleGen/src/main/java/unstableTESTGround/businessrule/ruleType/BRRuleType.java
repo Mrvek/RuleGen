@@ -24,5 +24,4 @@ public abstract class BRRuleType {
     public abstract String getConstraintCode();
     public abstract String getProcedureCode();
     public abstract String getParameterCode();
-    public abstract String getDeclarationCode();
 }

@@ -7,10 +7,12 @@ import unstableTESTGround.template.TemplateService;
  */
 public class AttributeOther extends BRRuleType {
     private String booleanStatement;
+    private String target;
 
-    public AttributeOther(String operator, String databasetype, String booleanStatement) {
+    public AttributeOther(String operator, String databasetype, String booleanStatement, String target) {
         super(operator, new TemplateService(), databasetype, "THR");
         this.booleanStatement = booleanStatement;
+        this.target = target;
     }
 
     @Override
@@ -21,5 +23,10 @@ public class AttributeOther extends BRRuleType {
     @Override
     public String getProcedureCode() {
         return manager.getRuleTypeOtherTriggerCode(databasetype, booleanStatement);
+    }
+
+    @Override
+    public String getParameterCode() {
+        return manager.getParameterRuletTypeCode(databasetype, target);
     }
 }

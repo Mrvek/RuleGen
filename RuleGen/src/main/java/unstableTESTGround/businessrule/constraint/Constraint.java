@@ -8,35 +8,25 @@ import unstableTESTGround.businessrule.ruleType.BRRuleType;
  */
 public class Constraint {
     protected String primarykey;
-    protected String projectid;
     protected BRRuleType ruletype;
     protected String databasetype;
     protected String target;
     protected String table;
     protected String name;
-    protected String initials;
-    protected TemplateService manager;
+    protected TemplateService manager = new TemplateService();
     protected String Message = "not yet initiated";
 
-    public Constraint(String primarykey, String projectid, BRRuleType ruletype, String databasetype, String target, String table, String name, String initials, TemplateService manager, String message) {
+    public Constraint(String primarykey, BRRuleType ruletype, String databasetype, String target, String table, String name) {
         this.primarykey = primarykey;
-        this.projectid = projectid;
         this.ruletype = ruletype;
         this.databasetype = databasetype;
         this.target = target;
         this.table = table;
         this.name = name;
-        this.initials = initials;
-        this.manager = manager;
-        Message = message;
     }
 
     public String getPrimarykey() {
         return primarykey;
-    }
-
-    public String getProjectid() {
-        return projectid;
     }
 
     public String getMessage() {
