@@ -21,8 +21,8 @@ public class ProjectController {
     
     public JSONArray initialiseProject(int project_id) {
         TargetAnalysisService tac = new TargetAnalysisService(); //TODO: do something!?
-        
-        SupportedDatabases database = new SupportedDatabases(1, "Oracle 12c"); //TODO: do something!?
+        //TODO Fetch from pull
+        SupportedDatabases database = new SupportedDatabases(1, "Oracle 12c", "ORA", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@"); //TODO: do something!?
         ArrayList<Table> targetTables = tac.getTargetDatabaseStructure(database);
         
         ProjectService pc = new ProjectService();

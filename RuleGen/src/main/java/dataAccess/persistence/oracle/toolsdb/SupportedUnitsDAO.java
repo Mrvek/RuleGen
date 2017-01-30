@@ -40,9 +40,13 @@ public class SupportedUnitsDAO extends BaseDAO {
             
             while (dbResultSet.next()) {
                 SupportedDatabases database = new SupportedDatabases(dbResultSet.getInt("SUPPORTEDDATABASES_ID"), 
-                                                                            dbResultSet.getString("DATABASETYPE"));
+                                                                            dbResultSet.getString("DATABASETYPE"),
+                                                                            dbResultSet.getString("ABBREVIATION"),
+                                                                            dbResultSet.getString("DBDRIVER"),
+                                                                            dbResultSet.getString("DBCON_PREFIX"));
                 result.add(database);
             }
+
             
         } catch (SQLException ex) {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,7 +68,10 @@ public class SupportedUnitsDAO extends BaseDAO {
             
             while (dbResultSet.next()) {
                 SupportedDatabases database = new SupportedDatabases(dbResultSet.getInt("SUPPORTEDDATABASES_ID"), 
-                                                                            dbResultSet.getString("DATABASETYPE"));
+                                                                            dbResultSet.getString("DATABASETYPE"),
+                                                                            dbResultSet.getString("ABBREVIATION"),
+                                                                            dbResultSet.getString("DBDRIVER"),
+                                                                            dbResultSet.getString("DBCON_PREFIX"));
                 return database;
             }
             

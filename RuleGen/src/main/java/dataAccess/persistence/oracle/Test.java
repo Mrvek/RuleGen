@@ -21,7 +21,7 @@ public class Test {
 
 
     public static void main(String[] args) {
-        SupportedDatabases sdbs = new SupportedDatabases(1, "Oracle 12c");
+        SupportedDatabases sdbs = new SupportedDatabases(1, "Oracle 12c", "ORA", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@");
         
         ArrayList<Table> targetTables = new ArrayList<>();
         
