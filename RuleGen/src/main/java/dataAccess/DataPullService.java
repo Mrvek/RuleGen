@@ -4,9 +4,8 @@ package dataAccess;
 
 import dto.businessrules.BRDefinition;
 import dataAccess.toolsdb.DataPull;
-import dto.businessrules.Businessrule;
-import dto.supported_units.SupportedDatabases;
 import dto.template.TemplateDummy;
+import unstableTESTGround.businessrule.ProjectData;
 
 import java.util.List;
 
@@ -15,8 +14,8 @@ import java.util.List;
  */
 public class DataPullService {
     private DataPull puller = new DataPull();
-    public BRDefinition getData(String primaryKey, String projectid) {
-        BRDefinition result = puller.getBusinessRule(primaryKey, projectid);
+    public ProjectData getData(int ticket) {
+        ProjectData result = puller.getBusinessRule(ticket);
         return result;
     }
 

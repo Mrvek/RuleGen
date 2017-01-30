@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataAccess.persistence.oracle.toolsdb.DBConfig;
+import unstableTESTGround.businessrule.ProjectData;
 
 /**
  * Created by Mitchell on 18/01/2017.
@@ -54,7 +55,9 @@ public class DataPull {
         }
     }
 
-    public BRDefinition getBusinessRule(String primaryKey, String projectid) {
+    public ProjectData getBusinessRule(int ticket) {
+
+
         BaseService bs = new BaseService();
         Businessrule brs = bs.getBusinessrule(Integer.parseInt(primaryKey));
         String jdbc = "";
@@ -86,7 +89,7 @@ public class DataPull {
         tokens.put("[HI]", "HAPPY");
         String severity = "Warning";
 
-        BRDefinition definitions = new BRDefinition(projectid, jdbc, primaryKey, valuables, operator, databasetype.getDatabasetype(), "AttributeRange", target, triggers, exception, tokens, severity, tablename);
+//        BRDefinition definitions = new BRDefinition(projectid, jdbc, primaryKey, valuables, operator, databasetype.getDatabasetype(), "AttributeRange", target, triggers, exception, tokens, severity, tablename);
 
 
 

@@ -1,8 +1,6 @@
 package unstableTESTGround.businessrule;
 
 import dataAccess.DataPullService;
-import dto.businessrules.BRDefinition;
-import dto.businessrules.BRToJSONConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import unstableTESTGround.businessrule.constraint.Constraint;
@@ -23,62 +21,68 @@ public class BusinessruleManager {
     private Map<TriggerOnTable, TablePackage> triggers = new HashMap<>();
     private List<Constraint> constraintList = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
-    private BRToJSONConverter jsonConverter;
     private NameGen nameGen = new NameGen();
     private String projectID;
 
-    public void createBR(String primaryKey, String projectid) {
-        BRDefinition BRData = datapuller.getData(primaryKey, projectid);
-        this.projectID = projectid;
-        BRRuleType ruletype = createRuleType(BRData);
+    public void createBR(int ticket) {
+        ProjectData projectData = getAllData(ticket);
+        this.projectID = projectData.getProjectID();
+        for (BRData BR : projectData.getBusinessRules()) {
+            BRRuleType ruletype = createRuleType(BR);
 
-        if (BRData.trigger == null || BRData.Severity == null || BRData.exceptionMessage == null || BRData.tokens.isEmpty() || BRData.trigger == null) {
-            Constraint constraint = new Constraint(BRData.primarykey, ruletype, BRData.databasetype, BRData.target, BRData.tablename, nameGen.getConstraintName(BRData.databaseshortname, BRData.tablename, ruletype.getShortname(), BRData.target));
-            constraintList.add(constraint);
+            if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null || BR.getTokens().isEmpty() || BR.getTrigger() == null) {
+                Constraint constraint = new Constraint(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
+                constraintList.add(constraint);
 
-        } else {
-            Procedure procedure = new Procedure();
-            TablePackage tablePackage = createOrGetPackage(BRData);
-            tablePackage.addProcedure(BRData.trigger, procedure);
-            TriggerOnTable trigger = createOrGetTrigger(BRData);
-            if (!triggers.get(trigger).equals(tablePackage)) {
-                triggers.put(trigger, tablePackage);
+            } else {
+                Procedure procedure = new Procedure();
+                TablePackage tablePackage = createOrGetPackage(BR);
+                tablePackage.addProcedure(BR.getTrigger(), procedure);
+                TriggerOnTable trigger = createOrGetTrigger(BR);
+                if (!triggers.get(trigger).equals(tablePackage)) {
+                    triggers.put(trigger, tablePackage);
+                }
             }
         }
     }
 
-    private TriggerOnTable createOrGetTrigger(BRDefinition brData) {
+    private ProjectData getAllData(int ticket) {
+        ProjectData data = datapuller.getData(ticket);
+        return data;
+    }
+
+    private TriggerOnTable createOrGetTrigger(BRData brData) {
         for (TriggerOnTable trigger : triggers.keySet()) {
-            if (trigger.getTable().equals(brData.tablename))
+            if (trigger.getTable().equals(brData.getTablename()))
                 return  trigger;
         }
         return new TriggerOnTable();
     }
 
-    private TablePackage createOrGetPackage(BRDefinition brData) {
+    private TablePackage createOrGetPackage(BRData brData) {
         for (TablePackage tablePackage : triggers.values()) {
-            if (tablePackage.getTable().equals(brData.tablename)) {
+            if (tablePackage.getTable().equals(brData.getTablename())) {
                 return tablePackage;
             }
         }
         return new TablePackage();
     }
 
-    private BRRuleType createRuleType(BRDefinition BRData) {
+    private BRRuleType createRuleType(BRData BRData) {
         BRRuleType ruletype = null;
 
-        switch (BRData.BRRuleType) {
+        switch (BRData.getBRRuleType()) {
             case ("ACMP"):
-                ruletype = new AttributeCompare(BRData.target, BRData.values.get(1), BRData.operator, BRData.databasetype);
+                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getValue(0), BRData.getOperator(), BRData.getDatabasetype());
                 break;
             case ("ARNG"):
-                ruletype = new AttributeRange(BRData.values.get(0), BRData.values.get(1), BRData.operator, BRData.databasetype, BRData.target);
+                ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget());
                 break;
             case ("ALIS"):
-                ruletype = new AttributeList(BRData.operator, BRData.databasetype, BRData.target, BRData.values);
+                ruletype = new AttributeList(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getValues());
                 break;
             case ("AOTH"):
-                ruletype = new AttributeOther(BRData.operator, BRData.databasetype, BRData.values.get(0), BRData.target);
+                ruletype = new AttributeOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
                 break;
         }
         return ruletype;

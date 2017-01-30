@@ -70,7 +70,7 @@ public class TablePackage {
         for (Procedure p : procedures.values()) {
             code += p.getPackageSpecificationCode() + "\n";
         }
-        code += templateService.getPackageEndCode(databasetype, name);
+        code += templateService.getPackageHeaderEndCode(databasetype, name);
         return code;
     }
 

@@ -55,19 +55,19 @@ public class TriggerOnTable {
     }
 
     private String getInsertMomentCode() {
-        String code = templateService.getInsertMomentCode(databasetype) + "\n";
+        String code = templateService.getTriggerInsertMomentCode(databasetype) + "\n";
         code += apackage.getDeclarationCode(TriggerMoment.INSERT) + "\n";
         return code;
     }
 
     private String getUpdateMomentCode() {
-        String code = templateService.getUpdateMomentCode(databasetype);
+        String code = templateService.getTriggerUpdateMomentCode(databasetype);
         code += apackage.getDeclarationCode(TriggerMoment.UPDATE) + "\n";
         return code;
     }
 
     private String getDeleteMomentCode() {
-        String code = templateService.getDeleteMomentCode(databasetype);
+        String code = templateService.getTriggerDeleteMomentCode(databasetype);
         code += apackage.getDeclarationCode(TriggerMoment.DELETE) + "\n";
         return code;
     }

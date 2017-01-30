@@ -35,7 +35,7 @@ public class Constraint {
     }
 
     public String getCode() {
-        String code = null;
+        String code = manager.getConstraintCode(databasetype, name, table);
         String ruletypecode = ruletype.getConstraintCode();
         return code;
     }

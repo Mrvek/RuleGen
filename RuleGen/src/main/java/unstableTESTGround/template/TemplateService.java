@@ -1,7 +1,5 @@
 package unstableTESTGround.template;
 
-import unstableTESTGround.template.TemplateManager;
-
 import java.util.List;
 import java.util.Map;
 
@@ -12,15 +10,15 @@ public class TemplateService {
     private TemplateManager factory = new TemplateManager();
 
 
-    public String getDeleteMomentCode(String databasetype) {
+    public String getTriggerDeleteMomentCode(String databasetype) {
         return null;
     }
 
-    public String getUpdateMomentCode(String databasetype) {
+    public String getTriggerUpdateMomentCode(String databasetype) {
         return null;
     }
 
-    public String getInsertMomentCode(String databasetype) {
+    public String getTriggerInsertMomentCode(String databasetype) {
         return null;
     }
 
@@ -72,7 +70,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getPackageEndCode(String databasetype, String name) {
+    public String getPackageHeaderEndCode(String databasetype, String name) {
         return null;
     }
 
@@ -141,6 +139,10 @@ public class TemplateService {
     }
 
     public String getProcedureBodyEndCode(String databasetype, String name) {
+        return null;
+    }
+
+    public String getConstraintCode(String databasetype, String name, String table) {
         return null;
     }
 }
