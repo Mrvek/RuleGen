@@ -6,29 +6,29 @@ import unstableTESTGround.template.TemplateService;
  * Created by Mitchell on 18/01/2017.
  */
 public class AttributeCompare extends BRRuleType {
-    private String Target;
+    private String target;
     private String CompareWith;
 
     public AttributeCompare(String target, String compareWith, String operator, String databasetype) {
         super(operator, new TemplateService(), databasetype, "ACMP");
-        this.Target = target;
+        this.target = target;
         this.CompareWith = compareWith;
     }
 
 
     @Override
     public String getConstraintCode() {
-        return manager.getRuleTypeCompareConstraintCode(databasetype, Target, operator, CompareWith);
+        return manager.getRuleTypeCompareConstraintCode(databasetype, target, operator, CompareWith);
     }
 
     @Override
-    public String getProcedureCode() {
-        return manager.getRuleTypeCompareTriggerCode(databasetype, Target, operator, CompareWith);
+    public String getProcedureCode(String passedName) {
+        return manager.getRuleTypeCompareProcedureCode(databasetype, target, operator, CompareWith);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return manager.getParameterRuletTypeCode(databasetype, target);
     }
 
 }

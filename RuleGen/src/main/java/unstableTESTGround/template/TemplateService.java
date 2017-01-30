@@ -36,7 +36,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeCompareTriggerCode(String databasetype, String target, String operator, String compareWith) {
+    public String getRuleTypeCompareProcedureCode(String databasetype, String target, String operator, String compareWith) {
         return null;
     }
 
@@ -44,7 +44,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeListTriggerCode(String databasetype, String target, String operator, List<String> values) {
+    public String getRuleTypeListProcedureCode(String databasetype, String target, String operator, List<String> values) {
         return null;
     }
 
@@ -56,7 +56,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeOtherTriggerCode(String databasetype, String booleanStatement) {
+    public String getRuleTypeOtherProcedureCode(String databasetype, String booleanStatement) {
         return null;
     }
 
@@ -64,7 +64,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeRangeTriggerCode(String databasetype, String from, String operator, String to, String target) {
+    public String getRuleTypeRangeProcedureCode(String databasetype, String from, String operator, String to, String target) {
         return null;
     }
 
@@ -73,6 +73,74 @@ public class TemplateService {
     }
 
     public String getPackageEndCode(String databasetype, String name) {
+        return null;
+    }
+
+    public boolean checkPackageSupport(String databasetype) {
+        return false;
+    }
+
+    public String getPackageBodyStartCode(String databasetype, String name) {
+        return null;
+    }
+
+    public String getPackageBodyEndCode(String databasetype, String name) {
+        return null;
+    }
+
+    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode) {
+        return null;
+    }
+
+    public String getTriggerEndCode(String databasetype, String name) {
+        return null;
+    }
+
+    public String getProcedureExecutionCode(String databasetype, String name, String exceptionParameters) {
+        return null;
+    }
+
+    public String getExceptionExceptStartCode(String databasetype) {
+        return null;
+    }
+
+    public String getExceptionExceptErrorCode(String databasetype, String errorStackName, String errorExceptionName) {
+        return null;
+    }
+
+    public String getExceptionRaiseErrorCode(String databasetype, String errorStackName, String errorExceptionName) {
+        return null;
+    }
+
+    public String getExceptionExceptWarningCode(String databasetype, String errorStackName, String errorExceptionName) {
+        return null;
+    }
+
+    public String getExceptionRaiseWarningCode(String databasetype, String warningStackName, String warningExceptionName) {
+        return null;
+    }
+
+    public String getAddStringToExceptionStackCode(String databasetype, String exceptionStackName, String message, Map<String, String> tokens) {
+        return null;
+    }
+
+    public String getExceptionParameters(String databasetype, String warningStackName, String errorStackName) {
+        return null;
+    }
+
+    public String getExceptionTriggerDeclarationCode(String databasetype, String warningStackName, String warningExceptionName, String errorStackName, String errorExceptionName) {
+        return null;
+    }
+
+    public String getProcedureBodyStartCode(String databasetype, String name) {
+        return null;
+    }
+
+    public String getProcedureBodyDeclarationCode(String databasetype, String passedName) {
+        return null;
+    }
+
+    public String getProcedureBodyEndCode(String databasetype, String name) {
         return null;
     }
 }

@@ -21,8 +21,8 @@ public class AttributeOther extends BRRuleType {
     }
 
     @Override
-    public String getProcedureCode() {
-        return manager.getRuleTypeOtherTriggerCode(databasetype, booleanStatement);
+    public String getProcedureCode(String passedName) {
+        return manager.getRuleTypeOtherProcedureCode(databasetype, booleanStatement);
     }
 
     @Override

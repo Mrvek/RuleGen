@@ -1,5 +1,6 @@
 package unstableTESTGround.businessrule.trigger;
 
+import org.json.JSONObject;
 import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
 
@@ -37,11 +38,14 @@ public class TriggerOnTable {
         code += getUpdateMomentCode();
         code += getDeleteMomentCode();
         code += exception.getExceptionTriggerEnd();
+        code += getEndCode();
+        Message = "Trigger Succesfully made";
         return code;
     }
 
     private String getStartCode() {
-        String code = templateService.getTriggerStartCode(databasetype);
+        String code = templateService.getTriggerStartCode(databasetype) + "\n";
+        code += exception.getExceptionTriggerDeclarations();
         return code;
     }
 
@@ -51,30 +55,36 @@ public class TriggerOnTable {
     }
 
     private String getInsertMomentCode() {
-        String code = templateService.getInsertMomentCode(databasetype);
-        for (String declaration : apackage.getDeclarationCode(TriggerMoment.INSERT)) {
-            code += "\t" + declaration + "\n";
-        }
+        String code = templateService.getInsertMomentCode(databasetype) + "\n";
+        code += apackage.getDeclarationCode(TriggerMoment.INSERT) + "\n";
         return code;
     }
 
     private String getUpdateMomentCode() {
         String code = templateService.getUpdateMomentCode(databasetype);
-        for (String declaration : apackage.getDeclarationCode(TriggerMoment.UPDATE)) {
-            code += "\t" + declaration + "\n";
-        }
+        code += apackage.getDeclarationCode(TriggerMoment.UPDATE) + "\n";
         return code;
     }
 
     private String getDeleteMomentCode() {
         String code = templateService.getDeleteMomentCode(databasetype);
-        for (String declaration : apackage.getDeclarationCode(TriggerMoment.DELETE)) {
-            code += "\t" + declaration + "\n";
-        }
+        code += apackage.getDeclarationCode(TriggerMoment.DELETE) + "\n";
+        return code;
+    }
+
+    private String getEndCode() {
+        String code = templateService.getTriggerEndCode(databasetype, name);
         return code;
     }
 
     public String getTable() {
         return table;
+    }
+
+    public JSONObject getStatus() {
+        JSONObject status = new JSONObject();
+        status.put("Table", table);
+        status.put("Message", Message);
+        return status;
     }
 }

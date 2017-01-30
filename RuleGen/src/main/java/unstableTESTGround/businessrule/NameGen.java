@@ -14,7 +14,7 @@ public class NameGen {
         String name = initials + "_" +
                 databaseName + "_" +
                 tableName + "_" +
-                "TRIGGER";
+                "TRG";
         return name;
     }
 
@@ -32,7 +32,7 @@ public class NameGen {
         String name = initials + "_" +
                 databaseName + "_" +
                 tableName + "_" +
-                "PACKAGE";
+                "PKG";
         return name;
     }
 
@@ -42,7 +42,7 @@ public class NameGen {
                 tablename + "_" +
                 ruleType + "_" +
                 target + "_" +
-                "CONSTRAINT";
+                "CNS";
         int versionNumber = getVersionNumber(name);
         name += name + "_" + versionNumber;
         return name;

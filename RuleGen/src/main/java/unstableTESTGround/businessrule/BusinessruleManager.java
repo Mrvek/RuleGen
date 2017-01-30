@@ -88,17 +88,17 @@ public class BusinessruleManager {
     public String getAllCode() {
         String code = "";
         for (Constraint constraint : constraintList) {
-            code += constraint.getCode() + "\n";
+            code += constraint.getCode() + "\n/\n";
         }
         code += "\n";
 
         for (TablePackage TPackage : triggers.values()) {
-            code = TPackage.getCode() + "\n\n";
+            code = TPackage.getCode() + "\n/\n\n";
         }
         code += "\n";
 
         for (TriggerOnTable trigger : triggers.keySet()) {
-            code += trigger.getCode() + "\n\n";
+            code += trigger.getCode() + "\n/\n\n";
         }
         System.out.println("\t Generated: " + code);
         return code;
@@ -111,40 +111,22 @@ public class BusinessruleManager {
 
         JSONArray constraintInfo = new JSONArray();
         for (Constraint constraint : constraintList) {
-            constraintInfo.put(constraint.getInfo());
+            constraintInfo.put(constraint.getStatus());
         }
         projectInfo.put("Constraints", constraintInfo);
 
         JSONArray triggerInfo = new JSONArray();
         for (TriggerOnTable trigger : triggers.keySet()) {
-            triggerInfo.put(trigger.getInfo());
+            triggerInfo.put(trigger.getStatus());
         }
         projectInfo.put("Triggers", triggerInfo);
 
         JSONArray packageInfo = new JSONArray();
         for (TablePackage TPackage : triggers.values()) {
-            packageInfo.put(TPackage.getInfo());
+            packageInfo.put(TPackage.getStatus());
         }
         projectInfo.put("Packages", packageInfo);
 
         return information;
-    }
-
-    public String getCodeforRule(String key) {
-        for(String CT : rules.keySet()) {
-            if (CT.equals(key)) {
-                return rules.get(CT).getCode();
-            }
-        }
-        return "";
-    }
-
-    public String getName(String key) {
-        for(String CT : rules.keySet()) {
-            if (CT.equals(key)) {
-                return rules.get(CT).getName();
-            }
-        }
-        return "Wrong Key!";
     }
 }

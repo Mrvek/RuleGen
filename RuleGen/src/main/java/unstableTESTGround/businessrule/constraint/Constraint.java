@@ -1,5 +1,6 @@
 package unstableTESTGround.businessrule.constraint;
 
+import org.json.JSONObject;
 import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.ruleType.BRRuleType;
 
@@ -37,5 +38,12 @@ public class Constraint {
         String code = null;
         String ruletypecode = ruletype.getConstraintCode();
         return code;
+    }
+
+    public JSONObject getStatus() {
+        JSONObject status = new JSONObject();
+        status.put("ID", primarykey);
+        status.put("Message", Message);
+        return status;
     }
 }

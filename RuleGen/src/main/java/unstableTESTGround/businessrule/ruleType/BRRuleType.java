@@ -22,6 +22,6 @@ public abstract class BRRuleType {
         return shortname;
     }
     public abstract String getConstraintCode();
-    public abstract String getProcedureCode();
+    public abstract String getProcedureCode(String passedName);
     public abstract String getParameterCode();
 }
