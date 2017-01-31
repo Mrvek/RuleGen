@@ -7,13 +7,13 @@ import java.util.List;
  */
 public class ProjectData {
     private String projectID;
-    private List<String> businessRules;
+    private List<BRData> businessRules;
 
     public String getProjectID() {
         return projectID;
     }
 
-    public List<String> getBusinessRules() {
+    public List<BRData> getBusinessRules() {
         return businessRules;
     }
 }

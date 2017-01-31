@@ -10,6 +10,7 @@ public abstract class BRRuleType {
     protected TemplateService manager;
     protected String databasetype;
     protected String shortname;
+    protected String target;
 
     protected BRRuleType(String operator, TemplateService manager, String databasetype, String shortname) {
         this.operator = operator;
@@ -24,4 +25,8 @@ public abstract class BRRuleType {
     public abstract String getConstraintCode();
     public abstract String getProcedureCode(String passedName);
     public abstract String getParameterCode();
+
+    public String getTarget() {
+        return target;
+    }
 }

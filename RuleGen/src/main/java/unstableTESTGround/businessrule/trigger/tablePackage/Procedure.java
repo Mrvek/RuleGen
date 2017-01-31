@@ -16,8 +16,6 @@ public class Procedure {
     private String databasetype;
     private String attribute;
     private String table;
-    private String initials;
-    private TemplateService manager;
     private String name;
     private String Message = "not yet initiated";
     private String severity;
@@ -25,26 +23,24 @@ public class Procedure {
     private Map<String, String> tokens;
     private Exception exception;
     private TemplateService templateService = new TemplateService();
-    private String passedName;
+    private String passedName = "I_Passed";
 
-    public Procedure(String primarykey, BRRuleType ruletype, String databasetype, String attribute, String table, String initials, TemplateService manager, String name, String severity, String exceptionMessage, Map<String, String> tokens, Exception exception) {
+    public Procedure(String primarykey, BRRuleType ruletype, String databasetype, String attribute, String table, String name, String severity, String exceptionMessage, Map<String, String> tokens) {
         this.primarykey = primarykey;
         this.ruletype = ruletype;
         this.databasetype = databasetype;
         this.attribute = attribute;
         this.table = table;
-        this.initials = initials;
-        this.manager = manager;
         this.name = name;
         this.severity = severity;
         ExceptionMessage = exceptionMessage;
         this.tokens = tokens;
-        this.exception = exception;
+        this.exception = new Exception(databasetype, templateService);
     }
 
     /** Code for executing the procedure*/
     public String getExcecutionCode() {
-        String code = templateService.getProcedureExecutionCode(databasetype, name, exception.getExceptionParameters());
+        String code = templateService.getProcedureExecutionCode(databasetype, name, ruletype.getTarget(), exception.getExceptionParameters());
         return code;
     }
 

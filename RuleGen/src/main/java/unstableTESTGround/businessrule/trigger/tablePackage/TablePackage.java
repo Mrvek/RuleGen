@@ -29,7 +29,7 @@ public class TablePackage {
         this.table = table;
         this.initials = initials;
         Message = message;
-        this.templateService = templateService;
+        this.templateService = new TemplateService();
 
         supported = templateService.checkPackageSupport(databasetype);
         if (!supported) {

@@ -8,7 +8,6 @@ import java.util.List;
  * Created by Mitchell on 25/01/2017.
  */
 public class AttributeList extends BRRuleType {
-    private String target;
     private List<String> values;
     private String operator;
 

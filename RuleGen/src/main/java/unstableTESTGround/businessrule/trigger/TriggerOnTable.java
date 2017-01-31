@@ -20,15 +20,15 @@ public class TriggerOnTable {
     private TablePackage apackage;
     private Exception exception;
 
-    public TriggerOnTable(String name, String projectid, String databasetype, String table, String initials, TemplateService templateService, TablePackage apackage, Exception exception) {
+    public TriggerOnTable(String name, String projectid, String databasetype, String table, String initials, TablePackage apackage) {
         this.name = name;
         this.projectid = projectid;
         this.databasetype = databasetype;
         this.table = table;
         this.initials = initials;
-        this.templateService = templateService;
+        this.templateService = new TemplateService();
         this.apackage = apackage;
-        this.exception = exception;
+        this.exception = new Exception(databasetype, templateService);
     }
 
     public String getCode() {

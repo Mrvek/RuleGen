@@ -35,7 +35,7 @@ public class BusinessruleManager {
                 constraintList.add(constraint);
 
             } else {
-                Procedure procedure = new Procedure();
+                Procedure procedure = new Procedure(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), BR.getDatabaseshortname(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
                 TablePackage tablePackage = createOrGetPackage(BR);
                 tablePackage.addProcedure(BR.getTriggerMoment(), procedure);
                 TriggerOnTable trigger = createOrGetTrigger(BR);

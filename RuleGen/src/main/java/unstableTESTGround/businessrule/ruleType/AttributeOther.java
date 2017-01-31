@@ -7,7 +7,6 @@ import unstableTESTGround.template.TemplateService;
  */
 public class AttributeOther extends BRRuleType {
     private String booleanStatement;
-    private String target;
 
     public AttributeOther(String operator, String databasetype, String booleanStatement, String target) {
         super(operator, new TemplateService(), databasetype, "THR");

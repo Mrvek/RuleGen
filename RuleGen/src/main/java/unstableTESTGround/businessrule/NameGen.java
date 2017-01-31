@@ -18,7 +18,7 @@ public class NameGen {
         return name;
     }
 
-    public String getProcedureName(String databaseName, String tableName, String ruleType, int number) {
+    public String getProcedureName(String databaseName, String tableName, String ruleType) {
         String name = initials + "_" +
                 databaseName + "_" +
                 tableName + "_" +

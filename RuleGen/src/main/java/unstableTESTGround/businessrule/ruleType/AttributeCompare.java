@@ -6,7 +6,6 @@ import unstableTESTGround.template.TemplateService;
  * Created by Mitchell on 18/01/2017.
  */
 public class AttributeCompare extends BRRuleType {
-    private String target;
     private String CompareWith;
 
     public AttributeCompare(String target, String compareWith, String operator, String databasetype) {

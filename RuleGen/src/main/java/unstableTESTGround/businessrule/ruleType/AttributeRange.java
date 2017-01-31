@@ -8,7 +8,6 @@ import unstableTESTGround.template.TemplateService;
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
-    private String target;
 
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
