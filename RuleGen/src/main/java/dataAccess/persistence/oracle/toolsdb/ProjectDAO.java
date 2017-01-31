@@ -7,7 +7,9 @@ package dataAccess.persistence.oracle.toolsdb;
 
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 import dto.project.Attribute;
+import dto.project.Brgqueue;
 import dto.project.DatabaseSchema;
+import dto.project.LinkedBusinessrules;
 import dto.project.Project;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
@@ -27,6 +29,7 @@ import java.util.logging.Logger;
 public class ProjectDAO extends BaseDAO {
 	
 	private SupportedUnitsService sus = ToolDbService.getSUService();
+        private BusinessRuleService brs = ToolDbService.getBRService();
    
     public ProjectDAO() { 
         super();
@@ -326,6 +329,84 @@ public class ProjectDAO extends BaseDAO {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public LinkedBusinessrules getLinkedBusinessrules (int linkedbs_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select LINKED_BUSINESSRULES.LINKED_BUSINESSRULES_ID as LINKED_BUSINESSRULES_ID," +
+                                                        "    LINKED_BUSINESSRULES.PROJECT_ID as PROJECT_ID," +
+                                                        "    LINKED_BUSINESSRULES.BUSINESSRULE_ID as BUSINESSRULE_ID" +
+                                                        " from LINKED_BUSINESSRULES LINKED_BUSINESSRULES" +
+                                                        " WHERE LINKED_BUSINESSRULES.LINKED_BUSINESSRULES_ID = ?");
+            ps.setInt(1, linkedbs_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                LinkedBusinessrules lbs = new LinkedBusinessrules(dbResultSet.getInt("LINKED_BUSINESSRULES_ID"),
+                        this.getProject(dbResultSet.getInt("PROJECT_ID")),
+                        brs.getBusinessrule(dbResultSet.getInt("BUSINESSRULE_ID")));
+
+                return lbs;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Brgqueue getBrgqueue (int brgq_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(" select BRGQUEUE.BRGQUEUE_ID as BRGQUEUE_ID," +
+                                                        "    BRGQUEUE.TICKET_ID as TICKET_ID," +
+                                                        "    BRGQUEUE.LINKED_BUSINESSRULES_ID as LINKED_BUSINESSRULES_ID," +
+                                                        "    BRGQUEUE.RESPONSE_MESSAGE as RESPONSE_MESSAGE" +
+                                                        " from BRGQUEUE BRGQUEUE" +
+                                                        " WHERE BRGQUEUE.BRGQUEUE_ID = ?");
+            ps.setInt(1, brgq_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                Brgqueue brgq = new Brgqueue(dbResultSet.getInt("BRGQUEUE_ID"),
+                                            dbResultSet.getInt("TICKET_ID"),
+                                            this.getLinkedBusinessrules(dbResultSet.getInt("LINKED_BUSINESSRULES_ID")),
+                                            dbResultSet.getString("RESPONSE_MESSAGE"));
+
+                return brgq;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Brgqueue> getAllBrgqueue (int ticket_id) {
+        ArrayList<Brgqueue> result = new ArrayList<>();
+        
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(" select BRGQUEUE.BRGQUEUE_ID as BRGQUEUE_ID," +
+                                                        "    BRGQUEUE.TICKET_ID as TICKET_ID," +
+                                                        "    BRGQUEUE.LINKED_BUSINESSRULES_ID as LINKED_BUSINESSRULES_ID," +
+                                                        "    BRGQUEUE.RESPONSE_MESSAGE as RESPONSE_MESSAGE" +
+                                                        " from BRGQUEUE BRGQUEUE" +
+                                                        " WHERE BRGQUEUE.TICKET_ID = ?");
+            ps.setInt(1, ticket_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                Brgqueue brgq = new Brgqueue(dbResultSet.getInt("BRGQUEUE_ID"),
+                                            dbResultSet.getInt("TICKET_ID"),
+                                            this.getLinkedBusinessrules(dbResultSet.getInt("LINKED_BUSINESSRULES_ID")),
+                                            dbResultSet.getString("RESPONSE_MESSAGE"));
+                
+                result.add(brgq);   
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
     
 }

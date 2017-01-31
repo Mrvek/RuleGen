@@ -2,17 +2,17 @@ package dataAccess.toolsdb;
 
 import dataAccess.persistence.oracle.BaseService;
 import dataAccess.persistence.oracle.toolsdb.DBConfig;
+import domainGeneric.dto.ProjectData;
 import dto.businessrules.Businessrule;
 import dto.businessrules.GeneratedTrigger;
 import dto.supported_units.SupportedDatabases;
 import dto.template.TemplateDummy;
-import unstableTESTGround.dto.ProjectData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+ 
 /**
  * Created by Mitchell on 18/01/2017.
  */
@@ -22,7 +22,7 @@ public class DataPull {
     public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
         List<TemplateDummy> templates = new ArrayList<>();
         config();
-//        TODO: get data out of database
+//        TODO: get data out of database.
 
 //        temporary data for testing
         if (!templateNames.contains("Oracle 11g")) {
@@ -53,9 +53,9 @@ public class DataPull {
         }
     }
 
-    public ProjectData getBusinessRule(int Ticket) {
+    public ProjectData getBusinessRule(int ticketId) {
         BaseService bs = new BaseService();
-
+        
         /** get data en set it in a dto (ProjectData) */
         ProjectData data = null;
 //        data = new ProjectData();
