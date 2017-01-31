@@ -29,6 +29,6 @@ public class AttributeRange extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuletTypeCode(databasetype, target);
+        return manager.getParameterRuleTypeRNGCode(databasetype, target);
     }
 }

@@ -27,7 +27,7 @@ public class AttributeCompare extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuletTypeCode(databasetype, target);
+        return manager.getParameterRuleTypeACMPCode(databasetype, target);
     }
 
 }

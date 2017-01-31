@@ -26,6 +26,6 @@ public class AttributeOther extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuletTypeCode(databasetype, target);
+        return manager.getParameterRuleTypeTHRCode(databasetype, target);
     }
 }
