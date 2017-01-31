@@ -8,6 +8,8 @@ import unstableTESTGround.businessrule.ruleType.*;
 import unstableTESTGround.businessrule.trigger.TriggerOnTable;
 import unstableTESTGround.businessrule.trigger.tablePackage.Procedure;
 import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
+import unstableTESTGround.dto.BRData;
+import unstableTESTGround.dto.ProjectData;
 
 import java.util.ArrayList;
 import java.util.HashMap;

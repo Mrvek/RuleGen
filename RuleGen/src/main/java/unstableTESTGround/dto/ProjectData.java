@@ -1,4 +1,4 @@
-package unstableTESTGround.businessrule;
+package unstableTESTGround.dto;
 
 import java.util.List;
 
@@ -8,6 +8,11 @@ import java.util.List;
 public class ProjectData {
     private String projectID;
     private List<BRData> businessRules;
+
+    public ProjectData(String projectID, List<BRData> businessRules) {
+        this.projectID = projectID;
+        this.businessRules = businessRules;
+    }
 
     public String getProjectID() {
         return projectID;

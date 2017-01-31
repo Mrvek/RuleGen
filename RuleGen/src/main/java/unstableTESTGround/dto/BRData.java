@@ -1,4 +1,4 @@
-package unstableTESTGround.businessrule;
+package unstableTESTGround.dto;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,21 @@ public class BRData {
     private String BRRuleType;
     private List<String> values;
     private String operator;
+
+    public BRData(List<String> triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, String primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator) {
+        this.triggerMoment = triggerMoment;
+        this.severity = severity;
+        this.exceptionMessage = exceptionMessage;
+        this.tokens = tokens;
+        this.primarykey = primarykey;
+        this.databasetype = databasetype;
+        this.target = target;
+        this.tablename = tablename;
+        this.databaseshortname = databaseshortname;
+        this.BRRuleType = BRRuleType;
+        this.values = values;
+        this.operator = operator;
+    }
 
     public List<String> getTriggerMoment() {
         return triggerMoment;

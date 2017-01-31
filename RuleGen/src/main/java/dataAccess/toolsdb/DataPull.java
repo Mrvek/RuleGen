@@ -1,25 +1,24 @@
 package dataAccess.toolsdb;
 
-import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.BaseService;
-import dto.businessrules.*;
-import dto.project.Attribute;
-import dto.project.Table;
+import dataAccess.persistence.oracle.toolsdb.DBConfig;
+import dto.businessrules.Businessrule;
+import dto.businessrules.GeneratedTrigger;
 import dto.supported_units.SupportedDatabases;
 import dto.template.TemplateDummy;
+import unstableTESTGround.dto.ProjectData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dataAccess.persistence.oracle.toolsdb.DBConfig;
-
 /**
  * Created by Mitchell on 18/01/2017.
  */
 public class DataPull {
     private DBConfig config;
+
     public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
         List<TemplateDummy> templates = new ArrayList<>();
         config();
@@ -54,54 +53,13 @@ public class DataPull {
         }
     }
 
-    public BRDefinition getBusinessRule(String primaryKey, String projectid) {
+    public ProjectData getBusinessRule(int Ticket) {
         BaseService bs = new BaseService();
-        Businessrule brs = bs.getBusinessrule(Integer.parseInt(primaryKey));
-        String jdbc = "";
-        ArrayList<BusinessValues> values = bs.getAllBusinessValues(brs);
-        ArrayList<String> valuables = new ArrayList<>();
-        String target = "YOLO";
-        String tablename = "HOLO";
-        for (BusinessValues V : values) {
-            if (V.getType().equals("Attribute")) {
-//                target = V.getAttribute().getName();
-//                tablename = V.getAttribute().getTable().getName();
-            } if(V.getType().equals("Min")){
-                valuables.add(V.getValue());
-            }
-        }
-        for (BusinessValues V : values) {
-            if (V.getType().equals("Max")) {
-                valuables.add(V.getValue());
-            }
-        }
-        String operator = brs.getKoppeloperator().getSupportedoperator().getOperator();
-        SupportedDatabases databasetype = bs.getProject(Integer.parseInt(projectid)).getSupporteddatabase();
-        BusinessruleType BRRuleType = brs.getBusinessruletype();
-        List<String> triggers = new ArrayList<>();
-        triggers.add("insert");
-        triggers.add("update");
-        String exception = "Hello [HI] World!";
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("[HI]", "HAPPY");
-        String severity = "Warning";
 
-        BRDefinition definitions = new BRDefinition(projectid, jdbc, primaryKey, valuables, operator, databasetype.getDatabasetype(), "AttributeRange", target, triggers, exception, tokens, severity, tablename);
-
-
-
-
-//        Temporary data for testing
-       /* List<String> valuestoo = new ArrayList<>();
-        valuestoo.add("2");
-        valuestoo.add("4");
-        List<String> triggers = new ArrayList<>();
-        triggers.add("insert");
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("[Message]", "Cruel");
-        BRDefinition definitions = new BRDefinition("1", "", "1", valuestoo, "BETWEEN", "Oracle 11g", "AttributeRange", "number", triggers, "HELLO [Message], [Message] WORLD!", tokens, "Error", "table");
-        System.out.println("\tBRDefenitions found for a " + definitions.databasetype + " " + definitions.BRRuleType + "Rule"); */
-        return definitions;
+        /** get data en set it in a dto (projectData) */
+        ProjectData data = null;
+//        data = new ProjectData();
+        return data;
     }
 
     public boolean pushCode(String code, String primaryKey, String projectid, String name) {
