@@ -6,8 +6,11 @@ import domainGeneric.template.TemplateService;
  * Created by Mitchell on 31/01/2017.
  */
 public class EntityOther extends BRRuleType {
-    protected EntityOther(String operator, TemplateService manager, String databasetype, String shortname) {
-        super(operator, manager, databasetype, shortname);
+    private String compareWith;
+
+    protected EntityOther(String operator, String databasetype, String target, String compareWith) {
+        super(operator, databasetype, "EOTH", target);
+        this.compareWith = compareWith;
     }
 
     @Override
@@ -17,11 +20,11 @@ public class EntityOther extends BRRuleType {
 
     @Override
     public String getProcedureCode(String passedName) {
-        return null;
+        return templateService.getRuleTypeEOTHProcedureCode(databasetype, target, operator, compareWith);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return templateService.getParameterRuleTypeEOTHCode(databasetype, target);
     }
 }

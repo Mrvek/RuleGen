@@ -11,24 +11,23 @@ public class AttributeRange extends BRRuleType {
 
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
-        super(operator, new TemplateService(), databasetype, "RNG");
+        super(operator, databasetype, "RNG", target);
         this.from = from;
         this.to = to;
-        this.target = target;
     }
 
     @Override
     public String getConstraintCode() {
-        return manager.getRuleTypeRangeConstraintCode(databasetype, target , from, operator, to);
+        return templateService.getRuleTypeRangeConstraintCode(databasetype, target , from, operator, to);
     }
 
     @Override
     public String getProcedureCode(String passedName) {
-        return manager.getRuleTypeRangeProcedureCode(databasetype, from, operator, to, target);
+        return templateService.getRuleTypeRangeProcedureCode(databasetype, from, operator, to, target);
     }
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuleTypeRNGCode(databasetype, target);
+        return templateService.getParameterRuleTypeRNGCode(databasetype, target);
     }
 }

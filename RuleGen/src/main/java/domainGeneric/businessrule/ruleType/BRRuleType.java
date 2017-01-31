@@ -7,16 +7,17 @@ import domainGeneric.template.TemplateService;
  */
 public abstract class BRRuleType {
     protected String operator;
-    protected TemplateService manager;
+    protected TemplateService templateService;
     protected String databasetype;
     protected String shortname;
     protected String target;
 
-    protected BRRuleType(String operator, TemplateService manager, String databasetype, String shortname) {
+    public BRRuleType(String operator, String databasetype, String shortname, String target) {
         this.operator = operator;
-        this.manager = manager;
+        this.templateService = new TemplateService();
         this.databasetype = databasetype;
         this.shortname = shortname;
+        this.target = target;
     }
 
     public String getShortname() {

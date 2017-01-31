@@ -1,28 +1,29 @@
 package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.template.TemplateService;
-
 /**
  * Created by Mitchell on 31/01/2017.
  */
 public class TupleCompare extends BRRuleType {
+    private String compareWith;
 
-    protected TupleCompare(String operator, TemplateService manager, String databasetype, String shortname) {
-        super(operator, manager, databasetype, shortname);
+
+    public TupleCompare(String operator, String databasetype, String compareWith, String target) {
+        super(operator, databasetype, "TCMP", target);
+        this.compareWith = compareWith;
     }
 
     @Override
     public String getConstraintCode() {
-        return null;
+        return templateService.getRuleTypeTCMPConstraintCode(databasetype, target, operator, compareWith);
     }
 
     @Override
     public String getProcedureCode(String passedName) {
-        return null;
+        return templateService.getRuleTypeTCMPProcedureCode(databasetype, target, operator, compareWith);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return templateService.getParameterRuleTypeTCMPCode(databasetype, target, compareWith);
     }
 }

@@ -6,8 +6,11 @@ import domainGeneric.template.TemplateService;
  * Created by Mitchell on 31/01/2017.
  */
 public class TupleOther extends BRRuleType {
-    protected TupleOther(String operator, TemplateService manager, String databasetype, String shortname) {
-        super(operator, manager, databasetype, shortname);
+    private String compareWith;
+
+    protected TupleOther(String operator, String databasetype, String target, String compareWith) {
+        super(operator, databasetype, "TOTH", target);
+        this.compareWith = compareWith;
     }
 
     @Override
@@ -17,11 +20,11 @@ public class TupleOther extends BRRuleType {
 
     @Override
     public String getProcedureCode(String passedName) {
-        return null;
+        return templateService.getRuleTypeTOTHProcedureCode(databasetype, target, operator, compareWith);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return templateService.getParameterRuleTypeTOTHCode(databasetype, target);
     }
 }

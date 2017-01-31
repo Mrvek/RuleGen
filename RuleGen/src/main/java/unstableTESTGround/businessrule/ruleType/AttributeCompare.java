@@ -17,12 +17,12 @@ public class AttributeCompare extends BRRuleType {
 
     @Override
     public String getConstraintCode() {
-        return manager.getRuleTypeCompareConstraintCode(databasetype, target, operator, CompareWith);
+        return manager.getRuleTypeACMPConstraintCode(databasetype, target, operator, CompareWith);
     }
 
     @Override
     public String getProcedureCode(String passedName) {
-        return manager.getRuleTypeCompareProcedureCode(databasetype, target, operator, CompareWith);
+        return manager.getRuleTypeACMPProcedureCode(databasetype, target, operator, CompareWith);
     }
 
     @Override

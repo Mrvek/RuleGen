@@ -29,11 +29,11 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeCompareConstraintCode(String databasetype, String target, String operator, String compareWith) {
+    public String getRuleTypeACMPConstraintCode(String databasetype, String target, String operator, String compareWith) {
         return null;
     }
 
-    public String getRuleTypeCompareProcedureCode(String databasetype, String target, String operator, String compareWith) {
+    public String getRuleTypeACMPProcedureCode(String databasetype, String target, String operator, String compareWith) {
         return null;
     }
 
@@ -150,6 +150,51 @@ public class TemplateService {
     }
 
     public String getParameterRuleTypeRNGCode(String databasetype, String target) {
+        return null;
+    }
+
+    public String getRuleTypeEOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        return null;
+    }
+
+    public String getParameterRuleTypeEOTHCode(String databasetype, String target) {
+        return null;
+    }
+
+    public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable) {
+        return null;
+    }
+
+    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable) {
+        return null;
+    }
+
+    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn) {
+        return null;
+    }
+
+    public String getRuleTypeMODIProcedureCode(String databasetype, String target, String operator, String compareWithColumn) {
+        return null;
+    }
+
+    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn) {
+        return null;
+    }
+
+    public String getRuleTypeTCMPConstraintCode(String databasetype, String target, String operator, String compareWith) {
+        return null;
+    }
+
+
+    public String getRuleTypeTCMPProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        return null;
+    }
+
+    public String getRuleTypeTOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        return null;
+    }
+
+    public String getParameterRuleTypeTOTHCode(String databasetype, String target) {
         return null;
     }
 }

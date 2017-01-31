@@ -6,8 +6,12 @@ import domainGeneric.template.TemplateService;
  * Created by Mitchell on 31/01/2017.
  */
 public class Modify extends BRRuleType {
-    protected Modify(String operator, TemplateService manager, String databasetype, String shortname) {
-        super(operator, manager, databasetype, shortname);
+    private String compareWithColumn;
+
+
+    public Modify(String operator, String databasetype, String compareWith, String target) {
+        super(operator, databasetype, "MODI", target);
+        this.compareWithColumn = compareWith;
     }
 
     @Override
@@ -17,11 +21,11 @@ public class Modify extends BRRuleType {
 
     @Override
     public String getProcedureCode(String passedName) {
-        return null;
+        return templateService.getRuleTypeMODIProcedureCode(databasetype, target, operator, compareWithColumn);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return templateService.getParameterRuleTypeMODICode(databasetype, target, compareWithColumn);
     }
 }

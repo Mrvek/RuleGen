@@ -12,24 +12,23 @@ public class AttributeList extends BRRuleType {
     private String operator;
 
     public AttributeList(String operator, String databasetype, String target, List<String> values) {
-        super(operator, new TemplateService(), databasetype, "LST");
-        this.target = target;
+        super(operator, databasetype, "LST", target);
         this.values = values;
         this.operator = operator;
     }
 
     @Override
     public String getConstraintCode() {
-        return manager.getRuleTypeListConstraintCode(databasetype, target, values, operator);
+        return templateService.getRuleTypeListConstraintCode(databasetype, target, values, operator);
     }
 
     @Override
     public String getProcedureCode(String passedName) {
-        return manager.getRuleTypeListProcedureCode(databasetype, target, operator, values);
+        return templateService.getRuleTypeListProcedureCode(databasetype, target, operator, values);
     }
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuleTypeLSTCode(databasetype, target);
+        return templateService.getParameterRuleTypeLSTCode(databasetype, target);
     }
 }

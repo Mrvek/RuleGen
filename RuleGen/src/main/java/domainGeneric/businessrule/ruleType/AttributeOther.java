@@ -9,23 +9,22 @@ public class AttributeOther extends BRRuleType {
     private String booleanStatement;
 
     public AttributeOther(String operator, String databasetype, String booleanStatement, String target) {
-        super(operator, new TemplateService(), databasetype, "THR");
+        super(operator, databasetype, "THR", target);
         this.booleanStatement = booleanStatement;
-        this.target = target;
     }
 
     @Override
     public String getConstraintCode() {
-        return manager.getRuleTypeOtherConstraintCode(databasetype, booleanStatement);
+        return templateService.getRuleTypeOtherConstraintCode(databasetype, booleanStatement);
     }
 
     @Override
     public String getProcedureCode(String passedName) {
-        return manager.getRuleTypeOtherProcedureCode(databasetype, booleanStatement);
+        return templateService.getRuleTypeOtherProcedureCode(databasetype, booleanStatement);
     }
 
     @Override
     public String getParameterCode() {
-        return manager.getParameterRuleTypeTHRCode(databasetype, target);
+        return templateService.getParameterRuleTypeTHRCode(databasetype, target);
     }
 }

@@ -1,13 +1,17 @@
 package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.template.TemplateService;
-
 /**
  * Created by Mitchell on 31/01/2017.
  */
 public class InterEntityCompare extends BRRuleType {
-    protected InterEntityCompare(String operator, TemplateService manager, String databasetype, String shortname) {
-        super(operator, manager, databasetype, shortname);
+    private String compareWithColumn;
+    private String compareWithTable;
+
+
+    public InterEntityCompare(String operator, String databasetype, String compareWith, String compareWithTable, String target) {
+        super(operator, databasetype, "ICMP", target);
+        this.compareWithColumn = compareWith;
+        this.compareWithTable = compareWithTable;
     }
 
     @Override
@@ -17,11 +21,11 @@ public class InterEntityCompare extends BRRuleType {
 
     @Override
     public String getProcedureCode(String passedName) {
-        return null;
+        return templateService.getRuleTypeICMPProcedureCode(databasetype, target, operator, compareWithColumn, compareWithTable);
     }
 
     @Override
     public String getParameterCode() {
-        return null;
+        return templateService.getParameterRuleTypeICMPCode(databasetype, target, compareWithTable, compareWithColumn);
     }
 }
