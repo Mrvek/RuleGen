@@ -1,9 +1,9 @@
-package unstableTESTGround.businessrule.trigger.tablePackage;
+package domainGeneric.businessrule.trigger.tablePackage;
 
+import domainGeneric.businessrule.trigger.TriggerMoment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import domainGeneric.template.TemplateService;
-import unstableTESTGround.businessrule.trigger.TriggerMoment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

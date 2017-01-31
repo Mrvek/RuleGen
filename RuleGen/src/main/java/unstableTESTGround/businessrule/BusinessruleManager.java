@@ -37,10 +37,10 @@ public class BusinessruleManager {
                 constraintList.add(constraint);
 
             } else {
-                Procedure procedure = new Procedure(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), BR.getDatabaseshortname(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
+                Procedure procedure = new Procedure(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
                 TablePackage tablePackage = createOrGetPackage(BR);
                 tablePackage.addProcedure(BR.getTriggerMoment(), procedure);
-                TriggerOnTable trigger = createOrGetTrigger(BR);
+                TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
                 if (!triggers.get(trigger).equals(tablePackage)) {
                     triggers.put(trigger, tablePackage);
                 }
@@ -53,12 +53,12 @@ public class BusinessruleManager {
         return data;
     }
 
-    private TriggerOnTable createOrGetTrigger(BRData brData) {
+    private TriggerOnTable createOrGetTrigger(BRData brData, TablePackage apackage) {
         for (TriggerOnTable trigger : triggers.keySet()) {
             if (trigger.getTable().equals(brData.getTablename()))
                 return  trigger;
         }
-        return new TriggerOnTable();
+        return new TriggerOnTable(nameGen.getTriggerName(brData.getDatabaseshortname(), brData.getTablename()), brData.getPrimarykey(), brData.getDatabasetype(), brData.getTablename(), apackage);
     }
 
     private TablePackage createOrGetPackage(BRData brData) {
@@ -67,7 +67,7 @@ public class BusinessruleManager {
                 return tablePackage;
             }
         }
-        return new TablePackage();
+        return new TablePackage(nameGen.getTablePackageName(brData.getDatabaseshortname(), brData.getTablename()), brData.getDatabasetype(), brData.getTablename(), brData.getDatabaseshortname());
     }
 
     private BRRuleType createRuleType(BRData BRData) {

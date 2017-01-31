@@ -1,6 +1,6 @@
-package domainGeneric.businessrule.ruletype;
+package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.TemplateService;
+import domainGeneric.template.TemplateService;
 
 /**
  * Created by Mitchell on 18/01/2017.
@@ -8,7 +8,6 @@ import domainGeneric.TemplateService;
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
-    private String target;
 
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
@@ -24,7 +23,12 @@ public class AttributeRange extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
-        return manager.getRuleTypeRangeTriggerCode(databasetype, from, operator, to, target);
+    public String getProcedureCode(String passedName) {
+        return manager.getRuleTypeRangeProcedureCode(databasetype, from, operator, to, target);
+    }
+
+    @Override
+    public String getParameterCode() {
+        return manager.getParameterRuleTypeRNGCode(databasetype, target);
     }
 }

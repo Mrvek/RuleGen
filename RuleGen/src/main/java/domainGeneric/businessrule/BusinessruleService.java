@@ -1,8 +1,7 @@
-package unstableTESTGround.businessrule;
+package domainGeneric.businessrule;
 
 
 import org.json.JSONArray;
-import unstableTESTGround.businessrule.BusinessruleManager;
 
 /**
  * Created by Mitchell on 18/01/2017.

@@ -1,8 +1,8 @@
-package unstableTESTGround.businessrule.trigger.tablePackage;
+package domainGeneric.businessrule.trigger.tablePackage;
 
+import domainGeneric.businessrule.ruleType.BRRuleType;
+import domainGeneric.businessrule.trigger.Exception;
 import org.json.JSONObject;
-import unstableTESTGround.businessrule.ruleType.BRRuleType;
-import unstableTESTGround.businessrule.trigger.Exception;
 import domainGeneric.template.TemplateService;
 
 import java.util.Map;

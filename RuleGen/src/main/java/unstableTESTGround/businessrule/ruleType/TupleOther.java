@@ -1,9 +1,15 @@
 package unstableTESTGround.businessrule.ruleType;
 
+import domainGeneric.template.TemplateService;
+
 /**
  * Created by Mitchell on 31/01/2017.
  */
 public class TupleOther extends BRRuleType {
+    protected TupleOther(String operator, TemplateService manager, String databasetype, String shortname) {
+        super(operator, manager, databasetype, shortname);
+    }
+
     @Override
     public String getConstraintCode() {
         return null;

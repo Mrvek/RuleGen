@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DataPullService {
     private DataPull puller = new DataPull();
-    public ProjectData getData(int ticket) {
+    public domainGeneric.dto.ProjectData getData(int ticket) {
         ProjectData result = puller.getBusinessRule(ticket);
         return result;
     }

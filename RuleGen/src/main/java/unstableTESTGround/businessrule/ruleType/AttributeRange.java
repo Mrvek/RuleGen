@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.template.TemplateService;
+import domainGeneric.template.TemplateService;
 
 /**
  * Created by Mitchell on 18/01/2017.

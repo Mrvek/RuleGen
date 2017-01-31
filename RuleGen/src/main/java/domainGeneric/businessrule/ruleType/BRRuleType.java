@@ -1,6 +1,6 @@
-package domainGeneric.businessrule.ruletype;
+package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.TemplateService;
+import domainGeneric.template.TemplateService;
 
 /**
  * Created by Mitchell on 19/01/2017.
@@ -10,6 +10,7 @@ public abstract class BRRuleType {
     protected TemplateService manager;
     protected String databasetype;
     protected String shortname;
+    protected String target;
 
     protected BRRuleType(String operator, TemplateService manager, String databasetype, String shortname) {
         this.operator = operator;
@@ -22,5 +23,10 @@ public abstract class BRRuleType {
         return shortname;
     }
     public abstract String getConstraintCode();
-    public abstract String getTriggerCode();
+    public abstract String getProcedureCode(String passedName);
+    public abstract String getParameterCode();
+
+    public String getTarget() {
+        return target;
+    }
 }

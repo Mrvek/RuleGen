@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.ruleType;
 
-import unstableTESTGround.template.TemplateService;
+import domainGeneric.template.TemplateService;
 
 import java.util.List;
 

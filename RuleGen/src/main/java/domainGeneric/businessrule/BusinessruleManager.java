@@ -1,16 +1,15 @@
 package domainGeneric.businessrule;
 
 import dataAccess.DataPullService;
+import domainGeneric.businessrule.constraint.Constraint;
+import domainGeneric.businessrule.ruleType.*;
+import domainGeneric.businessrule.trigger.TriggerOnTable;
+import domainGeneric.businessrule.trigger.tablePackage.Procedure;
+import domainGeneric.businessrule.trigger.tablePackage.TablePackage;
+import domainGeneric.dto.BRData;
+import domainGeneric.dto.ProjectData;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import unstableTESTGround.businessrule.NameGen;
-import unstableTESTGround.businessrule.constraint.Constraint;
-import unstableTESTGround.businessrule.ruleType.*;
-import unstableTESTGround.businessrule.trigger.TriggerOnTable;
-import unstableTESTGround.businessrule.trigger.tablePackage.Procedure;
-import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
-import unstableTESTGround.dto.BRData;
-import unstableTESTGround.dto.ProjectData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +23,7 @@ public class BusinessruleManager {
     private Map<TriggerOnTable, TablePackage> triggers = new HashMap<>();
     private List<Constraint> constraintList = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
-    private unstableTESTGround.businessrule.NameGen nameGen = new NameGen();
+    private NameGen nameGen = new NameGen();
     private String projectID;
 
     public void createBR(int ticket) {

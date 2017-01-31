@@ -1,4 +1,4 @@
-package unstableTESTGround.businessrule.ruleType;
+package domainGeneric.businessrule.ruleType;
 
 import domainGeneric.template.TemplateService;
 

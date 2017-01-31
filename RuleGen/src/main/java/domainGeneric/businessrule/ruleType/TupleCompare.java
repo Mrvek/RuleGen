@@ -1,13 +1,13 @@
-package unstableTESTGround.businessrule.ruleType;
+package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.businessrule.ruletype.*;
 import domainGeneric.template.TemplateService;
 
 /**
  * Created by Mitchell on 31/01/2017.
  */
-public class Modify extends BRRuleType {
-    protected Modify(String operator, TemplateService manager, String databasetype, String shortname) {
+public class TupleCompare extends BRRuleType {
+
+    protected TupleCompare(String operator, TemplateService manager, String databasetype, String shortname) {
         super(operator, manager, databasetype, shortname);
     }
 

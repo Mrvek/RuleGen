@@ -1,6 +1,6 @@
-package domainGeneric.businessrule.ruletype;
+package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.TemplateService;
+import domainGeneric.template.TemplateService;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import java.util.List;
  * Created by Mitchell on 25/01/2017.
  */
 public class AttributeList extends BRRuleType {
-    private String target;
     private List<String> values;
     private String operator;
 
@@ -25,7 +24,12 @@ public class AttributeList extends BRRuleType {
     }
 
     @Override
-    public String getTriggerCode() {
-        return manager.getRuleTypeListTriggerCode(databasetype, target, operator, values);
+    public String getProcedureCode(String passedName) {
+        return manager.getRuleTypeListProcedureCode(databasetype, target, operator, values);
+    }
+
+    @Override
+    public String getParameterCode() {
+        return manager.getParameterRuleTypeLSTCode(databasetype, target);
     }
 }

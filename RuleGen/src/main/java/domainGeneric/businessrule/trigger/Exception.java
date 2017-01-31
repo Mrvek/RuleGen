@@ -1,4 +1,4 @@
-package unstableTESTGround.businessrule.trigger;
+package domainGeneric.businessrule.trigger;
 
 import domainGeneric.template.TemplateService;
 

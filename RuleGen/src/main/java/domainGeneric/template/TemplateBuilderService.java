@@ -1,4 +1,4 @@
-package domainGeneric;
+package domainGeneric.template;
 
 import dataAccess.DataPullService;
 import domainGeneric.template.TemplateManager;

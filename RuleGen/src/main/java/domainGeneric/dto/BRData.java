@@ -1,4 +1,4 @@
-package unstableTESTGround.dto;
+package domainGeneric.dto;
 
 import java.util.List;
 import java.util.Map;

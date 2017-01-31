@@ -1,8 +1,8 @@
-package unstableTESTGround.businessrule.constraint;
+package domainGeneric.businessrule.constraint;
 
+import domainGeneric.businessrule.ruleType.BRRuleType;
 import org.json.JSONObject;
 import domainGeneric.template.TemplateService;
-import unstableTESTGround.businessrule.ruleType.BRRuleType;
 
 /**
  * Created by Mitchell on 18/01/2017.
