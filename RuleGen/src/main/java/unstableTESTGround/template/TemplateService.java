@@ -1,7 +1,5 @@
 package unstableTESTGround.template;
 
-import unstableTESTGround.template.TemplateManager;
-
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +35,7 @@ public class TemplateService {
     }
 
     public String getRuleTypeCompareProcedureCode(String databasetype, String target, String operator, String compareWith) {
-        return factory.getRuleTypeCompareProcedureCode(databasetype, target, operator, compareWith);
+        return factory.getRuleTypeACMPProcedureCode(databasetype, target, operator, compareWith);
     }
 
     public String getRuleTypeListConstraintCode(String databasetype, String target, List<String> values, String operator) {
@@ -45,7 +43,7 @@ public class TemplateService {
     }
 
     public String getRuleTypeListProcedureCode(String databasetype, String target, String operator, List<String> values) {
-        return factory.getRuleTypeListProcedureCode(databasetype, target, operator, values);
+        return factory.getRuleTypeLSTProcedureCode(databasetype, target, operator, values);
     }
 
     public String getRuleTypeOtherConstraintCode(String databasetype, String booleanStatement) {
@@ -53,7 +51,7 @@ public class TemplateService {
     }
 
     public String getRuleTypeOtherProcedureCode(String databasetype, String booleanStatement) {
-        return factory.getRuletypeOtherProcedureCode(databasetype, booleanStatement);
+        return factory.getRuletypeOTHProcedureCode(databasetype, booleanStatement);
     }
 
     public String getRuleTypeRangeConstraintCode(String databasetype, String target, String from, String operator, String to) {
@@ -61,7 +59,7 @@ public class TemplateService {
     }
 
     public String getRuleTypeRangeProcedureCode(String databasetype, String from, String operator, String to, String target) {
-        return factory.getRuleTypeRangeProcedureCode(databasetype, from, operator, to, target);
+        return factory.getRuleTypeRNGProcedureCode(databasetype, from, operator, to, target);
     }
 
     public String getPackageHeaderStartCode(String databasetype, String name) {
@@ -84,8 +82,8 @@ public class TemplateService {
         return factory.getPackageBodyEndCode(databasetype, name);
     }
 
-    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode) {
-        return factory.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode);
+    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String databasetype) {
+        return factory.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode, databasetype);
     }
 
     public String getTriggerEndCode(String databasetype, String name) {
@@ -149,7 +147,7 @@ public class TemplateService {
     }
 
     public String getParameterRuleTypeTHRCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeTHRCode(databasetype, target);
+        return factory.getParameterRuleTypeOTHCode(databasetype, target);
     }
 
     public String getParameterRuleTypeRNGCode(String databasetype, String target) {
