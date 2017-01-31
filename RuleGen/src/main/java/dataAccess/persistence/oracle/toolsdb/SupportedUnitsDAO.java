@@ -5,7 +5,6 @@
  */
 package dataAccess.persistence.oracle.toolsdb;
 
-import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 import dto.project.DatabaseSchema;
 import dto.supported_units.SupportedDatabases;
@@ -25,7 +24,7 @@ import java.util.logging.Logger;
 public class SupportedUnitsDAO extends BaseDAO {
     
    
-    public SupportedUnitsDAO(){ 
+    public SupportedUnitsDAO() { 
         super();
     }
     

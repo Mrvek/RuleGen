@@ -14,8 +14,8 @@ import dto.businessrules.KoppelOperator;
 import dto.project.Attribute;
 import dto.project.DatabaseSchema;
 import dto.project.Table;
+import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedOperators;
-import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 
 import java.sql.Clob;
@@ -31,7 +31,11 @@ import java.util.logging.Logger;
  *
  * @author Matthias
  */
-public class BusinessRuleDAO extends BaseDAO { 
+public class BusinessRuleDAO extends BaseDAO {
+	
+	private ProjectService psr = ToolDbService.getPService();
+	private SupportedUnitsService sus = ToolDbService.getSUService();
+	
     
     public BusinessRuleDAO() { 
         super();
@@ -97,8 +101,7 @@ public class BusinessRuleDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
-                SupportedOperators supportedOperator = sdao.getSupportedOperator(dbResultSet.getInt("SUPPORTEDOPERATORS_ID"));
+                SupportedOperators supportedOperator = sus.getSupportedOperator(dbResultSet.getInt("SUPPORTEDOPERATORS_ID"));
                 BusinessruleType bsrt = this.getBusinessRuleType(dbResultSet.getInt("BUSINESSRULETYPE_ID"));
                 
                 KoppelOperator koppeloperator = new KoppelOperator(dbResultSet.getInt("KOPPELOPERATOR_ID"), supportedOperator, bsrt);
@@ -158,7 +161,8 @@ public class BusinessRuleDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                ProjectDAO pjd = new ProjectDAO();
+                //ProjectDAO pjd = new ProjectDAO(dbc, sdb);
+            	//ProjectDAO pjd = ps.getPService();
                 
                 Clob value = dbResultSet.getClob("BVALUES");
                 String svalue = null;
@@ -171,7 +175,7 @@ public class BusinessRuleDAO extends BaseDAO {
                                                         dbResultSet.getInt("POSITION"), 
                                                         svalue, 
                                                         this.getBusinessrule(dbResultSet.getInt("BUSINESSRULE_ID")), 
-                                                        pjd.getAttribute(dbResultSet.getInt("ATTRIBUTE_ID")));
+                                                        psr.getAttribute(dbResultSet.getInt("ATTRIBUTE_ID")));
                 
                 results.add(bsv);
             }

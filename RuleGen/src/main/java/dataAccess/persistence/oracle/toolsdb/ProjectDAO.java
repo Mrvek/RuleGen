@@ -5,7 +5,6 @@
  */
 package dataAccess.persistence.oracle.toolsdb;
 
-import dataAccess.persistence.oracle.BaseDAO;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
 import dto.project.Attribute;
 import dto.project.DatabaseSchema;
@@ -26,6 +25,8 @@ import java.util.logging.Logger;
  * @author Matthias
  */ 
 public class ProjectDAO extends BaseDAO {
+	
+	private SupportedUnitsService sus = ToolDbService.getSUService();
    
     public ProjectDAO() { 
         super();
@@ -246,8 +247,7 @@ public class ProjectDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
-                SupportedDatatypes supdatatype = sdao.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
+                SupportedDatatypes supdatatype = sus.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
                 
                 Attribute attribute = new Attribute(dbResultSet.getInt("ATTRIBUTE_ID"), dbResultSet.getString("NAME"), supdatatype);
                 
@@ -276,8 +276,7 @@ public class ProjectDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
-                SupportedDatatypes supdatatype = sdao.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
+                SupportedDatatypes supdatatype = sus.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
                 DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
                 Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"), dbs);
                 
@@ -311,8 +310,7 @@ public class ProjectDAO extends BaseDAO {
             ResultSet dbResultSet = ps.executeQuery();
             
             while (dbResultSet.next()) {
-                SupportedUnitsDAO sdao = new SupportedUnitsDAO();
-                SupportedDatabases sdb = sdao.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID"));
+                SupportedDatabases sdb = sus.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID"));
                 DatabaseSchema ds = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
                 
                 Project project = new Project(dbResultSet.getInt("PROJECT_ID"),

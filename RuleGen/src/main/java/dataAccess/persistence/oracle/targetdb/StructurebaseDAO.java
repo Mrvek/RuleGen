@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import dataAccess.persistence.oracle.toolsdb.DBConfig;
+import dataAccess.persistence.oracle.toolsdb.ToolDbConfig;
 import dto.project.DatabaseSchema;
 
 /**

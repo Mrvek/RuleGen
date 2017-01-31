@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess.persistence.oracle;
+package dataAccess.persistence.oracle.toolsdb;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import dataAccess.persistence.oracle.toolsdb.DBConfig;
 import dto.project.DatabaseSchema;
 import dto.supported_units.SupportedDatabases;
 
@@ -18,8 +17,8 @@ import dto.supported_units.SupportedDatabases;
  * @author Matthias
  */
 public class BaseDAO {
-	private static DatabaseSchema dbc = DBConfig.DBConfigToSchema();
-	private static SupportedDatabases sdb = DBConfig.DBConfigToSupportedDatabases();
+	private static DatabaseSchema dbc = ToolDbConfig.DBConfigToSchema();
+	private static SupportedDatabases sdb = ToolDbConfig.DBConfigToSupportedDatabases();
     private String DB_CONNECTION;
     private String DB_USER;
     private String DB_PASSWORD;

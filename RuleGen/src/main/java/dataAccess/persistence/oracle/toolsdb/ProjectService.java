@@ -5,7 +5,9 @@
  */
 package dataAccess.persistence.oracle.toolsdb;
 
+import dto.project.Attribute;
 import dto.project.DatabaseSchema;
+import dto.project.Project;
 import dto.project.Table;
 import java.util.ArrayList;
 
@@ -14,13 +16,46 @@ import java.util.ArrayList;
  * @author Matthias
  */
 public class ProjectService {
-    private ProjectDAO pdao; 
+	private static ProjectDAO pdao = new ProjectDAO();
 
-    public ProjectService() {
-        pdao = new ProjectDAO();
-    }
+//    public ProjectService() {
+//        pdao = new ProjectDAO();
+//    }
     
-    //More like project init:
+	public static ProjectDAO getProject(){		
+		return pdao;
+	}
+	public ArrayList<Table> getAllTablesFromProject(int project_id) {
+		return pdao.getAllTablesFromProject(project_id);
+	}
+	public ArrayList<Attribute> getAllAttributesFromTableAndProjectID(Table table, int project_id) {
+		return pdao.getAllAttributesFromTableAndProjectID(table,project_id);
+	}
+	public int getSchemaId(int project_id) {
+		return pdao.getSchemaId(project_id);
+	}
+	public boolean projectExists(int project_id) {
+		return pdao.projectExists(project_id);
+	}
+	public void insertTables(int database_schema_id, ArrayList<Table> tables) {
+		pdao.insertTables(database_schema_id,tables);
+	}
+	public void insertAttributes(Table table, ArrayList<Attribute> attributes) {
+		pdao.insertAttributes(table,attributes);
+	}
+	public DatabaseSchema getDatabaseSchema(int databaseSchema_id) {
+		return pdao.getDatabaseSchema(databaseSchema_id);
+	}
+	public Table getTable(int table_id) {
+		return pdao.getTable(table_id);
+	}
+	public Attribute getAttribute (int atr_id) {
+		return pdao.getAttribute(atr_id);
+	}
+	public Project getProject (int project_id) {
+		return pdao.getProject(project_id);
+	}	
+	
     public void updateProject(int project_id, ArrayList<Table> targetTables) {
         //This method will only update projects that DO NOT have any tables/attributes.
         //targetTables are the tables that are stored in Java, already linked with the attributes which contains all verified datatypes.   

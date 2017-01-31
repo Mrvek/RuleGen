@@ -10,7 +10,7 @@ import dto.project.DatabaseSchema;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
-import dataAccess.persistence.oracle.BaseDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +19,16 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import dataAccess.persistence.oracle.toolsdb.BaseDAO;
+
 /**
  *
  * @author Matthias
  */
 public class StructureDAO extends StructurebaseDAO {
-         
+    
+	
+	//extend basedao instead and add token baseschema/databaseversion
     public StructureDAO() {
         super();
     }
