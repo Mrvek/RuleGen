@@ -56,7 +56,7 @@ public class DataPull {
     public ProjectData getBusinessRule(int Ticket) {
         BaseService bs = new BaseService();
 
-        /** get data en set it in a dto (projectData) */
+        /** get data en set it in a dto (ProjectData) */
         ProjectData data = null;
 //        data = new ProjectData();
         return data;

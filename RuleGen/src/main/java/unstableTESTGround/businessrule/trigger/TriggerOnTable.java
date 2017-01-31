@@ -14,18 +14,16 @@ public class TriggerOnTable {
     private String projectid;
     private String databasetype;
     private String table;
-    private String initials;
     private String Message = "not yet initiated";
     private TemplateService templateService = new TemplateService();
     private TablePackage apackage;
     private Exception exception;
 
-    public TriggerOnTable(String name, String projectid, String databasetype, String table, String initials, TablePackage apackage) {
+public TriggerOnTable(String name, String projectid, String databasetype, String table, TablePackage apackage) {
         this.name = name;
         this.projectid = projectid;
         this.databasetype = databasetype;
         this.table = table;
-        this.initials = initials;
         this.templateService = new TemplateService();
         this.apackage = apackage;
         this.exception = new Exception(databasetype, templateService);

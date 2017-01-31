@@ -19,8 +19,9 @@ public class BRData {
     private String BRRuleType;
     private List<String> values;
     private String operator;
+    private String comparisonTarget;
 
-    public BRData(List<String> triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, String primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator) {
+    public BRData(List<String> triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, String primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator, String comparisonTarget) {
         this.triggerMoment = triggerMoment;
         this.severity = severity;
         this.exceptionMessage = exceptionMessage;
@@ -33,6 +34,7 @@ public class BRData {
         this.BRRuleType = BRRuleType;
         this.values = values;
         this.operator = operator;
+        this.comparisonTarget = comparisonTarget;
     }
 
     public List<String> getTriggerMoment() {
@@ -75,15 +77,15 @@ public class BRData {
         return BRRuleType;
     }
 
-    public String getValue(int i) {
-        return values.get(i);
-    }
-
     public List<String> getValues() {
         return values;
     }
 
     public String getOperator() {
         return operator;
+    }
+
+    public String getComparisonTarget() {
+        return comparisonTarget;
     }
 }
