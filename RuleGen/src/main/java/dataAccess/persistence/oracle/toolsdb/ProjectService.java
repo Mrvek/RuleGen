@@ -6,7 +6,9 @@
 package dataAccess.persistence.oracle.toolsdb;
 
 import dto.project.Attribute;
+import dto.project.Brgqueue;
 import dto.project.DatabaseSchema;
+import dto.project.LinkedBusinessrules;
 import dto.project.Project;
 import dto.project.Table;
 import java.util.ArrayList;
@@ -54,7 +56,16 @@ public class ProjectService {
 	}
 	public Project getProject (int project_id) {
 		return pdao.getProject(project_id);
-	}	
+	}
+        public LinkedBusinessrules getLinkedBusinessrules (int linkedbs_id) {
+            return pdao.getLinkedBusinessrules(linkedbs_id);
+        }
+        public Brgqueue getBrgqueue (int brgq_id) {
+            return pdao.getBrgqueue(brgq_id);
+        }
+        public ArrayList<Brgqueue> getAllBrgqueue (int ticket_id) {
+            return pdao.getAllBrgqueue(ticket_id);
+        }
 	
     public void updateProject(int project_id, ArrayList<Table> targetTables) {
         //This method will only update projects that DO NOT have any tables/attributes.
