@@ -253,11 +253,15 @@ public class Template {
     }
 
     public String getPackagHeaderStartCode(String name) {
-        return packageHeaderStartCode;
+        String code = packageHeaderStartCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public String getPackagEndCode(String name) {
-        return packageEndCode;
+        String code =  packageEndCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public boolean checkPackageSupport() {
@@ -265,15 +269,23 @@ public class Template {
     }
 
     public String getPakageBodyStartCode(String name) {
-        return packageBodyStartCode;
+        String code = packageBodyStartCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public String getPackageBodyEndCode(String name) {
-        return packageBodyEndCode;
+        String code = packageBodyEndCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode) {
-        return procedureSpecification;
+        String code = procedureSpecification;
+        code = code.replaceAll("\\{name}", name);
+        code = code.replaceAll("\\{exceptionParameters}", exceptionProcedureDeclarations);
+        code = code.replaceAll("\\{codeParameters}", parameterCode);
+        return code;
     }
 
     public String getTriggerEndCode() {
@@ -281,7 +293,11 @@ public class Template {
     }
 
     public String getProcedureExcecutionCode(String name, String target, String exceptionParameters) {
-        return procedureExcecutionCode;
+        String code =  procedureExcecutionCode;
+        code = code.replaceAll("\\{name}", name);
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{exceptionParameters}", exceptionParameters);
+        return code;
     }
 
     public String getExceptionExceptStartCode() {
@@ -289,58 +305,99 @@ public class Template {
     }
 
     public String getExceptionExceptErrorCode(String errorStackName, String errorExceptionName) {
-        return exceptionExceptErrorCode;
+        String code = exceptionExceptErrorCode;
+        code = code.replaceAll("\\{errorStack}", errorStackName);
+        code = code.replaceAll("\\{errorException}", errorExceptionName);
+        return code;
     }
 
     public String getExceptionRaiseErrorCode(String errorStackName, String errorExceptionName) {
-        return exceptionRaiseErrorCode;
+        String code = exceptionRaiseErrorCode;
+        code = code.replaceAll("\\{errorStack}", errorStackName);
+        code = code.replaceAll("\\{errorException}", errorExceptionName);
+        return code;
     }
 
     public String getExceptionWarningCode(String errorStackName, String errorExceptionName) {
-        return exceptionWarningCode;
+        String code = exceptionWarningCode;
+        code = code.replaceAll("\\{errorStack}", errorStackName);
+        code = code.replaceAll("\\{errorException}", errorExceptionName);
+        return code;
     }
 
     public String getExceptionRaiseWarningCode(String warningStackName, String warningExceptionName) {
-        return exceptionRaiseWarningCode;
+        String code = exceptionRaiseWarningCode;
+        code = code.replaceAll("\\{warningStack}", warningStackName);
+        code = code.replaceAll("\\{warningException}", warningExceptionName);
+        return code;
     }
 
     public String getAddStringTExceptionStackCode(String exceptionStackName, String message, Map<String, String> tokens) {
-        return addStringTExceptionStackCode;
+        String code = addStringTExceptionStackCode;
+        code = code.replaceAll("\\{exceptionStack}", exceptionStackName);
+        String mymessage = message;
+        for (String id : tokens.keySet()) {
+            mymessage = mymessage.replace(id, tokens.get(id));
+        }
+        code = code.replaceAll("\\{message}", mymessage);
+        return code;
     }
 
     public String getExceptionParameters(String warningStackName, String errorStackName) {
-        return exceptionParameters;
+        String code = exceptionParameters;
+        code = code.replaceAll("\\{warningStack}", warningStackName);
+        code = code.replaceAll("\\{errorStack}", errorStackName);
+        return code;
     }
 
     public String getExceptionTrigerDeclarationCode(String warningStackName, String warningExceptionName, String errorStackName, String errorExceptionName) {
-        return exceptionTriggerDeclarationCode;
+        String code = exceptionTriggerDeclarationCode;
+        code = code.replaceAll("\\{warningException}", warningExceptionName);
+        code = code.replaceAll("\\{errorException}", errorExceptionName);
+        code = code.replaceAll("\\{warningStack}", warningStackName);
+        code = code.replaceAll("\\{errorStack}", errorStackName);
+        return code;
     }
 
     public String getProcedureBodyStartCode(String name) {
-        return procedureBodyStartCode;
+        String code = procedureBodyStartCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public String getProcedureBodyDeclarationCode(String passedName) {
-        return procedureBodyDeclarationCode;
+        String code = procedureBodyDeclarationCode;
+        code = code.replaceAll("\\{checkName}", passedName);
+        return code;
     }
 
     public String getProcedureBodyEndCode(String name) {
-        return procedureBodyEndCode;
+        String code = procedureBodyEndCode;
+        code = code.replaceAll("\\{name}", name);
+        return code;
     }
 
     public String getRuleTypeACMPCode(String target) {
-        return ruleTypeACMPCode;
+        String code = ruleTypeACMPCode;
+        code = code.replaceAll("\\{attribute}", target);
+        return code;
     }
 
     public String getParameterRuleTypeLSTCode(String target) {
-        return parameterRuleTypeLSTCode;
+        String code = parameterRuleTypeLSTCode;
+        code = code.replaceAll("\\{attribute}", target);
+        return code;
     }
 
     public String getParameterRuleTypeOTHCode(String target) {
-        return parameterRuleTypeOTHCode;
+        String code = parameterRuleTypeOTHCode;
+        code = code.replaceAll("\\{attribute}", target);
+        return code;
     }
 
     public String getParameterRuleTypeRNGCode(String target) {
-        return parameterRuleTypeRNGCode;
+        String code = parameterRuleTypeRNGCode;
+        code = code.replaceAll("\\{attribute}", target);
+        return code;
     }
 }
