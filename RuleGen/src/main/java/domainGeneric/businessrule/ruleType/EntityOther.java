@@ -8,7 +8,7 @@ import domainGeneric.template.TemplateService;
 public class EntityOther extends BRRuleType {
     private String compareWith;
 
-    protected EntityOther(String operator, String databasetype, String target, String compareWith) {
+    public EntityOther(String operator, String databasetype, String target, String compareWith) {
         super(operator, databasetype, "EOTH", target);
         this.compareWith = compareWith;
     }

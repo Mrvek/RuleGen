@@ -17,15 +17,11 @@ public class BRController {
     private BusinessruleService BRService = new BusinessruleService();
     private DataPushService DPushService = new DataPushService();
     private DataPullService DPullService = new DataPullService();
-
-    //TODO: REMOVE HARDCODED PARTS!
     
     public JSONArray Generate(int ticket) {
         UpdateService template = new UpdateService();
         template.update();
 
-//        TODO: rewrite below to do the following: 1. create businessrules with the ticketnumber 2. getCode 3. push code to targetDB and toolsDB 4. return status (BRService.getStatus())
-//        NOTE: if datapull, businessruleManager and BRController are ready. You can test this method. Because of the temporary templateService dummy, all generated code will be null for the time being (while template component is not ready yet)
         System.out.println("Gathering Business Rules...");
         BRService.createBR(ticket);
         System.out.println("Generating Code...");
@@ -33,7 +29,8 @@ public class BRController {
         for (CodeReturnData tableCode : code) {
             System.out.println("Code Generated:\n\t" + tableCode.getCode());
         }
-        System.out.println("Pushing code results to ToolDatabase...");
+
+        System.out.println("\nPushing code results to ToolDatabase...");
         DPullService.pushCode(code);
         System.out.println("Pushing code to TargetDatabase...");
         DPushService.Send(code);

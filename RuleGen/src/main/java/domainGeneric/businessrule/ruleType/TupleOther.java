@@ -8,7 +8,7 @@ import domainGeneric.template.TemplateService;
 public class TupleOther extends BRRuleType {
     private String compareWith;
 
-    protected TupleOther(String operator, String databasetype, String target, String compareWith) {
+    public TupleOther(String operator, String databasetype, String target, String compareWith) {
         super(operator, databasetype, "TOTH", target);
         this.compareWith = compareWith;
     }

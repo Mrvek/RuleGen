@@ -25,7 +25,7 @@ public class BusinessruleManager {
     private List<Constraint> constraintList = new ArrayList<>();
     private DataPullService datapuller = new DataPullService();
     private NameGen nameGen = new NameGen();
-    private String projectID;
+    private int projectID;
     private int supportedDatabase;
 
     public void createBR(int ticket) {
@@ -44,7 +44,12 @@ public class BusinessruleManager {
                 Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
                 TablePackage tablePackage = createOrGetPackage(BR);
                 /** Hoe ziet de value van triggermoment eruit? */
-                tablePackage.addProcedure(BR.getTriggerMoment(), procedure);
+                String[] triggermoments = BR.getTriggerMoment().trim().split(", ");
+                List<String> momentstoString = new ArrayList<>();
+                for (String moment : triggermoments) {
+                    momentstoString.add(moment);
+                }
+                tablePackage.addProcedure(momentstoString, procedure);
                 TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
                 if (!triggers.get(trigger).equals(tablePackage)) {
                     triggers.put(trigger, tablePackage);
@@ -80,6 +85,18 @@ public class BusinessruleManager {
 
 //        TODO: add the iteration 2 ruletypes to this list (their initials can be found in their classes)
         switch (BRData.getBRRuleType()) {
+            case ("TCMP"):
+                ruletype = new TupleCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getTarget());
+                break;
+            case ("TOTH"):
+                ruletype = new TupleOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
+                break;
+            case ("ICMP"):
+                ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable());
+                break;
+            case ("EOTH"):
+                ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
+                break;
             case ("ACMP"):
                 ruletype = new AttributeCompare(BRData.getTarget(), BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
                 break;
