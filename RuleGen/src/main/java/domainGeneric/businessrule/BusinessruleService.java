@@ -1,7 +1,10 @@
 package domainGeneric.businessrule;
 
 
+import domainGeneric.dto.CodeReturnData;
 import org.json.JSONArray;
+
+import java.util.List;
 
 /**
  * Created by Mitchell on 18/01/2017.
@@ -14,11 +17,11 @@ public class BusinessruleService {
     }
 
 
-    public String getAllCode() {
+    public List<CodeReturnData> getAllCode() {
         return factory.getAllCode();
     }
 
-    public JSONArray getinfo() {
+    public JSONArray getStatus() {
         return factory.getinfo();
     }
 }

@@ -3,6 +3,7 @@ package dataAccess;
 
 
 import dataAccess.toolsdb.DataPull;
+import domainGeneric.dto.TemplateData;
 import dto.template.TemplateDummy;
 import domainGeneric.dto.ProjectData;
 
@@ -18,14 +19,14 @@ public class DataPullService {
         return result;
     }
 
-    public boolean pushCode(String code, String primaryKey, String projectid,  String name) {
-        return puller.pushCode(code, primaryKey, projectid, name);
+    public boolean pushCode(String code, int table_id, int supporteddatabase_id) {
+        return puller.pushCode(code, table_id, supporteddatabase_id);
     }
 
 
 
-    public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
-        List<TemplateDummy> templates = puller.getNewTemplates(templateNames);
+    public List<TemplateData> getNewTemplates(List<String> templateNames) {
+        List<TemplateData> templates = puller.getNewTemplates(templateNames);
         return templates;
     }
 }

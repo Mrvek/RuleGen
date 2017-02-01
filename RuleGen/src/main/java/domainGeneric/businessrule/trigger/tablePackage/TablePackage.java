@@ -17,15 +17,17 @@ public class TablePackage {
     private String name;
     private String databasetype;
     private String table;
+    private int tableID;
     private String Message = "not yet initiated";
     private TemplateService templateService;
     private Map<List<TriggerMoment>, Procedure> procedures = new HashMap();
     private boolean supported = false;
 
-    public TablePackage(String name, String databasetype, String table, String databasename) {
+    public TablePackage(String name, String databasetype, String table, String databasename, int tableID) {
         this.name = name;
         this.databasetype = databasetype;
         this.table = table;
+        this.tableID = tableID;
         this.templateService = new TemplateService();
 
         supported = templateService.checkPackageSupport(databasetype);
@@ -53,9 +55,9 @@ public class TablePackage {
     public String getCode() {
 //        TODO: Check on Package-support
         String code = getSpecificationCode();
-        code += "\n";
+        code += "\n/\n";
 
-        code += getBodyCode();
+        code += getBodyCode() + "\n/\n";
         return code;
     }
 
@@ -104,5 +106,9 @@ public class TablePackage {
 
     public String getTable() {
         return table;
+    }
+
+    public int getTableID() {
+        return tableID;
     }
 }

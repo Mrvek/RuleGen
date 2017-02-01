@@ -7,6 +7,7 @@ import domainGeneric.businessrule.trigger.TriggerOnTable;
 import domainGeneric.businessrule.trigger.tablePackage.Procedure;
 import domainGeneric.businessrule.trigger.tablePackage.TablePackage;
 import domainGeneric.dto.BRData;
+import domainGeneric.dto.CodeReturnData;
 import domainGeneric.dto.ProjectData;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,20 +26,24 @@ public class BusinessruleManager {
     private DataPullService datapuller = new DataPullService();
     private NameGen nameGen = new NameGen();
     private String projectID;
+    private int supportedDatabase;
 
     public void createBR(int ticket) {
         ProjectData projectData = getAllData(ticket);
         this.projectID = projectData.getProjectID();
+        this.supportedDatabase = projectData.getSupportedDatabase();
         for (BRData BR : projectData.getBusinessRules()) {
             BRRuleType ruletype = createRuleType(BR);
 
+//            TODO: add check if it's possible to make a constraint of the ruletype (3 ruletypes can't be constraints)
             if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null || BR.getTokens().isEmpty()) {
-                Constraint constraint = new Constraint(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
+                Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
                 constraintList.add(constraint);
 
             } else {
-                Procedure procedure = new Procedure(BR.getPrimarykey(), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
+                Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
                 TablePackage tablePackage = createOrGetPackage(BR);
+                /** Hoe ziet de value van triggermoment eruit? */
                 tablePackage.addProcedure(BR.getTriggerMoment(), procedure);
                 TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
                 if (!triggers.get(trigger).equals(tablePackage)) {
@@ -58,7 +63,7 @@ public class BusinessruleManager {
             if (trigger.getTable().equals(brData.getTablename()))
                 return  trigger;
         }
-        return new TriggerOnTable(nameGen.getTriggerName(brData.getDatabaseshortname(), brData.getTablename()), brData.getPrimarykey(), brData.getDatabasetype(), brData.getTablename(), apackage);
+        return new TriggerOnTable(nameGen.getTriggerName(brData.getDatabaseshortname(), brData.getTablename()), String.valueOf(brData.getPrimarykey()), brData.getDatabasetype(), brData.getTablename(), apackage);
     }
 
     private TablePackage createOrGetPackage(BRData brData) {
@@ -73,9 +78,10 @@ public class BusinessruleManager {
     private BRRuleType createRuleType(BRData BRData) {
         BRRuleType ruletype = null;
 
+//        TODO: add the iteration 2 ruletypes to this list (their initials can be found in their classes)
         switch (BRData.getBRRuleType()) {
             case ("ACMP"):
-                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getValue(0), BRData.getOperator(), BRData.getDatabasetype());
+                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
                 break;
             case ("ARNG"):
                 ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget());
@@ -91,23 +97,24 @@ public class BusinessruleManager {
     }
 
 
-    public String getAllCode() {
-        String code = "";
-        for (Constraint constraint : constraintList) {
-            code += constraint.getCode() + "\n/\n";
-        }
-        code += "\n";
-
-        for (TablePackage TPackage : triggers.values()) {
-            code = TPackage.getCode() + "\n/\n\n";
-        }
-        code += "\n";
-
+    public List<CodeReturnData> getAllCode() {
+        List<CodeReturnData> result = new ArrayList<>();
         for (TriggerOnTable trigger : triggers.keySet()) {
-            code += trigger.getCode() + "\n/\n\n";
+            TablePackage tablePackage = triggers.get(trigger);
+
+            String code = tablePackage.getCode();
+            code += trigger.getCode();
+
+            CodeReturnData Listvalue = new CodeReturnData(tablePackage.getTableID(), this.supportedDatabase, code);
+            result.add(Listvalue);
         }
-        System.out.println("\t Generated: " + code);
-        return code;
+
+//        TODO: add constraints to the code of their corresponding table
+//        String code = "";
+//        for (Constraint constraint : constraintList) {
+//            code += constraint.getCode() + "\n/\n";
+//        }
+        return result;
     }
 
     public JSONArray getinfo() {

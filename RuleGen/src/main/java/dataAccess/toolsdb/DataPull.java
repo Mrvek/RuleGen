@@ -8,6 +8,7 @@ import dataAccess.persistence.oracle.toolsdb.SupportedUnitsService;
 import dataAccess.persistence.oracle.toolsdb.ToolDbService;
 import domainGeneric.dto.BRData;
 import domainGeneric.dto.ProjectData;
+import domainGeneric.dto.TemplateData;
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
 import dto.businessrules.GeneratedTrigger;
@@ -28,13 +29,15 @@ import java.util.Map;
 public class DataPull {
     private DBConfig config;
 
-    public List<TemplateDummy> getNewTemplates(List<String> templateNames) {
+    public List<TemplateData> getNewTemplates(List<String> currentTemplateNames) {
         List<TemplateDummy> templates = new ArrayList<>();
         config();
 //        TODO: get data out of database.
+//        TODO: write method so a filled TemplateData class can will be returned
+        TemplateData data = null;
 
 //        temporary data for testing
-        if (!templateNames.contains("Oracle 11g")) {
+        if (!currentTemplateNames.contains("Oracle 11g")) {
             Map<String, String> optranslators = new HashMap<>();
             optranslators.put("=", "==");
             TemplateDummy data = new TemplateDummy("Oracle 12c", optranslators,
@@ -57,6 +60,7 @@ public class DataPull {
     }
 
     private void config() {
+        /** config (re)moved? */
         if (config == null) {
             config = new DBConfig();
         }
@@ -80,7 +84,7 @@ public class DataPull {
             Project project = x.getLinBusinessrules().getProject();
             
             BRData brdata = new BRData();
-            brdata.setPrimarykey(businessrule.getId()); //PrimaryKey of BusinessRule?
+            brdata.setPrimarykey(businessrule.getId()); //PrimaryKey of BusinessRule?  Yes
             brdata.setOperator(businessrule.getKoppeloperator().getSupportedoperator().getOperator());
             brdata.setBRRuleType(businessrule.getBusinessruletype().getType());
             brdata.setTriggerMoment(businessrule.getPosibleTriggerEvents().getEvent());
@@ -88,7 +92,7 @@ public class DataPull {
             brdata.setExceptionMessage(businessrule.getFailurehandling().getMessageText());
             brdata.setDatabasetype(project.getSupporteddatabase().getDatabasetype());
             brdata.setDatabaseshortname(project.getSupporteddatabase().getAbbreviation());
-            brdata.setTarget(project.getDatabaseschema().getName()); //Target is the DatabaseSchemaname?
+            brdata.setTarget(project.getDatabaseschema().getName()); //Target is the DatabaseSchemaname? Attribute name (the column that needs to be validated)
             
             ArrayList<Token> dbtokens = businessrule.getFailurehandling().getToken();
             HashMap<String, String> tokens = new HashMap<>();
@@ -105,7 +109,7 @@ public class DataPull {
                 
                 if (y.getAttribute() != null) {
                     brdata.setTablename(y.getAttribute().getTable().getName());
-                    brdata.setComparisonTarget(y.getAttribute().getName()); //ComparisonTarget is the linked attribute?
+                    brdata.setComparisonTarget(y.getAttribute().getName()); //ComparisonTarget is the linked attribute? Is the second attributeName that is needed for comparison (not for all ruletypes, can be null)
                 }
             }
             brdata.setValues(values);
@@ -119,7 +123,8 @@ public class DataPull {
         return projectdata;
     }
 
-    public boolean pushCode(String code, String primaryKey, String projectid, String name) {
+    public boolean pushCode(String code, int table_id, int supportedDatabases) {
+//        TODO: push code to the DB.table_trigger (find a way to get the table_id and supportedDatabases. BRData DTO might be changed)
         changename(Integer.parseInt(primaryKey), name);
         BaseService bs = new BaseService();
         SupportedDatabases DB = bs.getProject(Integer.parseInt(projectid)).getSupporteddatabase();

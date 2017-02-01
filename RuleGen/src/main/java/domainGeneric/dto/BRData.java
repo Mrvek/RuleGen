@@ -15,13 +15,14 @@ public class BRData {
     private String databasetype;
     private String target;
     private String tablename;
+    private int tableID;
     private String databaseshortname;
     private String BRRuleType;
     private List<String> values;
     private String operator; 
     private String comparisonTarget;
 
-    public BRData(String triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, int primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator, String comparisonTarget) {
+    public BRData(String triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, int primarykey, String databasetype, String target, String tablename, int tableID, String databaseshortname, String BRRuleType, List<String> values, String operator, String comparisonTarget) {
         this.triggerMoment = triggerMoment;
         this.severity = severity;
         this.exceptionMessage = exceptionMessage;
@@ -30,14 +31,12 @@ public class BRData {
         this.databasetype = databasetype;
         this.target = target;
         this.tablename = tablename;
+        this.tableID = tableID;
         this.databaseshortname = databaseshortname;
         this.BRRuleType = BRRuleType;
         this.values = values;
         this.operator = operator;
         this.comparisonTarget = comparisonTarget;
-    }
-
-    public BRData() {
     }
 
     public String getTriggerMoment() {
@@ -70,6 +69,10 @@ public class BRData {
 
     public String getTablename() {
         return tablename;
+    }
+
+    public int getTableID() {
+        return tableID;
     }
 
     public String getDatabaseshortname() {
@@ -128,6 +131,10 @@ public class BRData {
         this.tablename = tablename;
     }
 
+    public void setTableID(int tableID) {
+        this.tableID = tableID;
+    }
+
     public void setDatabaseshortname(String databaseshortname) {
         this.databaseshortname = databaseshortname;
     }
@@ -147,6 +154,4 @@ public class BRData {
     public void setComparisonTarget(String comparisonTarget) {
         this.comparisonTarget = comparisonTarget;
     }
-    
-    
 }

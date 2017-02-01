@@ -6,6 +6,7 @@ import java.util.Map;
  * Created by Mitchell on 18/01/2017.
  */
 public class TemplateData {
+    private String databaseName;
     private boolean packageSupport;
     private String triggerCode;
     private String constraintCode;
@@ -48,7 +49,8 @@ public class TemplateData {
     private String executeStatementCode;
 
 
-    public TemplateData(boolean packageSupport, String triggerCode, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTranslations, String ruleTypeOtherConstraintCode, String ruleTypeOtherTriggerCode, String ruleTypeListConstraintCode, String ruleTypeListTriggerCode, String deleteMomentCode, String updateMomentCode, String insertMomentCode, String triggerStartCode, String triggerDeclarationCode, String packageHeaderStartCode, String packageEndCode, String packageBodyStartCode, String packageBodyEndCode, String procedureSpecification, String triggerEndCode, String procedureExcecutionCode, String exceptionExceptStartCode, String exceptionExceptErrorCode, String exceptionRaiseErrorCode, String exceptionWarningCode, String exceptionRaiseWarningCode, String addStringTExceptionStackCode, String exceptionParameters, String exceptionTriggerDeclarationCode, String procedureBodyStartCode, String procedureBodyDeclarationCode, String procedureBodyEndCode, String ruleTypeACMPCode, String parameterRuleTypeLSTCode, String parameterRuleTypeOTHCode, String parameterRuleTypeRNGCode, String executeStatementCode) {
+    public TemplateData(String databaseName, boolean packageSupport, String triggerCode, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTranslations, String ruleTypeOtherConstraintCode, String ruleTypeOtherTriggerCode, String ruleTypeListConstraintCode, String ruleTypeListTriggerCode, String deleteMomentCode, String updateMomentCode, String insertMomentCode, String triggerStartCode, String triggerDeclarationCode, String packageHeaderStartCode, String packageEndCode, String packageBodyStartCode, String packageBodyEndCode, String procedureSpecification, String triggerEndCode, String procedureExcecutionCode, String exceptionExceptStartCode, String exceptionExceptErrorCode, String exceptionRaiseErrorCode, String exceptionWarningCode, String exceptionRaiseWarningCode, String addStringTExceptionStackCode, String exceptionParameters, String exceptionTriggerDeclarationCode, String procedureBodyStartCode, String procedureBodyDeclarationCode, String procedureBodyEndCode, String ruleTypeACMPCode, String parameterRuleTypeLSTCode, String parameterRuleTypeOTHCode, String parameterRuleTypeRNGCode, String executeStatementCode) {
+        this.databaseName = databaseName;
         this.packageSupport = packageSupport; //true if databasetype supports packages, else false
         this.triggerCode = triggerCode;
         this.constraintCode = constraintCode;
@@ -89,6 +91,10 @@ public class TemplateData {
         this.parameterRuleTypeOTHCode = parameterRuleTypeOTHCode;
         this.parameterRuleTypeRNGCode = parameterRuleTypeRNGCode;
         this.executeStatementCode = executeStatementCode;
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
     }
 
     public boolean isPackageSupport() {

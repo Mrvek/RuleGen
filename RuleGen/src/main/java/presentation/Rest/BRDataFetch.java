@@ -14,17 +14,15 @@ import java.util.List;
 public class BRDataFetch {
     private BRController controller = new BRController();
 
-    public JSONArray getData(List<String> keys, String projectid) {
-        return controller.Generate(keys, projectid);
+    public JSONArray getData(int ticket) {
+        return controller.Generate(ticket);
     }
 
     public JSONArray getBR(Request request, Response response) {
         Response result = response;
-        String key = request.attribute("BusinessRules");
-        String projectid = request.attribute("project");
+        int ticket = request.attribute("project");
         List<String> keys = new ArrayList<>();
-        keys.add(key);
-        JSONArray businessRule = getData(keys, projectid);
+        JSONArray businessRule = getData(ticket);
 
         return businessRule;
     }
