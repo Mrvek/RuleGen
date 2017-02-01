@@ -42,7 +42,7 @@ public class BRController {
 
     public boolean pushCodeToTarget(Integer tableID) {
         String Code = DPullService.getTableCode(tableID);
-        boolean answer = DPushService.Send(tableID);
+        boolean answer = DPushService.Send(Code);
         return answer;
     }
 }

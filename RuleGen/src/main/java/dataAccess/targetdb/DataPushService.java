@@ -14,7 +14,7 @@ public class DataPushService {
         System.out.println("\tError 404:\tImplementation of code not found!");
     }
 
-    public boolean Send(Integer tableID) {
+    public boolean Send(String code) {
 
         return false;
     }
