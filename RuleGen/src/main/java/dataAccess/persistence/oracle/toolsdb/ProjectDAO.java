@@ -305,23 +305,25 @@ public class ProjectDAO extends BaseDAO {
                                                         "    PROJECT.PROJECTNAME as PROJECTNAME," +
                                                         "    PROJECT.ABBREVIATION as ABBREVIATION," +
                                                         "    PROJECT.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
-                                                        "    PROJECT.USERNAME as USERNAME," +
+                                                        "    PROJECT.ACCOUNT_ID as USERNAME," +
                                                         "    PROJECT.DATABASESCHEMA_ID as DATABASESCHEMA_ID " +
                                                         " from PROJECT PROJECT" +
                                                         " WHERE PROJECT.PROJECT_ID = ?");
             ps.setInt(1, project_id);
             ResultSet dbResultSet = ps.executeQuery();
-            
             while (dbResultSet.next()) {
+            	System.out.println("voor toevoegen supdatabases");
                 SupportedDatabases sdb = sus.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID"));
+                System.out.println("voor toevoegen schema");
                 DatabaseSchema ds = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
-                
+                System.out.println("voor toevoegen project");
                 Project project = new Project(dbResultSet.getInt("PROJECT_ID"),
                                               dbResultSet.getString("PROJECTNAME"),
                                               dbResultSet.getString("ABBREVIATION"),
-                                            dbResultSet.getString("USERNAME"),
+                                              Integer.toString(dbResultSet.getInt("USERNAME")),
                                                sdb, ds);
                 
+                System.out.println("na toevoegen project");
                 return project;
             }
             

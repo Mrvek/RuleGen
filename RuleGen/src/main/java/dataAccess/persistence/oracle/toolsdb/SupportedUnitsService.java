@@ -12,12 +12,12 @@ import dto.supported_units.Template;
 import dto.supported_units.TriggerTemplate;
 
 public class SupportedUnitsService {
-	private static SupportedUnitsDAO sudao = new SupportedUnitsDAO();
+	private SupportedUnitsDAO sudao = new SupportedUnitsDAO();
 	
 	public ArrayList<SupportedDatabases> getAllSupportedDatabases() {
 		return sudao.getAllSupportedDatabases();
 	}
-	public SupportedDatabases getSupportedDatabaseById(int id) {
+	public SupportedDatabases getSupportedDatabaseById(int id) {		
 		return sudao.getSupportedDatabaseById(id);
 	}
 	public ArrayList<SupportedDatatypes> getSupportedDataTypesByDB(SupportedDatabases database) {

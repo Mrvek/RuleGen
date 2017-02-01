@@ -27,8 +27,8 @@ public class RestService {
             return answer;
         });
 
-        get("/project/new", (request, response) -> {
-            JSONArray answer = new ProjectDataFetch().initialise(request, response);
+        get("/project/*/new", (request, response) -> {
+            JSONArray answer = new ProjectDataFetch().initialise(request.splat()[0]);
             return answer;
         });
 

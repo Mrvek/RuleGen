@@ -8,6 +8,7 @@ package dataAccess.persistence.oracle.targetdb;
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsDAO;
 import dto.project.Attribute;
 import dto.project.DatabaseSchema;
+import dto.project.Project;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
@@ -20,8 +21,8 @@ import java.util.ArrayList;
 public class TargetAnalysisService {
     private StructureDAO sdao;
 
-    public TargetAnalysisService() {
-        sdao = new StructureDAO();
+    public TargetAnalysisService(Project project) {
+        sdao = new StructureDAO(project);
     }
     
     public ArrayList<Table> getTargetDatabaseStructure(SupportedDatabases database) {

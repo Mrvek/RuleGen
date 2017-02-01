@@ -28,16 +28,15 @@ import java.util.logging.Logger;
  * @author Matthias
  */
 public class SupportedUnitsDAO extends BaseDAO {
-    
+    	
         private BusinessRuleService brs = ToolDbService.getBRService();
    
-    public SupportedUnitsDAO() { 
-        super();
+    public SupportedUnitsDAO() {    	
+        super();        
     }
     
     public ArrayList<SupportedDatabases> getAllSupportedDatabases() {
         ArrayList<SupportedDatabases> result = new ArrayList<>();
-        
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDDATABASES.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
                                                                     " SUPPORTEDDATABASES.DATABASETYPE as DATABASETYPE," +

@@ -20,10 +20,6 @@ import java.util.ArrayList;
 public class ProjectService {
 	private static ProjectDAO pdao = new ProjectDAO();
 
-//    public ProjectService() {
-//        pdao = new ProjectDAO();
-//    }
-    
 	public static ProjectDAO getProject(){		
 		return pdao;
 	}

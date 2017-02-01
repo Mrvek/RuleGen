@@ -7,6 +7,7 @@ package dataAccess.persistence.oracle.targetdb;
 
 import dto.project.Attribute;
 import dto.project.DatabaseSchema;
+import dto.project.Project;
 import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedDatatypes;
@@ -29,8 +30,8 @@ public class StructureDAO extends StructurebaseDAO {
     
 	
 	//extend basedao instead and add token baseschema/databaseversion
-    public StructureDAO() {
-        super();
+    public StructureDAO(Project project) {
+        super(project);
     }
     
     public ArrayList<Table> getTables() {

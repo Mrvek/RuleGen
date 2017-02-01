@@ -9,8 +9,10 @@ import taskSpecific.ProjectUpdate.ProjectController;
  * Created by Mitchell on 26/01/2017.
  */
 public class ProjectDataFetch {
-    public JSONArray initialise(Request request, Response response) {
-        int projectId = Integer.parseInt(request.attribute("project"));
+    public JSONArray initialise(String projectid_s) {
+        int projectId = Integer.parseInt(projectid_s);
+        //TODO REMOVE SYSOUT
+        System.out.println("Starting engines on project: " + projectId);
         JSONArray result = new ProjectController().initialiseProject(projectId);
         return result;
     }
