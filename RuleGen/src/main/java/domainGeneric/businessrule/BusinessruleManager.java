@@ -37,8 +37,10 @@ public class BusinessruleManager {
 
 //            TODO: add check if it's possible to make a constraint of the ruletype (3 ruletypes can't be constraints)
             if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null || BR.getTokens().isEmpty()) {
-                Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
-                constraintList.add(constraint);
+                if (!(BR.getBRRuleType().equals("TOTH") || BR.getBRRuleType().equals("EOTH") || BR.getBRRuleType().equals("ICMP")|| BR.getBRRuleType().equals("MODI"))) {
+                    Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
+                    constraintList.add(constraint);
+                }
 
             } else {
                 Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
@@ -83,7 +85,7 @@ public class BusinessruleManager {
     private BRRuleType createRuleType(BRData BRData) {
         BRRuleType ruletype = null;
 
-//        TODO: add the iteration 2 ruletypes to this list (their initials can be found in their classes)
+
         switch (BRData.getBRRuleType()) {
             case ("TCMP"):
                 ruletype = new TupleCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getTarget());
