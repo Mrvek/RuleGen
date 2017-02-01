@@ -28,45 +28,51 @@ import java.util.Map;
  */
 public class DataPull {
 //    private DBConfig config;
-
+//TODO contains push services, refactor classname?
+	
+	
+	//must receive templates from database en get the right ones?
     public List<TemplateData> getNewTemplates(List<String> currentTemplateNames) {
         List<TemplateData> templates = new ArrayList<>();
-        config();
+//        config();
 //        TODO: get data out of database.
 //        TODO: write method so a filled TemplateData class can will be returned
         TemplateData data = null;
 
+  
 //        temporary data for testing
-        if (!currentTemplateNames.contains("Oracle 11g")) {
-            Map<String, String> optranslators = new HashMap<>();
-            optranslators.put("=", "==");
-            TemplateDummy data = new TemplateDummy("Oracle 12c", optranslators,
-                    "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception; ",
-                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
-                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
-                    "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?); ",
-                    "{Target} {Operator} ?",
-                    "I_passed := :NEW.{Target} {Operator} ?; ",
-                    "{Target} {Operator} {From} and {To}",
-                    "I_passed := :NEW.{Target} {Operator} {From} and {To}; ",
-                    "?",
-                    "I_passed := ? ",
-                    "{Target} {Operator} (?)",
-                    "I_passed := :NEW.{Target} {Operator} (?) ");
-            templates.add(data);
-        }
+//        if (!currentTemplateNames.contains("Oracle 12c")) {
+//            Map<String, String> optranslators = new HashMap<>();
+//            optranslators.put("=", "==");
+//            data = new TemplateData("Oracle 12c", optranslators,
+//                    "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception; ",
+//                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
+//                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
+//                    "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?); ",
+//                    "{Target} {Operator} ?",
+//                    "I_passed := :NEW.{Target} {Operator} ?; ",
+//                    "{Target} {Operator} {From} and {To}",
+//                    "I_passed := :NEW.{Target} {Operator} {From} and {To}; ",
+//                    "?",
+//                    "I_passed := ? ",
+//                    "{Target} {Operator} (?)",
+//                    "I_passed := :NEW.{Target} {Operator} (?) ");
+//            templates.add(data);
+//        }
 
         return templates;
     }
 
-    private void config() {
-        /** config (re)moved? */
-        if (config == null) {
-            config = new DBConfig();
-        }
-    }
+//    private void config() {
+//        /** config (re)moved? */
+//        if (config == null) {
+//            config = new DBConfig();
+//        }
+//    }
 
     public ProjectData getBusinessRule(int ticketId) {
+    	//TODO Comparison table moet er komen en gevuld worden en ingevuld worden als comparisontarget aanwezig
+    	//TODO BR data ook een nieuwe attribute komen genaam 
         
         SupportedUnitsService sus = ToolDbService.getSUService();
         BusinessRuleService brs = ToolDbService.getBRService();
@@ -129,17 +135,11 @@ public class DataPull {
 
     public boolean pushCode(List<CodeReturnData> code) {
 //        TODO: push code to the DB.table_trigger (find a way to get the table_id and supportedDatabases. BRData DTO might be changed)
-        changename(Integer.parseInt(primaryKey), name);
-        BaseService bs = new BaseService();
-        SupportedDatabases DB = bs.getProject(Integer.parseInt(projectid)).getSupporteddatabase();
-        Businessrule brs = bs.getBusinessrule(Integer.parseInt(primaryKey));
-        GeneratedTrigger gtrigger = new GeneratedTrigger(code, "Hi!", brs, DB);
-        bs.insertTrigger(gtrigger);
-        return true;
+    	//TODO Figure out if that todo above here it's last sentence still makes sense.
+    	// is secretly a push thing, don't tell the classname
+    	BusinessRuleService bs = ToolDbService.getBRService();
+    	boolean check = bs.insertTableTriggers(code);
+        return check;
     }
 
-    private void changename(int primaryKey, String name) {
-        BaseService bs = new BaseService();
-        bs.setBusinessRuleName(primaryKey, name);
-    }
 }

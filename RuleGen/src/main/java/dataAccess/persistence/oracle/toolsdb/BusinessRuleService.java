@@ -1,12 +1,17 @@
 package dataAccess.persistence.oracle.toolsdb;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import dataAccess.persistence.oracle.targetdb.StructureDAO;
+import domainGeneric.dto.CodeReturnData;
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
 import dto.businessrules.BusinessruleType;
 import dto.businessrules.Category;
-import dto.businessrules.GeneratedTrigger;
 import dto.businessrules.KoppelOperator;
 import dto.businessrules.PosibleTriggerEvents;
 
@@ -29,13 +34,27 @@ public class BusinessRuleService {
 	public ArrayList<BusinessValues> getAllBusinessValues(Businessrule businessrule) {
 		return brdao.getAllBusinessValues(businessrule);
 	}
-	public boolean insertTrigger(GeneratedTrigger generatedtrigger) {
-		return brdao.insertTrigger(generatedtrigger);
+	public boolean insertTableTrigger(CodeReturnData returnedCode) {
+		return brdao.insertTableTrigger(returnedCode);
 	}
-        public boolean setBusinessRuleName (int businessrule_id, String name) {
-            return brdao.setBusinessRuleName(businessrule_id, name);
+	public boolean insertTableTriggers(List<CodeReturnData> returnedCode) {
+		boolean result = false;
+		try{
+			for(CodeReturnData tableCode : returnedCode){
+				brdao.insertTableTrigger(tableCode);
+			}
+			result = true;
+		}catch (Exception ex) {
+			System.out.println(ex);
         }
-        public PosibleTriggerEvents getPosibleTriggerEvents(int poste_id) {
-            return brdao.getPosibleTriggerEvents(poste_id);
-        }
+		return result;
+	}
+	
+	
+    public boolean setBusinessRuleName (int businessrule_id, String name) {
+        return brdao.setBusinessRuleName(businessrule_id, name);
+    }
+    public PosibleTriggerEvents getPosibleTriggerEvents(int poste_id) {
+        return brdao.getPosibleTriggerEvents(poste_id);
+    }
 }

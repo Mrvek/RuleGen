@@ -17,10 +17,10 @@ public class RestService {
     public static void main(String args[]) {
         get("/hello", (req, res) -> "Hello World");
 
-        List<String> keys = new ArrayList<>();
-        keys.add("10");
-        JSONArray result = new BRDataFetch().getData(3);
-        System.out.println("returning: " + result + "\n");
+       // List<String> keys = new ArrayList<>();
+       // keys.add("10");
+       // JSONArray result = new BRDataFetch().getData(3);
+       // System.out.println("returning: " + result + "\n");
 
         get("/hello/BR", (request, response) -> {
             JSONArray answer = new BRDataFetch().getBR(request, response);
@@ -28,6 +28,7 @@ public class RestService {
         });
 
         get("/project/*/new", (request, response) -> {
+        	System.out.println("Starting engines on project: " + request.splat()[0]);
             JSONArray answer = new ProjectDataFetch().initialise(request.splat()[0]);
             return answer;
         });

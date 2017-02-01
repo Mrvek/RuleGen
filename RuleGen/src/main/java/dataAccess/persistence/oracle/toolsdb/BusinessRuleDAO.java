@@ -17,6 +17,7 @@ import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedOperators;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
+import domainGeneric.dto.CodeReturnData;
 import dto.businessrules.Failurehandling;
 import dto.businessrules.PosibleTriggerEvents;
 import dto.businessrules.Token;
@@ -271,26 +272,24 @@ public class BusinessRuleDAO extends BaseDAO {
         }
         return results;
         
-    }
-    
-    public boolean insertTrigger (GeneratedTrigger generatedtrigger) {
+    }    
+    public boolean insertTableTrigger (CodeReturnData returnedCode) {
         try (Connection con = super.getConnection()) {
             
-            PreparedStatement ps = con.prepareStatement("INSERT INTO GENERATEDTRIGGER (DATETIME, BUSINESSRULE_ID, "
-                                                        + "SUPPORTEDDATABASES_ID, CODE, EVENT) VALUES (SYSDATE, ?, ?, ?, ?)");
-            ps.setInt(1, generatedtrigger.getBusinessrule().getId());
-            ps.setInt(2, generatedtrigger.getSupporteddatabase().getId());
-            ps.setString(3, generatedtrigger.getCode());
-            ps.setString(4, generatedtrigger.getEvent());
-
-            return ps.executeUpdate() == 1;
+            PreparedStatement ps = con.prepareStatement("INSERT INTO TABLE_TRIGGER (TABLE_ID, TIMESTAMP, "
+                                                        + "CODE, SUPPORTEDDATABASES_ID) VALUES (?, SYSDATE, ?, ?)");
+            ps.setInt(1, returnedCode.getTableID());
+            ps.setInt(2, returnedCode.getSupporteddatabase());
+            ps.setString(3, returnedCode.getCode());
             
+            return ps.executeUpdate() == 1;            
             
         } catch (SQLException ex) {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
+    
     
     public boolean setBusinessRuleName (int businessrule_id, String name) {
         try (Connection con = super.getConnection()) {
