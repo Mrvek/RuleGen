@@ -1,7 +1,5 @@
 package domainGeneric.template;
 
-import unstableTESTGround.template.*;
-
 import java.util.List;
 import java.util.Map;
 

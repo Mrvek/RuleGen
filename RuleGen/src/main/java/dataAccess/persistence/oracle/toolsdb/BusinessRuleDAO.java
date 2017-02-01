@@ -279,8 +279,8 @@ public class BusinessRuleDAO extends BaseDAO {
             PreparedStatement ps = con.prepareStatement("INSERT INTO TABLE_TRIGGER (TABLE_ID, TIMESTAMP, "
                                                         + "CODE, SUPPORTEDDATABASES_ID) VALUES (?, SYSDATE, ?, ?)");
             ps.setInt(1, returnedCode.getTableID());
-            ps.setInt(2, returnedCode.getSupporteddatabase());
-            ps.setString(3, returnedCode.getCode());
+            ps.setString(2, returnedCode.getCode());
+            ps.setInt(3, returnedCode.getSupporteddatabase());
             
             return ps.executeUpdate() == 1;            
             
