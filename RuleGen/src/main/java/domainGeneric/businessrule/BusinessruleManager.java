@@ -94,7 +94,7 @@ public class BusinessruleManager {
                 ruletype = new TupleOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
                 break;
             case ("ICMP"):
-                ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable());
+                ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable(), BRData.getTarget(), BRData.getTablename());
                 break;
             case ("EOTH"):
                 ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());

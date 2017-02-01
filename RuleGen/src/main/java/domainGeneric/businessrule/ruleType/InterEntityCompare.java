@@ -6,9 +6,9 @@ package domainGeneric.businessrule.ruleType;
 public class InterEntityCompare extends BRRuleType {
     private String compareWithColumn;
     private String compareWithTable;
+    private String targetTable;
 
-
-    public InterEntityCompare(String operator, String databasetype, String compareWith, String compareWithTable, String target) {
+    public InterEntityCompare(String operator, String databasetype, String compareWith, String compareWithTable, String target, String targetTable) {
         super(operator, databasetype, "ICMP", target);
         this.compareWithColumn = compareWith;
         this.compareWithTable = compareWithTable;
@@ -21,7 +21,7 @@ public class InterEntityCompare extends BRRuleType {
 
     @Override
     public String getProcedureCode(String passedName) {
-        return templateService.getRuleTypeICMPProcedureCode(databasetype, target, operator, compareWithColumn, compareWithTable);
+        return templateService.getRuleTypeICMPProcedureCode(databasetype, target, operator, compareWithColumn, compareWithTable, targetTable);
     }
 
     @Override

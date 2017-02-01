@@ -161,7 +161,7 @@ public class TemplateService {
         return null;
     }
 
-    public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable) {
+    public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable, String targetTable) {
         return null;
     }
 

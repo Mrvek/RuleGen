@@ -117,6 +117,7 @@ public class DataPull {
                     brdata.setTablename(y.getAttribute().getTable().getName());
                     brdata.setTarget(y.getAttribute().getName());
                 } else if(y.getAttribute() != null && attributeCount > 0) {
+                    brdata.setComparisonTable(y.getAttribute().getTable().getName());
                     brdata.setComparisonTarget(y.getAttribute().getName());
                 } else {
                     values.add(y.getValue());
