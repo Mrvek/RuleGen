@@ -40,7 +40,10 @@ public class SupportedUnitsDAO extends BaseDAO {
         
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDDATABASES.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
-                                                                    "SUPPORTEDDATABASES.DATABASETYPE as DATABASETYPE" +
+                                                                    " SUPPORTEDDATABASES.DATABASETYPE as DATABASETYPE," +
+                                                                    " SUPPORTEDDATABASES.ABBREVIATION as ABBREVIATION," +
+                                                                    " SUPPORTEDDATABASES.DBDRIVER as DBDRIVER," +
+                                                                    " SUPPORTEDDATABASES.DBCON_PREFIX as DBCON_PREFIX" +
                                                                     " from SUPPORTEDDATABASES SUPPORTEDDATABASES");
             ResultSet dbResultSet = ps.executeQuery();
             
@@ -66,7 +69,10 @@ public class SupportedUnitsDAO extends BaseDAO {
         
         try (Connection con = super.getConnection()) {
             java.sql.PreparedStatement ps = con.prepareStatement("select SUPPORTEDDATABASES.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
-                                                                    "SUPPORTEDDATABASES.DATABASETYPE as DATABASETYPE" +
+                                                                    " SUPPORTEDDATABASES.DATABASETYPE as DATABASETYPE," +
+                                                                    " SUPPORTEDDATABASES.ABBREVIATION as ABBREVIATION," +
+                                                                    " SUPPORTEDDATABASES.DBDRIVER as DBDRIVER," +
+                                                                    " SUPPORTEDDATABASES.DBCON_PREFIX as DBCON_PREFIX" +
                                                                     " from SUPPORTEDDATABASES SUPPORTEDDATABASES WHERE "
                                                                     + "SUPPORTEDDATABASES.SUPPORTEDDATABASES_ID = ?");
             ps.setInt(1, id);

@@ -15,13 +15,17 @@ public class Businessrule {
     private String description;
     private BusinessruleType businessruletype;
     private KoppelOperator koppeloperator;
+    private PosibleTriggerEvents posibleTriggerEvents;
+    private Failurehandling failurehandling;
 
-    public Businessrule(int id, String name, String description, BusinessruleType businessruletype, KoppelOperator koppeloperator) {
+    public Businessrule(int id, String name, String description, BusinessruleType businessruletype, KoppelOperator koppeloperator, PosibleTriggerEvents posibleTriggerEvents, Failurehandling failurehandling) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.businessruletype = businessruletype;
         this.koppeloperator = koppeloperator;
+        this.posibleTriggerEvents = posibleTriggerEvents;
+        this.failurehandling = failurehandling;
     }
 
     public Businessrule() {
@@ -66,6 +70,21 @@ public class Businessrule {
     public void setKoppeloperator(KoppelOperator koppeloperator) {
         this.koppeloperator = koppeloperator;
     }
-    
-    
+
+    public PosibleTriggerEvents getPosibleTriggerEvents() {
+        return posibleTriggerEvents;
+    }
+
+    public void setPosibleTriggerEvents(PosibleTriggerEvents posibleTriggerEvents) {
+        this.posibleTriggerEvents = posibleTriggerEvents;
+    }
+
+    public Failurehandling getFailurehandling() {
+        return failurehandling;
+    }
+
+    public void setFailurehandling(Failurehandling failurehandling) {
+        this.failurehandling = failurehandling;
+    }
+
 }

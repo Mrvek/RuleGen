@@ -7,21 +7,21 @@ import java.util.Map;
  * Created by Mitchell on 30/01/2017.
  */
 public class BRData {
-    private List<String> triggerMoment;
+    private String triggerMoment;
     private String severity;
     private String exceptionMessage;
     private Map<String, String> tokens;
-    private String primarykey;
+    private int primarykey;
     private String databasetype;
     private String target;
     private String tablename;
     private String databaseshortname;
     private String BRRuleType;
     private List<String> values;
-    private String operator;
+    private String operator; 
     private String comparisonTarget;
 
-    public BRData(List<String> triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, String primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator, String comparisonTarget) {
+    public BRData(String triggerMoment, String severity, String exceptionMessage, Map<String, String> tokens, int primarykey, String databasetype, String target, String tablename, String databaseshortname, String BRRuleType, List<String> values, String operator, String comparisonTarget) {
         this.triggerMoment = triggerMoment;
         this.severity = severity;
         this.exceptionMessage = exceptionMessage;
@@ -37,7 +37,10 @@ public class BRData {
         this.comparisonTarget = comparisonTarget;
     }
 
-    public List<String> getTriggerMoment() {
+    public BRData() {
+    }
+
+    public String getTriggerMoment() {
         return triggerMoment;
     }
 
@@ -53,7 +56,7 @@ public class BRData {
         return tokens;
     }
 
-    public String getPrimarykey() {
+    public int getPrimarykey() {
         return primarykey;
     }
 
@@ -92,4 +95,58 @@ public class BRData {
     public String getValue(int i) {
         return values.get(i);
     }
+
+    public void setTriggerMoment(String triggerMoment) {
+        this.triggerMoment = triggerMoment;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+
+    public void setExceptionMessage(String exceptionMessage) {
+        this.exceptionMessage = exceptionMessage;
+    }
+
+    public void setTokens(Map<String, String> tokens) {
+        this.tokens = tokens;
+    }
+
+    public void setPrimarykey(int primarykey) {
+        this.primarykey = primarykey;
+    }
+
+    public void setDatabasetype(String databasetype) {
+        this.databasetype = databasetype;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public void setTablename(String tablename) {
+        this.tablename = tablename;
+    }
+
+    public void setDatabaseshortname(String databaseshortname) {
+        this.databaseshortname = databaseshortname;
+    }
+
+    public void setBRRuleType(String BRRuleType) {
+        this.BRRuleType = BRRuleType;
+    }
+
+    public void setValues(List<String> values) {
+        this.values = values;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public void setComparisonTarget(String comparisonTarget) {
+        this.comparisonTarget = comparisonTarget;
+    }
+    
+    
 }

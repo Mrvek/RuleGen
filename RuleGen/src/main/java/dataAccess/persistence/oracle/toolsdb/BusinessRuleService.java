@@ -8,6 +8,7 @@ import dto.businessrules.BusinessruleType;
 import dto.businessrules.Category;
 import dto.businessrules.GeneratedTrigger;
 import dto.businessrules.KoppelOperator;
+import dto.businessrules.PosibleTriggerEvents;
 
 public class BusinessRuleService {
 	
@@ -31,7 +32,10 @@ public class BusinessRuleService {
 	public boolean insertTrigger(GeneratedTrigger generatedtrigger) {
 		return brdao.insertTrigger(generatedtrigger);
 	}
-    public boolean setBusinessRuleName (int businessrule_id, String name) {
-        return brdao.setBusinessRuleName(businessrule_id, name);
-    }
+        public boolean setBusinessRuleName (int businessrule_id, String name) {
+            return brdao.setBusinessRuleName(businessrule_id, name);
+        }
+        public PosibleTriggerEvents getPosibleTriggerEvents(int poste_id) {
+            return brdao.getPosibleTriggerEvents(poste_id);
+        }
 }

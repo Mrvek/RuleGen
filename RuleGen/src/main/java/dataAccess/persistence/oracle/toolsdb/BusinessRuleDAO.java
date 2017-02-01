@@ -17,6 +17,9 @@ import dto.project.Table;
 import dto.supported_units.SupportedDatabases;
 import dto.supported_units.SupportedOperators;
 import dataAccess.persistence.oracle.targetdb.StructureDAO;
+import dto.businessrules.Failurehandling;
+import dto.businessrules.PosibleTriggerEvents;
+import dto.businessrules.Token;
 
 import java.sql.Clob;
 import java.sql.Connection;
@@ -122,6 +125,8 @@ public class BusinessRuleDAO extends BaseDAO {
                                                         "    BUSINESSRULE.NAME as NAME," +
                                                         "    BUSINESSRULE.DESCRIPTION as DESCRIPTION," +
                                                         "    BUSINESSRULE.BUSINESSRULETYPE_ID as BUSINESSRULETYPE_ID," +
+                                                        " BUSINESSRULE.POSSIBLE_TRIGGER_EVENTS_ID as POSSIBLE_TRIGGER_EVENTS_ID," +
+                                                        " BUSINESSRULE.FAILUREHANDLING_ID as FAILUREHANDLING_ID," +
                                                         "    BUSINESSRULE.KOPPEOPERATOR_ID as KOPPEOPERATOR_ID " +
                                                         " from BUSINESSRULE BUSINESSRULE" +
                                                         " WHERE BUSINESSRULE.BUSINESSRULE_ID = ?");
@@ -134,7 +139,9 @@ public class BusinessRuleDAO extends BaseDAO {
                                                     dbResultSet.getString("NAME"), 
                                                     "not implemented", 
                                                     this.getBusinessRuleType(dbResultSet.getInt("BUSINESSRULETYPE_ID")), 
-                                                    this.getKoppelOperator(dbResultSet.getInt("KOPPEOPERATOR_ID")));
+                                                    this.getKoppelOperator(dbResultSet.getInt("KOPPEOPERATOR_ID")),
+                                                    this.getPosibleTriggerEvents(dbResultSet.getInt("POSSIBLE_TRIGGER_EVENTS_ID")),
+                                                    this.getFailurehandling(dbResultSet.getInt("FAILUREHANDLING_ID")));
                 return bsr;
             }
             
@@ -142,6 +149,85 @@ public class BusinessRuleDAO extends BaseDAO {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+        
+    }
+    
+    public PosibleTriggerEvents getPosibleTriggerEvents(int poste_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(" select POSSIBLE_TRIGGER_EVENTS.POSSIBLE_TRIGGER_EVENTS_ID as POSSIBLE_TRIGGER_EVENTS_ID," +
+                                                        "    POSSIBLE_TRIGGER_EVENTS.EVENT as EVENT " +
+                                                        " from POSSIBLE_TRIGGER_EVENTS POSSIBLE_TRIGGER_EVENTS" +
+                                                        " WHERE POSSIBLE_TRIGGER_EVENTS.POSSIBLE_TRIGGER_EVENTS_ID = ?");
+            ps.setInt(1, poste_id);
+            
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                PosibleTriggerEvents posibleTriggerEvents = new PosibleTriggerEvents(dbResultSet.getInt("POSSIBLE_TRIGGER_EVENTS_ID"),
+                                                                                     dbResultSet.getString("EVENT"));
+                return posibleTriggerEvents;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
+    
+    public Failurehandling getFailurehandling(int failureh_id) {
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("  select FAILUREHANDLING.FAILUREHANDLING_ID as FAILUREHANDLING_ID," +
+                                                        "    FAILUREHANDLING.SEVERITY as SEVERITY," +
+                                                        "    FAILUREHANDLING.MESSAGETEXT as MESSAGETEXT " +
+                                                        " from FAILUREHANDLING FAILUREHANDLING" +
+                                                        " where FAILUREHANDLING.FAILUREHANDLING_ID = ?");
+            ps.setInt(1, failureh_id);
+            
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                Failurehandling failurehandling = new Failurehandling(dbResultSet.getInt("FAILUREHANDLING_ID"),
+                                                                      dbResultSet.getString("SEVERITY"),
+                                                                      dbResultSet.getString("MESSAGETEXT"),
+                                                                      this.getAllTokens(dbResultSet.getInt("FAILUREHANDLING_ID")));
+                return failurehandling;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
+    
+    public ArrayList<Token> getAllTokens(int failureh_id) {
+        ArrayList<Token> results = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(" select TOKEN.TOKEN_ID as TOKEN_ID," +
+                                                        "    TOKEN.NAME as NAME," +
+                                                        "    TOKEN.EXPRESSION as EXPRESSION" +
+                                                        " from TOKEN TOKEN," +
+                                                        "    TOKENFAILUREHANDLING TOKENFAILUREHANDLING " +
+                                                        " where TOKENFAILUREHANDLING.TOKEN_ID=TOKEN.TOKEN_ID" +
+                                                        " and TOKENFAILUREHANDLING.FAILUREHANDLING_ID = ?");
+            ps.setInt(1, failureh_id);
+            
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                
+                Token token = new Token(dbResultSet.getInt("TOKEN_ID"),
+                                        dbResultSet.getString("NAME"),
+                                        dbResultSet.getString("EXPRESSION"));
+                
+                results.add(token);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return results;
         
     }
     
