@@ -39,6 +39,9 @@ public class BRData {
         this.comparisonTarget = comparisonTarget;
     }
 
+    public BRData() {
+    }
+    
     public String getTriggerMoment() {
         return triggerMoment;
     }

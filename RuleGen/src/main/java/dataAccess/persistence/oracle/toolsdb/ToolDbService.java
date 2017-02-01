@@ -6,12 +6,12 @@ public class ToolDbService {
 	private static SupportedUnitsService sus = new SupportedUnitsService();	
 	
 	public static BusinessRuleService getBRService(){
-		return brs;
+		return new BusinessRuleService();
 	}
 	public static ProjectService getPService(){
-		return prs;
+		return new ProjectService();
 	}
 	public static SupportedUnitsService getSUService(){
-		return sus;
+		return new SupportedUnitsService();
 	}	
 }

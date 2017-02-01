@@ -6,17 +6,17 @@ import java.util.List;
  * Created by Mitchell on 30/01/2017.
  */
 public class ProjectData {
-    private String projectID;
+    private int projectID;
     private int supportedDatabase;
     private List<BRData> businessRules;
 
-    public ProjectData(String projectID, int supportedDatabase, List<BRData> businessRules) {
+    public ProjectData(int projectID, int supportedDatabase, List<BRData> businessRules) {
         this.projectID = projectID;
         this.supportedDatabase = supportedDatabase;
         this.businessRules = businessRules;
     }
 
-    public String getProjectID() {
+    public int getProjectID() {
         return projectID;
     }
 

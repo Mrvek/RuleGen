@@ -2,7 +2,6 @@ package dataAccess.toolsdb;
 
 
 import dataAccess.persistence.oracle.toolsdb.BusinessRuleService;
-import dataAccess.persistence.oracle.toolsdb.DBConfig;
 import dataAccess.persistence.oracle.toolsdb.ProjectService;
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsService;
 import dataAccess.persistence.oracle.toolsdb.ToolDbService;
@@ -27,10 +26,10 @@ import java.util.Map;
  * Created by Mitchell on 18/01/2017.
  */
 public class DataPull {
-    private DBConfig config;
+//    private DBConfig config;
 
     public List<TemplateData> getNewTemplates(List<String> currentTemplateNames) {
-        List<TemplateDummy> templates = new ArrayList<>();
+        List<TemplateData> templates = new ArrayList<>();
         config();
 //        TODO: get data out of database.
 //        TODO: write method so a filled TemplateData class can will be returned
@@ -75,6 +74,7 @@ public class DataPull {
         ArrayList<Brgqueue> brgsList = prs.getAllBrgqueue(ticketId);
         
         int projectId = brgsList.get(0).getLinBusinessrules().getProject().getId();
+        int supportedDatabase = brgsList.get(0).getLinBusinessrules().getProject().getSupporteddatabase().getId();
         
         ArrayList<BRData> BRdataList = new ArrayList<>();
         
@@ -84,7 +84,7 @@ public class DataPull {
             Project project = x.getLinBusinessrules().getProject();
             
             BRData brdata = new BRData();
-            brdata.setPrimarykey(businessrule.getId()); //PrimaryKey of BusinessRule?  Yes
+            brdata.setPrimarykey(businessrule.getId());
             brdata.setOperator(businessrule.getKoppeloperator().getSupportedoperator().getOperator());
             brdata.setBRRuleType(businessrule.getBusinessruletype().getType());
             brdata.setTriggerMoment(businessrule.getPosibleTriggerEvents().getEvent());
@@ -92,7 +92,6 @@ public class DataPull {
             brdata.setExceptionMessage(businessrule.getFailurehandling().getMessageText());
             brdata.setDatabasetype(project.getSupporteddatabase().getDatabasetype());
             brdata.setDatabaseshortname(project.getSupporteddatabase().getAbbreviation());
-            brdata.setTarget(project.getDatabaseschema().getName()); //Target is the DatabaseSchemaname? Attribute name (the column that needs to be validated)
             
             ArrayList<Token> dbtokens = businessrule.getFailurehandling().getToken();
             HashMap<String, String> tokens = new HashMap<>();
@@ -105,11 +104,15 @@ public class DataPull {
             ArrayList<BusinessValues> busv = brs.getAllBusinessValues(businessrule);
             ArrayList<String> values = new ArrayList<>();
             for (BusinessValues y : busv) {
-                values.add(y.getValue());
-                
-                if (y.getAttribute() != null) {
+                int attributeCount = 0;
+                if (y.getAttribute() != null && attributeCount == 0) {
+                    attributeCount = attributeCount + 1;
                     brdata.setTablename(y.getAttribute().getTable().getName());
-                    brdata.setComparisonTarget(y.getAttribute().getName()); //ComparisonTarget is the linked attribute? Is the second attributeName that is needed for comparison (not for all ruletypes, can be null)
+                    brdata.setTarget(y.getAttribute().getName());
+                } else if(y.getAttribute() != null && attributeCount > 0) {
+                    brdata.setComparisonTarget(y.getAttribute().getName());
+                } else {
+                    values.add(y.getValue());
                 }
             }
             brdata.setValues(values);
@@ -118,7 +121,7 @@ public class DataPull {
             BRdataList.add(brdata);
         }
         
-        ProjectData projectdata = new ProjectData(Integer.toString(projectId), BRdataList);
+        ProjectData projectdata = new ProjectData(projectId, supportedDatabase, BRdataList);
 //        data = new ProjectData();
         return projectdata;
     }
