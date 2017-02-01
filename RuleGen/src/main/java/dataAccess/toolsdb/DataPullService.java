@@ -1,8 +1,9 @@
-package dataAccess;
+package dataAccess.toolsdb;
 
 
 
 import dataAccess.toolsdb.DataPull;
+import domainGeneric.dto.CodeReturnData;
 import domainGeneric.dto.TemplateData;
 import dto.template.TemplateDummy;
 import domainGeneric.dto.ProjectData;
@@ -19,11 +20,9 @@ public class DataPullService {
         return result;
     }
 
-    public boolean pushCode(String code, int table_id, int supporteddatabase_id) {
-        return puller.pushCode(code, table_id, supporteddatabase_id);
+    public boolean pushCode(List<CodeReturnData> code) {
+        return puller.pushCode(code);
     }
-
-
 
     public List<TemplateData> getNewTemplates(List<String> templateNames) {
         List<TemplateData> templates = puller.getNewTemplates(templateNames);

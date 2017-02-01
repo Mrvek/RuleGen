@@ -6,6 +6,7 @@ import dataAccess.persistence.oracle.toolsdb.ProjectService;
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsService;
 import dataAccess.persistence.oracle.toolsdb.ToolDbService;
 import domainGeneric.dto.BRData;
+import domainGeneric.dto.CodeReturnData;
 import domainGeneric.dto.ProjectData;
 import domainGeneric.dto.TemplateData;
 import dto.businessrules.BusinessValues;
@@ -126,7 +127,7 @@ public class DataPull {
         return projectdata;
     }
 
-    public boolean pushCode(String code, int table_id, int supportedDatabases) {
+    public boolean pushCode(List<CodeReturnData> code) {
 //        TODO: push code to the DB.table_trigger (find a way to get the table_id and supportedDatabases. BRData DTO might be changed)
         changename(Integer.parseInt(primaryKey), name);
         BaseService bs = new BaseService();

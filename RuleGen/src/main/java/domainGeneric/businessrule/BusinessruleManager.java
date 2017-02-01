@@ -1,6 +1,6 @@
 package domainGeneric.businessrule;
 
-import dataAccess.DataPullService;
+import dataAccess.toolsdb.DataPullService;
 import domainGeneric.businessrule.constraint.Constraint;
 import domainGeneric.businessrule.ruleType.*;
 import domainGeneric.businessrule.trigger.TriggerOnTable;

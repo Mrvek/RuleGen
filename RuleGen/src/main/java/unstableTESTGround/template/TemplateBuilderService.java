@@ -1,9 +1,7 @@
 package unstableTESTGround.template;
 
-import dataAccess.DataPullService;
+import dataAccess.toolsdb.DataPullService;
 import dto.template.TemplateDummy;
-import unstableTESTGround.template.Template;
-import unstableTESTGround.template.TemplateManager;
 
 import java.util.List;
 
