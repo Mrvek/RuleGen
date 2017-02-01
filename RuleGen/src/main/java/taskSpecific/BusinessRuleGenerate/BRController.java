@@ -1,7 +1,7 @@
 package taskSpecific.BusinessRuleGenerate;
 
 import dataAccess.toolsdb.DataPullService;
-import dataAccess.DataPushService;
+import dataAccess.targetdb.DataPushService;
 import domainGeneric.businessrule.BusinessruleService;
 
 import domainGeneric.dto.CodeReturnData;
@@ -32,11 +32,17 @@ public class BRController {
 
         System.out.println("\nPushing code results to ToolDatabase...");
         DPullService.pushCode(code);
-        System.out.println("Pushing code to TargetDatabase...");
-        DPushService.Send(code);
+//        System.out.println("Pushing code to TargetDatabase...");
+//        DPushService.Send(code);
 
         System.out.println("\n Returning Data...");
         JSONArray result = BRService.getStatus();
         return result;
+    }
+
+    public boolean pushCodeToTarget(Integer tableID) {
+        String Code = DPullService.getTableCode(tableID);
+        boolean answer = DPushService.Send(tableID);
+        return answer;
     }
 }

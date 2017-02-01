@@ -22,10 +22,16 @@ public class RestService {
        // JSONArray result = new BRDataFetch().getData(3);
        // System.out.println("returning: " + result + "\n");
 
-        get("/hello/BR", (request, response) -> {
-            JSONArray answer = new BRDataFetch().getBR(request, response);
+        get("/BR/*/generate", (request, response) -> {
+            JSONArray answer = new BRDataFetch().getBR(request.splat()[0]);
             return answer;
         });
+
+        get("/BR/*/push", (request, response) -> {
+            boolean answer = new BRDataFetch().pushcode(request.splat()[0]);
+            return answer;
+        });
+
 
         get("/project/*/new", (request, response) -> {
         	System.out.println("Starting engines on project: " + request.splat()[0]);

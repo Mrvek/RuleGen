@@ -281,7 +281,7 @@ public class BusinessRuleDAO extends BaseDAO {
             ps.setInt(1, returnedCode.getTableID());
             ps.setString(2, returnedCode.getCode());
             ps.setInt(3, returnedCode.getSupporteddatabase());
-            
+
             return ps.executeUpdate() == 1;            
             
         } catch (SQLException ex) {

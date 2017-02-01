@@ -26,4 +26,8 @@ public class DataPullService {
         List<TemplateData> templates = puller.getNewTemplates(templateNames);
         return templates;
     }
+
+    public String getTableCode(Integer tableID) {
+        return puller.getTableCode(tableID);
+    }
 }

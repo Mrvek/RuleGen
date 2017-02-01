@@ -131,4 +131,7 @@ public class DataPull {
         return check;
     }
 
+    public String getTableCode(Integer tableID) {
+        return null;
+    }
 }
