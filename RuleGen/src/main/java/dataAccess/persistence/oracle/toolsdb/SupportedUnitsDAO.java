@@ -209,6 +209,30 @@ public class SupportedUnitsDAO extends BaseDAO {
         return null;
     }
     
+    public ArrayList<Template> getAllTemplates() {
+        ArrayList<Template> results = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+            java.sql.PreparedStatement ps = con.prepareStatement(" select TEMPLATE.TEMPLATE_ID as TEMPLATE_ID," +
+                                                                "    TEMPLATE.NAME as NAME," +
+                                                                "    TEMPLATE.SUPPORTEDDATABASES_ID as SUPPORTEDDATABASES_ID," +
+                                                                "    TEMPLATE.CONSTRAINT_CODE as CONSTRAINT_CODE " +
+                                                                " from TEMPLATE TEMPLATE");
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                Template template = new Template(dbResultSet.getInt("TEMPLATE_ID"),
+                                                dbResultSet.getString("NAME"),
+                                                this.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID")),
+                                                dbResultSet.getString("CONSTRAINT_CODE"));
+                results.add(template);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return results;
+    }
+    
     public RuletypeTemplate getRuleTypeTemplate(int ruletype_id, int template_id) {
         
         try (Connection con = super.getConnection()) {
@@ -250,6 +274,46 @@ public class SupportedUnitsDAO extends BaseDAO {
             Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public ArrayList<RuletypeTemplate> getAllRuleTypeTemplates(int template_id) {
+        ArrayList<RuletypeTemplate> results = new ArrayList<>();
+        try (Connection con = super.getConnection()) {
+            java.sql.PreparedStatement ps = con.prepareStatement(" select RULETYPE_TEMPLATE.BUSINESSRULETYPE_ID as BUSINESSRULETYPE_ID," +
+                                                                "    RULETYPE_TEMPLATE.DATABASE_TEMPLATE_ID as DATABASE_TEMPLATE_ID," +
+                                                                "    RULETYPE_TEMPLATE.PROCEDURE_CODE as PROCEDURE_CODE," +
+                                                                "    RULETYPE_TEMPLATE.CONSTRAINT_CODE as CONSTRAINT_CODE," +
+                                                                "    RULETYPE_TEMPLATE.PARAMETER_CODE as PARAMETER_CODE " +
+                                                                " from RULETYPE_TEMPLATE RULETYPE_TEMPLATE" +
+                                                                " WHERE RULETYPE_TEMPLATE.DATABASE_TEMPLATE_ID = ? ");
+            ps.setInt(1, template_id);
+            ResultSet dbResultSet = ps.executeQuery();
+            
+            while (dbResultSet.next()) {
+                Clob PROCEDURE_CODE = dbResultSet.getClob("PROCEDURE_CODE");
+                String svalue = null;
+                if (PROCEDURE_CODE != null) {
+                    svalue = PROCEDURE_CODE.getSubString(1, (int) PROCEDURE_CODE.length());
+                } 
+                
+                Clob CONSTRAINT_CODE = dbResultSet.getClob("CONSTRAINT_CODE");
+                String svalue2 = null;
+                if (CONSTRAINT_CODE != null) {
+                    svalue = CONSTRAINT_CODE.getSubString(1, (int) CONSTRAINT_CODE.length());
+                } 
+                
+                RuletypeTemplate rtemplate = new RuletypeTemplate(this.getTemplate(dbResultSet.getInt("DATABASE_TEMPLATE_ID")),
+                                                                    brs.getBusinessRuleType(dbResultSet.getInt("BUSINESSRULETYPE_ID")),
+                                                                    svalue,
+                                                                    svalue2,
+                                                                    dbResultSet.getString("PARAMETER_CODE"));
+                results.add(rtemplate);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StructureDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return results;
     }
     
     public ProcedureTemplate getProcedureTemplate(int template_id) {

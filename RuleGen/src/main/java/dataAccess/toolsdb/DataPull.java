@@ -16,6 +16,7 @@ import dto.businessrules.Token;
 import dto.project.Brgqueue;
 import dto.project.Project;
 import dto.supported_units.SupportedDatabases;
+import dto.supported_units.Template;
 import dto.template.TemplateDummy;
 
 import java.util.ArrayList;
@@ -33,34 +34,22 @@ public class DataPull {
 	
 	//must receive templates from database en get the right ones?
     public List<TemplateData> getNewTemplates(List<String> currentTemplateNames) {
-        List<TemplateData> templates = new ArrayList<>();
-//        config();
-//        TODO: get data out of database.
-//        TODO: write method so a filled TemplateData class can will be returned
-        TemplateData data = null;
-
-  
-//        temporary data for testing
-//        if (!currentTemplateNames.contains("Oracle 12c")) {
-//            Map<String, String> optranslators = new HashMap<>();
-//            optranslators.put("=", "==");
-//            data = new TemplateData("Oracle 12c", optranslators,
-//                    "CREATE OR REPLACE TRIGGER ? BEFORE ? ON ? FOR EACH ROW DECLARE E_except Exception; ",
-//                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20100, ?); END; ",
-//                    "BEGIN IF (!I_passed) THEN RAISE E_Except; END IF; EXCEPTION when E_except then raise_application_error(-20200, ?); END; ",
-//                    "ALTER TABLE ? ADD CONSTRAINT ? CHECK (?); ",
-//                    "{Target} {Operator} ?",
-//                    "I_passed := :NEW.{Target} {Operator} ?; ",
-//                    "{Target} {Operator} {From} and {To}",
-//                    "I_passed := :NEW.{Target} {Operator} {From} and {To}; ",
-//                    "?",
-//                    "I_passed := ? ",
-//                    "{Target} {Operator} (?)",
-//                    "I_passed := :NEW.{Target} {Operator} (?) ");
-//            templates.add(data);
-//        }
-
-        return templates;
+        List<TemplateData> result = new ArrayList<>();
+        SupportedUnitsService sus = ToolDbService.getSUService();
+        ArrayList<Template> dbtemplates = sus.getAllTemplates();
+        
+        for (Template x : dbtemplates) {
+            TemplateData templateData = new TemplateData();
+            templateData.setTemplate(x);
+            templateData.setPackageTemplate(sus.getPackageTemplate(x.getId()));
+            templateData.setProcedureTemplate(sus.getProcedureTemplate(x.getId()));
+            templateData.setRuletypeTemplate(sus.getAllRuleTypeTemplates(x.getId()));
+            templateData.setTriggerTemplate(sus.getTriggerTemplate(x.getId()));
+            
+            result.add(templateData);
+        }
+        
+        return result;
     }
 
 //    private void config() {
@@ -74,7 +63,6 @@ public class DataPull {
     	//TODO Comparison table moet er komen en gevuld worden en ingevuld worden als comparisontarget aanwezig
     	//TODO BR data ook een nieuwe attribute komen genaam 
         
-        SupportedUnitsService sus = ToolDbService.getSUService();
         BusinessRuleService brs = ToolDbService.getBRService();
         ProjectService prs = ToolDbService.getPService();
         

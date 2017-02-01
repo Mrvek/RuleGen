@@ -53,4 +53,12 @@ public class SupportedUnitsService {
             return sudao.getTriggerTemplate(template_id);
         }
         
+        public ArrayList<Template> getAllTemplates() {
+            return sudao.getAllTemplates();
+        }
+        
+        public ArrayList<RuletypeTemplate> getAllRuleTypeTemplates(int template_id) {
+            return sudao.getAllRuleTypeTemplates(template_id);
+        }
+        
 }
