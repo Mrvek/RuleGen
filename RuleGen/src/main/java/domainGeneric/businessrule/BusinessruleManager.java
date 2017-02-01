@@ -100,16 +100,19 @@ public class BusinessruleManager {
                 ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
                 break;
             case ("ACMP"):
-                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
+                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
                 break;
             case ("ARNG"):
                 ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget());
                 break;
-            case ("ALIS"):
+            case ("LST"):
                 ruletype = new AttributeList(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getValues());
                 break;
             case ("AOTH"):
                 ruletype = new AttributeOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
+                break;
+            case ("MODI"):
+                ruletype = new Modify(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
                 break;
         }
         return ruletype;

@@ -1,6 +1,6 @@
 package unstableTESTGround.businessrule.trigger;
 
-import domainGeneric.template.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 import java.util.Map;
 

@@ -1,5 +1,7 @@
 package domainGeneric.businessrule.trigger;
 
+
+
 import domainGeneric.template.TemplateService;
 
 import java.util.Map;

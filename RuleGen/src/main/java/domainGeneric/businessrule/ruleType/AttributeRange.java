@@ -1,14 +1,11 @@
 package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.template.TemplateService;
-
 /**
  * Created by Mitchell on 18/01/2017.
  */
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
-
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
         super(operator, databasetype, "RNG", target);

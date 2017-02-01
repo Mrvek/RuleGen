@@ -1,7 +1,5 @@
 package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.template.TemplateService;
-
 /**
  * Created by Mitchell on 25/01/2017.
  */
@@ -9,7 +7,7 @@ public class AttributeOther extends BRRuleType {
     private String booleanStatement;
 
     public AttributeOther(String operator, String databasetype, String booleanStatement, String target) {
-        super(operator, databasetype, "THR", target);
+        super(operator, databasetype, "AOTH", target);
         this.booleanStatement = booleanStatement;
     }
 

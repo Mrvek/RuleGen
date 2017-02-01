@@ -1,9 +1,9 @@
 package domainGeneric.businessrule.trigger.tablePackage;
 
 import domainGeneric.businessrule.trigger.TriggerMoment;
+import domainGeneric.template.TemplateService;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import domainGeneric.template.TemplateService;
 
 import java.util.ArrayList;
 import java.util.HashMap;

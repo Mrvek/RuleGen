@@ -8,9 +8,6 @@ import java.util.Map;
  */
 public class Template {
     private boolean packageSupport;
-    private String triggerCode;
-    private String warningCode;
-    private String errorCode;
     private String constraintCode;
     private String ruleTypeCompareConstraintCode;
     private String ruleTypeCompareTriggerCode;
@@ -38,7 +35,7 @@ public class Template {
     private String exceptionRaiseErrorCode;
     private String exceptionWarningCode;
     private String exceptionRaiseWarningCode;
-    private String addStringTExceptionStackCode;
+    private String addStringToExceptionStackCode;
     private String exceptionParameters;
     private String exceptionTriggerDeclarationCode;
     private String procedureBodyStartCode;
@@ -48,22 +45,49 @@ public class Template {
     private String parameterRuleTypeLSTCode;
     private String parameterRuleTypeOTHCode;
     private String parameterRuleTypeRNGCode;
+    private String parameterRuleTypeTOTHCode;
+    private String ruleTypeTOTHProcedureCode;
+    private String ruleTypeTCMPProcedureCode;
+    private String ruleTypeTCMPConstraintCode;
+    private String parameterRuleTypeMODICode;
+    private String ruleTypeMODIProcedureCode;
+    private String parameterRuleTypeICMPCode;
+    private String parameterRuleTypeTCMPCode;
+    private String ruleTypeICMPProcedureCode;
+    private String parameterRuleTypeEOTHCode;
+    private String ruleTypeEOTHProcedureCode;
 
-    public Template(boolean packageSupport, String triggerCode, String warningCode, String errorCode, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTranslations, String ruleTypeOtherConstraintCode, String ruleTypeOtherTriggerCode, String ruleTypeListConstraintCode, String ruleTypeListTriggerCode, String deleteMomentCode, String updateMomentCode, String insertMomentCode, String triggerStartCode, String triggerDeclarationCode, String packagHeaderStartCode, String packagEndCode, String pakageBodyStartCode, String packageBodyEndCode, String procedureSpecification, String triggerEndCode, String procedureExcecutionCode, String exceptionExceptStartCode, String exceptionExceptErrorCode, String exceptionRaiseErrorCode, String exceptionWarningCode, String exceptionRaiseWarningCode, String addStringTExceptionStackCode, String exceptionParameters, String exceptionTrigerDeclarationCode, String procedureBodyStartCode, String procedureBodyDeclarationCode, String procedureBodyEndCode, String ruleTypeACMPCode, String parameterRuleTypeLSTCode, String parameterRuleTypeOTHCode, String parameterRuleTypeRNGCode) {
+    public Template(boolean packageSupport, String constraintCode, String deleteMomentCode, String updateMomentCode, String insertMomentCode, String triggerStartCode, String triggerDeclarationCode, String packageHeaderStartCode, String packageEndCode, String packageBodyStartCode, String packageBodyEndCode, String procedureSpecification, String triggerEndCode, String procedureExcecutionCode, String exceptionExceptStartCode, String exceptionExceptErrorCode, String exceptionRaiseErrorCode, String exceptionWarningCode, String exceptionRaiseWarningCode, String addStringToExceptionStackCode, String exceptionParameters, String exceptionTriggerDeclarationCode, String procedureBodyStartCode, String procedureBodyDeclarationCode, String procedureBodyEndCode) {
         this.packageSupport = packageSupport;
-        this.triggerCode = triggerCode;
-        this.warningCode = warningCode;
-        this.errorCode = errorCode;
         this.constraintCode = constraintCode;
-        this.ruleTypeCompareConstraintCode = ruleTypeCompareConstraintCode;
-        this.ruleTypeCompareTriggerCode = ruleTypeCompareTriggerCode;
-        this.ruleTypeRangeConstraintCode = ruleTypeRangeConstraintCode;
-        this.ruleTypeRangeTriggerCode = ruleTypeRangeTriggerCode;
-        this.operatorTranslations = operatorTranslations;
-        this.ruleTypeOtherConstraintCode = ruleTypeOtherConstraintCode;
-        this.ruleTypeOtherTriggerCode = ruleTypeOtherTriggerCode;
-        this.ruleTypeListConstraintCode = ruleTypeListConstraintCode;
-        this.ruleTypeListTriggerCode = ruleTypeListTriggerCode;
+        this.deleteMomentCode = deleteMomentCode;
+        this.updateMomentCode = updateMomentCode;
+        this.insertMomentCode = insertMomentCode;
+        this.triggerStartCode = triggerStartCode;
+        this.triggerDeclarationCode = triggerDeclarationCode;
+        this.packageHeaderStartCode = packageHeaderStartCode;
+        this.packageEndCode = packageEndCode;
+        this.packageBodyStartCode = packageBodyStartCode;
+        this.packageBodyEndCode = packageBodyEndCode;
+        this.procedureSpecification = procedureSpecification;
+        this.triggerEndCode = triggerEndCode;
+        this.procedureExcecutionCode = procedureExcecutionCode;
+        this.exceptionExceptStartCode = exceptionExceptStartCode;
+        this.exceptionExceptErrorCode = exceptionExceptErrorCode;
+        this.exceptionRaiseErrorCode = exceptionRaiseErrorCode;
+        this.exceptionWarningCode = exceptionWarningCode;
+        this.exceptionRaiseWarningCode = exceptionRaiseWarningCode;
+        this.addStringToExceptionStackCode = addStringToExceptionStackCode;
+        this.exceptionParameters = exceptionParameters;
+        this.exceptionTriggerDeclarationCode = exceptionTriggerDeclarationCode;
+        this.procedureBodyStartCode = procedureBodyStartCode;
+        this.procedureBodyDeclarationCode = procedureBodyDeclarationCode;
+        this.procedureBodyEndCode = procedureBodyEndCode;
+    }
+
+    public Template(boolean packageSupport, String constraintCode, String ruleTypeCompareConstraintCode, String ruleTypeCompareTriggerCode, String ruleTypeRangeConstraintCode, String ruleTypeRangeTriggerCode, Map<String, String> operatorTranslations, String ruleTypeOtherConstraintCode, String ruleTypeOtherTriggerCode, String ruleTypeListConstraintCode, String ruleTypeListTriggerCode, String deleteMomentCode, String updateMomentCode, String insertMomentCode, String triggerStartCode, String triggerDeclarationCode, String packagHeaderStartCode, String packagEndCode, String pakageBodyStartCode, String packageBodyEndCode, String procedureSpecification, String triggerEndCode, String procedureExcecutionCode, String exceptionExceptStartCode, String exceptionExceptErrorCode, String exceptionRaiseErrorCode, String exceptionWarningCode, String exceptionRaiseWarningCode, String addStringTExceptionStackCode, String exceptionParameters, String exceptionTrigerDeclarationCode, String procedureBodyStartCode, String procedureBodyDeclarationCode, String procedureBodyEndCode, String ruleTypeACMPCode, String parameterRuleTypeLSTCode, String parameterRuleTypeOTHCode, String parameterRuleTypeRNGCode) {
+        this.packageSupport = packageSupport;
+        this.constraintCode = constraintCode;
         this.deleteMomentCode = deleteMomentCode;
         this.updateMomentCode = updateMomentCode;
         this.insertMomentCode = insertMomentCode;
@@ -81,52 +105,26 @@ public class Template {
         this.exceptionRaiseErrorCode = exceptionRaiseErrorCode;
         this.exceptionWarningCode = exceptionWarningCode;
         this.exceptionRaiseWarningCode = exceptionRaiseWarningCode;
-        this.addStringTExceptionStackCode = addStringTExceptionStackCode;
+        this.addStringToExceptionStackCode = addStringTExceptionStackCode;
         this.exceptionParameters = exceptionParameters;
         this.exceptionTriggerDeclarationCode = exceptionTrigerDeclarationCode;
         this.procedureBodyStartCode = procedureBodyStartCode;
         this.procedureBodyDeclarationCode = procedureBodyDeclarationCode;
         this.procedureBodyEndCode = procedureBodyEndCode;
+
         this.ruleTypeACMPCode = ruleTypeACMPCode;
         this.parameterRuleTypeLSTCode = parameterRuleTypeLSTCode;
         this.parameterRuleTypeOTHCode = parameterRuleTypeOTHCode;
         this.parameterRuleTypeRNGCode = parameterRuleTypeRNGCode;
-    }
-
-    public String getTriggerCode(String triggerName, List<String> triggermoment, String tableName) {
-        String result = triggerCode;
-        result = result.replaceFirst("\\?", triggerName);
-        String trigger = null;
-        for (String t : triggermoment) {
-            if (trigger == null || trigger.isEmpty()) {
-                trigger = t;
-            }else {
-                trigger += ", " + t;
-            }
-        }
-        result = result.replaceFirst("\\?", trigger);
-        result = result.replaceFirst("\\?", tableName);
-        return result;
-    }
-
-    public String getWarningCode(String message, Map<String, String> tokens) {
-        String result = warningCode;
-        String mymessage = message;
-        for (String id : tokens.keySet()) {
-            mymessage = mymessage.replace(id, tokens.get(id));
-        }
-        result = result.replaceFirst("\\?", mymessage);
-        return result;
-    }
-
-    public String getErrorCode(String message, Map<String, String> tokens) {
-        String result = errorCode;
-        String mymessage = message;
-        for (String id : tokens.keySet()) {
-            mymessage = mymessage.replace(id, tokens.get(id));
-        }
-        result = result.replaceFirst("\\?", mymessage);
-        return result;
+        this.ruleTypeCompareConstraintCode = ruleTypeCompareConstraintCode;
+        this.ruleTypeCompareTriggerCode = ruleTypeCompareTriggerCode;
+        this.ruleTypeRangeConstraintCode = ruleTypeRangeConstraintCode;
+        this.ruleTypeRangeTriggerCode = ruleTypeRangeTriggerCode;
+        this.operatorTranslations = operatorTranslations;
+        this.ruleTypeOtherConstraintCode = ruleTypeOtherConstraintCode;
+        this.ruleTypeOtherTriggerCode = ruleTypeOtherTriggerCode;
+        this.ruleTypeListConstraintCode = ruleTypeListConstraintCode;
+        this.ruleTypeListTriggerCode = ruleTypeListTriggerCode;
     }
 
     public String getConstraintCode(String tablename, String name, String rule, String target) {
@@ -156,7 +154,7 @@ public class Template {
         return result;
     }
 
-    public String getRuleTypeRangeConstraintCode(String target , String first, String operator, String second) {
+    public String getRuleTypeRangeConstraintCode(String target, String first, String operator, String second) {
         String result = ruleTypeRangeConstraintCode;
         operator = this.translateOperator(operator);
         result = result.replaceFirst("\\{Target}", target);
@@ -213,7 +211,7 @@ public class Template {
         for (String V : values) {
             if (value.isEmpty()) {
                 value += V;
-            }else {
+            } else {
                 value += "," + V;
             }
         }
@@ -259,7 +257,7 @@ public class Template {
     }
 
     public String getPackagEndCode(String name) {
-        String code =  packageEndCode;
+        String code = packageEndCode;
         code = code.replaceAll("\\{name}", name);
         return code;
     }
@@ -293,7 +291,7 @@ public class Template {
     }
 
     public String getProcedureExcecutionCode(String name, String target, String exceptionParameters) {
-        String code =  procedureExcecutionCode;
+        String code = procedureExcecutionCode;
         code = code.replaceAll("\\{name}", name);
         code = code.replaceAll("\\{attribute}", target);
         code = code.replaceAll("\\{exceptionParameters}", exceptionParameters);
@@ -333,7 +331,7 @@ public class Template {
     }
 
     public String getAddStringTExceptionStackCode(String exceptionStackName, String message, Map<String, String> tokens) {
-        String code = addStringTExceptionStackCode;
+        String code = addStringToExceptionStackCode;
         code = code.replaceAll("\\{exceptionStack}", exceptionStackName);
         String mymessage = message;
         for (String id : tokens.keySet()) {
@@ -400,4 +398,184 @@ public class Template {
         code = code.replaceAll("\\{attribute}", target);
         return code;
     }
+
+    public String getParameterRuleTypeTOTHCode(String target) {
+        String code =  parameterRuleTypeTOTHCode;
+        code = code.replaceAll("\\{atttribute}", target);
+        return code;
+    }
+
+    public String getRuleTypeTOTHProcedureCode(String target, String operator, String compareWith) {
+        String code = ruleTypeTOTHProcedureCode;
+        code = code.replaceAll("\\{target}", target);
+        code = code.replaceAll("\\{operator}", operator);
+        code = code.replaceAll("\\{code}", compareWith);
+        return code;
+    }
+
+    public String getRuleTypeTCMPProcedureCode(String target, String operator, String compareWith) {
+        String code =  ruleTypeTCMPProcedureCode;
+        code = code.replaceAll("\\{target}", target);
+        code = code.replaceAll("\\{operator}", operator);
+        code = code.replaceAll("\\{code}", compareWith);
+        return code;
+    }
+
+    public String getRuleTypeTCMPConstraintCode(String target, String operator, String compareWith) {
+        String code = ruleTypeTCMPConstraintCode;
+        code = code.replaceAll("\\{target}", target);
+        code = code.replaceAll("\\{operator}", operator);
+        code = code.replaceAll("\\{code}", compareWith);
+        return code;
+    }
+
+    public String getParameterRuleTypeMODICode(String target, String compareWithColumn) {
+        String code = parameterRuleTypeMODICode;
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{code}", compareWithColumn);
+        return code;
+    }
+
+    public String getRuleTypeMODIProcedureCode(String target, String operator, String compareWithColumn) {
+        String code = ruleTypeMODIProcedureCode;
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{code}", compareWithColumn);
+        return code;
+    }
+
+    public String getParameterRuleTypeICMPCode(String target, String compareWithTable, String compareWithColumn) {
+        String code = parameterRuleTypeICMPCode;
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{compareTable}", compareWithTable);
+        code = code.replaceAll("\\{compareAttribute}", compareWithColumn);
+        return code;
+    }
+
+    public String getParameterRuleTypeTCMPCode(String target, String compareWithTable) {
+        String code = parameterRuleTypeTCMPCode;
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{compareAttribute}", compareWithTable);
+        return code;
+    }
+
+    public String getRuleTypeICMPProcedureCode(String target, String operator, String compareWithColumn, String compareWithTable, String targetTable) {
+        String code = ruleTypeICMPProcedureCode;
+        code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{operator}", operator);
+        code = code.replaceAll("\\{compareAttribute}", compareWithColumn);
+        code = code.replaceAll("\\{compareTable}", compareWithTable);
+        code = code.replaceAll("\\{table}", targetTable);
+        return code;
+    }
+
+    public String getParameterRuleTypeEOTHCode(String target) {
+        String code = parameterRuleTypeEOTHCode;
+        code = code.replaceAll("\\{attribute}", target);
+        return code;
+    }
+
+    public String getRuleTypeEOTHProcedureCode(String target, String operator, String compareWith) {
+        String code = ruleTypeEOTHProcedureCode;
+        code = code.replaceAll("\\{target}", target);
+        code = code.replaceAll("\\{operator}", operator);
+        code = code.replaceAll("\\{code}", compareWith);
+        return code;
+    }
+
+    public void setRuleTypeCompareConstraintCode(String ruleTypeCompareConstraintCode) {
+        this.ruleTypeCompareConstraintCode = ruleTypeCompareConstraintCode;
+    }
+
+    public void setRuleTypeCompareTriggerCode(String ruleTypeCompareTriggerCode) {
+        this.ruleTypeCompareTriggerCode = ruleTypeCompareTriggerCode;
+    }
+
+    public void setRuleTypeRangeConstraintCode(String ruleTypeRangeConstraintCode) {
+        this.ruleTypeRangeConstraintCode = ruleTypeRangeConstraintCode;
+    }
+
+    public void setRuleTypeRangeTriggerCode(String ruleTypeRangeTriggerCode) {
+        this.ruleTypeRangeTriggerCode = ruleTypeRangeTriggerCode;
+    }
+
+    public void setOperatorTranslations(Map<String, String> operatorTranslations) {
+        this.operatorTranslations = operatorTranslations;
+    }
+
+    public void setRuleTypeOtherConstraintCode(String ruleTypeOtherConstraintCode) {
+        this.ruleTypeOtherConstraintCode = ruleTypeOtherConstraintCode;
+    }
+
+    public void setRuleTypeOtherTriggerCode(String ruleTypeOtherTriggerCode) {
+        this.ruleTypeOtherTriggerCode = ruleTypeOtherTriggerCode;
+    }
+
+    public void setRuleTypeListConstraintCode(String ruleTypeListConstraintCode) {
+        this.ruleTypeListConstraintCode = ruleTypeListConstraintCode;
+    }
+
+    public void setRuleTypeListTriggerCode(String ruleTypeListTriggerCode) {
+        this.ruleTypeListTriggerCode = ruleTypeListTriggerCode;
+    }
+
+    public void setRuleTypeACMPCode(String ruleTypeACMPCode) {
+        this.ruleTypeACMPCode = ruleTypeACMPCode;
+    }
+
+    public void setParameterRuleTypeLSTCode(String parameterRuleTypeLSTCode) {
+        this.parameterRuleTypeLSTCode = parameterRuleTypeLSTCode;
+    }
+
+    public void setParameterRuleTypeOTHCode(String parameterRuleTypeOTHCode) {
+        this.parameterRuleTypeOTHCode = parameterRuleTypeOTHCode;
+    }
+
+    public void setParameterRuleTypeRNGCode(String parameterRuleTypeRNGCode) {
+        this.parameterRuleTypeRNGCode = parameterRuleTypeRNGCode;
+    }
+
+    public void setParameterRuleTypeTOTHCode(String parameterRuleTypeTOTHCode) {
+        this.parameterRuleTypeTOTHCode = parameterRuleTypeTOTHCode;
+    }
+
+    public void setRuleTypeTOTHProcedureCode(String ruleTypeTOTHProcedureCode) {
+        this.ruleTypeTOTHProcedureCode = ruleTypeTOTHProcedureCode;
+    }
+
+    public void setRuleTypeTCMPProcedureCode(String ruleTypeTCMPProcedureCode) {
+        this.ruleTypeTCMPProcedureCode = ruleTypeTCMPProcedureCode;
+    }
+
+    public void setRuleTypeTCMPConstraintCode(String ruleTypeTCMPConstraintCode) {
+        this.ruleTypeTCMPConstraintCode = ruleTypeTCMPConstraintCode;
+    }
+
+    public void setParameterRuleTypeMODICode(String parameterRuleTypeMODICode) {
+        this.parameterRuleTypeMODICode = parameterRuleTypeMODICode;
+    }
+
+    public void setRuleTypeMODIProcedureCode(String ruleTypeMODIProcedureCode) {
+        this.ruleTypeMODIProcedureCode = ruleTypeMODIProcedureCode;
+    }
+
+    public void setParameterRuleTypeICMPCode(String parameterRuleTypeICMPCode) {
+        this.parameterRuleTypeICMPCode = parameterRuleTypeICMPCode;
+    }
+
+    public void setParameterRuleTypeTCMPCode(String parameterRuleTypeTCMPCode) {
+        this.parameterRuleTypeTCMPCode = parameterRuleTypeTCMPCode;
+    }
+
+    public void setRuleTypeICMPProcedureCode(String ruleTypeICMPProcedureCode) {
+        this.ruleTypeICMPProcedureCode = ruleTypeICMPProcedureCode;
+    }
+
+    public void setParameterRuleTypeEOTHCode(String parameterRuleTypeEOTHCode) {
+        this.parameterRuleTypeEOTHCode = parameterRuleTypeEOTHCode;
+    }
+
+    public void setRuleTypeEOTHProcedureCode(String ruleTypeEOTHProcedureCode) {
+        this.ruleTypeEOTHProcedureCode = ruleTypeEOTHProcedureCode;
+    }
 }
+

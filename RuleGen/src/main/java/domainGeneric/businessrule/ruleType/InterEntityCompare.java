@@ -12,6 +12,7 @@ public class InterEntityCompare extends BRRuleType {
         super(operator, databasetype, "ICMP", target);
         this.compareWithColumn = compareWith;
         this.compareWithTable = compareWithTable;
+        this.targetTable = targetTable;
     }
 
     @Override

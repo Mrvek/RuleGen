@@ -6,7 +6,7 @@ package domainGeneric.businessrule.ruleType;
 public class AttributeCompare extends BRRuleType {
     private String CompareWith;
 
-    public AttributeCompare(String operator, String databasetype, String shortname, String target, String compareWith) {
+    public AttributeCompare(String operator, String databasetype, String target, String compareWith) {
         super(operator, databasetype, "ACMP", target);
         CompareWith = compareWith;
     }

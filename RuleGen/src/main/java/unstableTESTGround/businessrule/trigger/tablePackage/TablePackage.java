@@ -2,7 +2,7 @@ package unstableTESTGround.businessrule.trigger.tablePackage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import domainGeneric.template.TemplateService;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.trigger.TriggerMoment;
 
 import java.util.ArrayList;

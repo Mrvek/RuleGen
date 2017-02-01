@@ -1,7 +1,5 @@
 package domainGeneric.businessrule.ruleType;
 
-import domainGeneric.template.TemplateService;
-
 import java.util.List;
 
 /**

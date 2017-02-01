@@ -1,8 +1,8 @@
 package domainGeneric.businessrule.constraint;
 
 import domainGeneric.businessrule.ruleType.BRRuleType;
-import org.json.JSONObject;
 import domainGeneric.template.TemplateService;
+import org.json.JSONObject;
 
 /**
  * Created by Mitchell on 18/01/2017.

@@ -3,7 +3,7 @@ package unstableTESTGround.businessrule.trigger.tablePackage;
 import org.json.JSONObject;
 import unstableTESTGround.businessrule.ruleType.BRRuleType;
 import unstableTESTGround.businessrule.trigger.Exception;
-import domainGeneric.template.TemplateService;
+import unstableTESTGround.template.TemplateService;
 
 import java.util.Map;
 

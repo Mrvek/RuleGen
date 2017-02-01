@@ -1,7 +1,7 @@
 package unstableTESTGround.businessrule.trigger;
 
 import org.json.JSONObject;
-import domainGeneric.template.TemplateService;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.trigger.tablePackage.TablePackage;
 
 import java.lang.*;

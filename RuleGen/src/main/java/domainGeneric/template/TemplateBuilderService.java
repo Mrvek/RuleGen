@@ -18,16 +18,10 @@ public class TemplateBuilderService {
             return false;
         } else {
             templates.forEach((td) -> {
-                buildTemplate(td);
-                System.out.println("\tTemplate found: " + td.getDatabaseName());
+                System.out.println("\tTemplate found: " + td.getTemplate().getName());
+                TemplateManager.addTemplate(td);
             });
             return true;
         }
-    }
-
-    private void buildTemplate(TemplateData td) {
-//        TODO: fill new Template() constructor
-        Template template = new Template();
-        TemplateManager.addTemplate(td.getDatabaseName(), template);
     }
 }

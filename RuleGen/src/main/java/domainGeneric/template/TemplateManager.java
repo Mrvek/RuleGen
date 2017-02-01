@@ -1,5 +1,11 @@
 package domainGeneric.template;
 
+import domainGeneric.dto.TemplateData;
+import dto.supported_units.PackageTemplate;
+import dto.supported_units.ProcedureTemplate;
+import dto.supported_units.RuletypeTemplate;
+import dto.supported_units.TriggerTemplate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,11 +39,6 @@ public class TemplateManager {
     public String getRuleTypeRangeConstraintCode(String databasetype, String target , String from, String operator, String to) {
         Template t = templates.get(databasetype);
         return t.getRuleTypeRangeConstraintCode(target , from, operator, to);
-    }
-
-    public String getTriggerCode(List<String> trigger, String name, String table, String databasetype) {
-        Template t = templates.get(databasetype);
-        return t.getTriggerCode(name, trigger, table);
     }
 
     public static List<String> getTemplateNames() {
@@ -216,4 +217,119 @@ public class TemplateManager {
         Template t = templates.get(databasetype);
         return t.getParameterRuleTypeRNGCode(target);
     }
+
+    public String getParameterRuleTypeTOTHCode(String databasetype, String target) {
+        Template t = templates.get(databasetype);
+        return t.getParameterRuleTypeTOTHCode(target);
+    }
+
+    public String getRuleTypeTOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeTOTHProcedureCode(target, operator, compareWith);
+    }
+
+    public String getRuleTypeTCMPProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeTCMPProcedureCode(target, operator, compareWith);
+    }
+
+    public String getRuleTypeTCMPConstraintCode(String databasetype, String target, String operator, String compareWith) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeTCMPConstraintCode(target, operator, compareWith);
+    }
+
+    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn) {
+        Template t = templates.get(databasetype);
+        return t.getParameterRuleTypeMODICode(target, compareWithColumn);
+    }
+
+    public String getRuleTypeMODIProcedureCode(String databasetype, String target, String operator, String compareWithColumn) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeMODIProcedureCode(target,operator, compareWithColumn);
+    }
+
+    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn) {
+        Template t = templates.get(databasetype);
+        return t.getParameterRuleTypeICMPCode(target, compareWithTable, compareWithColumn);
+    }
+
+    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable) {
+        Template t = templates.get(databasetype);
+        return t.getParameterRuleTypeTCMPCode(target, compareWithTable);
+    }
+
+    public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable, String targetTable) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeICMPProcedureCode(target, operator, compareWithColumn, compareWithTable, targetTable);
+    }
+
+    public String getParameterRuleTypeEOTHCode(String databasetype, String target) {
+        Template t = templates.get(databasetype);
+        return t.getParameterRuleTypeEOTHCode(target);
+    }
+
+    public String getRuleTypeEOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
+        Template t = templates.get(databasetype);
+        return t.getRuleTypeEOTHProcedureCode(target, operator, compareWith);
+    }
+
+    public static void addTemplate(TemplateData td) {
+        boolean packagesupport = false;
+        if (td.getPackageTemplate() != null) {
+            packagesupport = true;
+        }
+        TriggerTemplate trigger = td.getTriggerTemplate();
+        PackageTemplate packaget = td.getPackageTemplate();
+        ProcedureTemplate procedure = td.getProcedureTemplate();
+        ArrayList<RuletypeTemplate> ruletypes = td.getRuletypeTemplate();
+
+        Template template = new Template(packagesupport, td.getTemplate().getConstraint_code(), trigger.getDeleteMoment(), trigger.getUpdateMoment(), trigger.getInsertMoment(), trigger.getStart(), trigger.getDecleration(), packaget.getHeaderStart(), packaget.getHeaderEnd(), packaget.getBodyStart(), packaget.getBodyEnd(), procedure.getSpecification(), trigger.getEnd(), procedure.getExcecution(), trigger.getExceptionExceptStart(), trigger.getExceptionExceptError(), trigger.getExceptionRaiseError(), trigger.getExceptionExceptWarning(), trigger.getExceptionRaiseWarning(), trigger.getAddStringToExceptionStack(), trigger.getExceptionParameters(), trigger.getExceptionTriggerDeclaration(), procedure.getBodyStart(), procedure.getBodyDecleration(), procedure.getBodyEnd());
+
+        for (RuletypeTemplate type : ruletypes) {
+            switch (type.getBusinessruleType().getType()) {
+                case ("ATTRIBUTE_RANGE_RULE"):
+                    template.setParameterRuleTypeRNGCode(type.getParameterCode());
+                    template.setRuleTypeRangeConstraintCode(type.getConstraintCode());
+                    template.setRuleTypeRangeTriggerCode(type.getProcedureCode());
+                    break;
+                case ("ATTRIBUTE_COMPARE_RULE"):
+                    template.setRuleTypeCompareConstraintCode(type.getConstraintCode());
+                    template.setRuleTypeCompareTriggerCode(type.getProcedureCode());
+                    template.setRuleTypeACMPCode(type.getParameterCode());
+                    break;
+                case ("ATTRIBUTE_LIST_RULE"):
+                    template.setRuleTypeListConstraintCode(type.getConstraintCode());
+                    template.setRuleTypeListTriggerCode(type.getProcedureCode());
+                    template.setParameterRuleTypeLSTCode(type.getParameterCode());
+                    break;
+                case ("ATTRIBUTE_OTHER_RULE"):
+                    template.setRuleTypeOtherConstraintCode(type.getConstraintCode());
+                    template.setRuleTypeOtherTriggerCode(type.getProcedureCode());
+                    template.setParameterRuleTypeOTHCode(type.getParameterCode());
+                    break;
+                case ("TUPLE_COMPARE_RULE"):
+                    template.setRuleTypeTCMPConstraintCode(type.getConstraintCode());
+                    template.setRuleTypeTCMPProcedureCode(type.getProcedureCode());
+                    template.setParameterRuleTypeTCMPCode(type.getParameterCode());
+                    break;
+                case ("INTER-ENTITY_COMPARE_RULE"):
+                    template.setParameterRuleTypeICMPCode(type.getParameterCode());
+                    template.setRuleTypeICMPProcedureCode(type.getProcedureCode());
+                    break;
+                case ("ENTITY_OTHER_RULE"):
+                    template.setRuleTypeEOTHProcedureCode(type.getProcedureCode());
+                    template.setParameterRuleTypeEOTHCode(type.getParameterCode());
+                    break;
+                case ("TUPLE OTHER_RULE"):
+                    template.setRuleTypeTOTHProcedureCode(type.getProcedureCode());
+                    template.setParameterRuleTypeTOTHCode(type.getParameterCode());
+                    break;
+                default:
+                    break;
+
+            }
+        }
+        addTemplate(td.getTemplate().getName(), template);
+    }
+
 }

@@ -2,8 +2,9 @@ package domainGeneric.businessrule.trigger.tablePackage;
 
 import domainGeneric.businessrule.ruleType.BRRuleType;
 import domainGeneric.businessrule.trigger.Exception;
-import org.json.JSONObject;
 import domainGeneric.template.TemplateService;
+import org.json.JSONObject;
+
 
 import java.util.Map;
 

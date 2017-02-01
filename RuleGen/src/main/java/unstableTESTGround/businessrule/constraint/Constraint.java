@@ -1,7 +1,7 @@
 package unstableTESTGround.businessrule.constraint;
 
 import org.json.JSONObject;
-import domainGeneric.template.TemplateService;
+import unstableTESTGround.template.TemplateService;
 import unstableTESTGround.businessrule.ruleType.BRRuleType;
 
 /**
