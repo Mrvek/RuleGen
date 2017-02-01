@@ -72,7 +72,7 @@ public class BusinessruleManager {
                 return tablePackage;
             }
         }
-        return new TablePackage(nameGen.getTablePackageName(brData.getDatabaseshortname(), brData.getTablename()), brData.getDatabasetype(), brData.getTablename(), brData.getDatabaseshortname());
+        return new TablePackage(nameGen.getTablePackageName(brData.getDatabaseshortname(), brData.getTablename()), brData.getDatabasetype(), brData.getTablename(), brData.getDatabaseshortname(), brData.getTableID());
     }
 
     private BRRuleType createRuleType(BRData BRData) {
