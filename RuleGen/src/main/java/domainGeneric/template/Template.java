@@ -245,8 +245,11 @@ public class Template {
         return insertMomentCode;
     }
 
-    public String getTriggerStartCode() {
-        return triggerStartCode;
+    public String getTriggerStartCode(String name, String table) {
+        String code = triggerStartCode;
+        code = code.replaceAll("\\{name}", name);
+        code = code.replaceAll("\\{table}", table);
+        return code;
     }
 
     public String getTriggerDeclarationCode() {
