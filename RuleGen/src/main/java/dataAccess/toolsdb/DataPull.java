@@ -62,7 +62,7 @@ public class DataPull {
         procedureTemplate.setSpecification("PROCEDURE {name}({codeParameters}, {exceptionParameters});\n");
         procedureTemplate.setExcecution("{name}({attribute}, {exceptionParameters});");
         procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS\n");
-        procedureTemplate.setBodyDecleration("{PassedName VARCHAR2;");
+        procedureTemplate.setBodyDecleration("{PassedName} VARCHAR2;\n");
         procedureTemplate.setBodyEnd("END {name};");
 
         TriggerTemplate triggerTemplate = new TriggerTemplate();
@@ -86,48 +86,48 @@ public class DataPull {
         RuletypeTemplate ACMP = new RuletypeTemplate();
         ACMP.setBusinessruleType(new BusinessruleType());
         ACMP.getBusinessruleType().setType("ATTRIBUTE_COMPARE_RULE");
-        ACMP.setConstraintCode("{target} {operator} ?");
-        ACMP.setParameterCode("{target} novaluetype...");
-        ACMP.setProcedureCode("{target} {operator} ?");
+        ACMP.setConstraintCode("{attribute} {operator} ?");
+        ACMP.setParameterCode("{attribute} novaluetype...");
+        ACMP.setProcedureCode("I_Passed := {attribute} {operator} ?;\n");
 
         RuletypeTemplate LST = new RuletypeTemplate();
         LST.setBusinessruleType(new BusinessruleType());
         LST.getBusinessruleType().setType("ATTRIBUTE_LIST_RULE");
-        LST.setConstraintCode("{target} {operator} ?");
-        LST.setParameterCode("{target} novaluetype...");
-        LST.setProcedureCode("{target} {operator} ?");
+        LST.setConstraintCode("{attribute} {operator} ?");
+        LST.setParameterCode("{attribute} novaluetype...");
+        LST.setProcedureCode("I_Passed := {attribute} {operator} ?;\n");
 
         RuletypeTemplate RNG = new RuletypeTemplate();
         RNG.setBusinessruleType(new BusinessruleType());
         RNG.getBusinessruleType().setType("ATTRIBUTE_RANGE_RULE");
-        RNG.setConstraintCode("{target} {operator} {from} AND {to}");
-        RNG.setParameterCode("{target} novaluetype...");
-        RNG.setProcedureCode("{target} {operator} {from} AND {to}");
+        RNG.setConstraintCode("{attribute} {operator} {from} AND {to}");
+        RNG.setParameterCode("{attribute} novaluetype...");
+        RNG.setProcedureCode("I_Passed := {attribute} {operator} {from} AND {to};\n");
 
         RuletypeTemplate AOTH = new RuletypeTemplate();
         AOTH.setBusinessruleType(new BusinessruleType());
         AOTH.getBusinessruleType().setType("ATTRIBUTE_OTHER_RULE");
         AOTH.setConstraintCode("?");
-        AOTH.setParameterCode("{target} novaluetype...");
+        AOTH.setParameterCode("{attribute} novaluetype...");
         AOTH.setProcedureCode("?");
 
         RuletypeTemplate TCMP = new RuletypeTemplate();
         TCMP.setBusinessruleType(new BusinessruleType());
         TCMP.getBusinessruleType().setType("TUPLE_COMPARE_RULE");
-        TCMP.setConstraintCode("{target} {operator} {comparison}");
-        TCMP.setParameterCode("{target} novaluetype...");
-        TCMP.setProcedureCode("{target} {operator} {comparison}");
+        TCMP.setConstraintCode("{attribute} {operator} {comparison}");
+        TCMP.setParameterCode("{attribute} novaluetype...");
+        TCMP.setProcedureCode("I_Passed := {attribute} {operator} {comparison};\n");
 
         RuletypeTemplate TOTH = new RuletypeTemplate();
         TOTH.setBusinessruleType(new BusinessruleType());
         TOTH.getBusinessruleType().setType("TUPLE_OTHER_RULE");
-        TOTH.setParameterCode("{target} novaluetype...");
+        TOTH.setParameterCode("{attribute} novaluetype...");
         TOTH.setProcedureCode("{code}");
 
         RuletypeTemplate ICMP = new RuletypeTemplate();
         ICMP.setBusinessruleType(new BusinessruleType());
         ICMP.getBusinessruleType().setType("INTER-ENTITY COMPARE RULE");
-        ICMP.setParameterCode("{target} novaluetype...");
+        ICMP.setParameterCode("{attribute} novaluetype...");
         ICMP.setProcedureCode("cursor lc_{compareTable} is\n" +
                 "select {compareTable}.{compareAttribute}\n" +
                 "from {compareTable}\n" +
@@ -142,7 +142,7 @@ public class DataPull {
         RuletypeTemplate EOTH = new RuletypeTemplate();
         EOTH.setBusinessruleType(new BusinessruleType());
         EOTH.getBusinessruleType().setType("ENTITY_OTHER_RULE");
-        EOTH.setParameterCode("{target} novaluetype...");
+        EOTH.setParameterCode("{attribute} novaluetype...");
         EOTH.setProcedureCode("l_{attribute} pls_integer;\n" +
                 "BEGIN\n" +
                 "select count(*)\n" +
@@ -154,7 +154,7 @@ public class DataPull {
         RuletypeTemplate MODI = new RuletypeTemplate();
         MODI.setBusinessruleType(new BusinessruleType());
         MODI.getBusinessruleType().setType("MODIFY_RULE");
-        MODI.setParameterCode("{target} novaluetype...");
+        MODI.setParameterCode("{attribute} novaluetype...");
         MODI.setProcedureCode("cursor lc_{table}\n" +
                 "select {attribute}\n" +
                 "from {table}\n" +
