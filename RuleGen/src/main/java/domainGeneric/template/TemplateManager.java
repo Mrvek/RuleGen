@@ -320,10 +320,13 @@ public class TemplateManager {
                     template.setRuleTypeEOTHProcedureCode(type.getProcedureCode());
                     template.setParameterRuleTypeEOTHCode(type.getParameterCode());
                     break;
-                case ("TUPLE OTHER_RULE"):
+                case ("TUPLE_OTHER_RULE"):
                     template.setRuleTypeTOTHProcedureCode(type.getProcedureCode());
                     template.setParameterRuleTypeTOTHCode(type.getParameterCode());
                     break;
+                case ("MODIFY_RULE"):
+                    template.setRuleTypeMODIProcedureCode(type.getProcedureCode());
+                    template.setParameterRuleTypeMODICode(type.getParameterCode());
                 default:
                     break;
 
