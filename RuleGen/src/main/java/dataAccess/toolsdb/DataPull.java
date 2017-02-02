@@ -100,9 +100,9 @@ public class DataPull {
         RuletypeTemplate RNG = new RuletypeTemplate();
         RNG.setBusinessruleType(new BusinessruleType());
         RNG.getBusinessruleType().setType("ATTRIBUTE_RANGE_RULE");
-        RNG.setConstraintCode("{target} {operator} ? AND ?");
+        RNG.setConstraintCode("{target} {operator} {from} AND {to}");
         RNG.setParameterCode("{target} novaluetype...");
-        RNG.setProcedureCode("{target} {operator} ? AND ?");
+        RNG.setProcedureCode("{target} {operator} {from} AND {to}");
 
         RuletypeTemplate AOTH = new RuletypeTemplate();
         AOTH.setBusinessruleType(new BusinessruleType());
