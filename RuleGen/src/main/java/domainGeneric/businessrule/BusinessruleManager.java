@@ -43,7 +43,7 @@ public class BusinessruleManager {
                 }
 
             } else {
-                Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), BR.getBRRuleType()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
+                Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
                 TablePackage tablePackage = createOrGetPackage(BR);
                 /** Hoe ziet de value van triggermoment eruit? */
                 String[] triggermoments = BR.getTriggerMoment().trim().split(", ");
@@ -87,31 +87,31 @@ public class BusinessruleManager {
 
 
         switch (BRData.getBRRuleType()) {
-            case ("TCMP"):
+            case ("TUPLE_COMPARE_RULE"):
                 ruletype = new TupleCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getTarget());
                 break;
-            case ("TOTH"):
+            case ("TUPLE_OTHER_RULE"):
                 ruletype = new TupleOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
                 break;
-            case ("ICMP"):
+            case ("INTER-ENTITY_RULE"):
                 ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable(), BRData.getTarget(), BRData.getTablename());
                 break;
-            case ("EOTH"):
+            case ("ENTITY_OTHER_RULE"):
                 ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
                 break;
-            case ("ACMP"):
+            case ("ATTRIBUTE_COMPARE_RULE"):
                 ruletype = new AttributeCompare(BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
                 break;
-            case ("ARNG"):
+            case ("ATTRIBUTE_RANGE_RULE"):
                 ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget());
                 break;
-            case ("LST"):
+            case ("ATTRIBUTE_LIST_RULE"):
                 ruletype = new AttributeList(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getValues());
                 break;
-            case ("AOTH"):
+            case ("ATTRIBUTE_OTHER_RULE"):
                 ruletype = new AttributeOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
                 break;
-            case ("MODI"):
+            case ("MODIFY_RULE"):
                 ruletype = new Modify(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
                 break;
         }

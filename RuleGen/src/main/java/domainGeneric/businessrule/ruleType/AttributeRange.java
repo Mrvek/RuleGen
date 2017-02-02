@@ -8,7 +8,7 @@ public class AttributeRange extends BRRuleType {
     private String to;
 
     public AttributeRange(String from, String to, String operator, String databasetype, String target) {
-        super(operator, databasetype, "RNG", target);
+        super(operator, databasetype, "ARNG", target);
         this.from = from;
         this.to = to;
     }

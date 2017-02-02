@@ -10,7 +10,7 @@ public class AttributeList extends BRRuleType {
     private String operator;
 
     public AttributeList(String operator, String databasetype, String target, List<String> values) {
-        super(operator, databasetype, "LST", target);
+        super(operator, databasetype, "ALIS", target);
         this.values = values;
         this.operator = operator;
     }
