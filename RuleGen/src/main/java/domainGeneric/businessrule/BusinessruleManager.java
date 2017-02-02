@@ -41,7 +41,7 @@ public class BusinessruleManager {
             BRRuleType ruletype = createRuleType(BR);
 
 //            TODO: add check if it's possible to make a constraint of the ruletype (3 ruletypes can't be constraints)
-            if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null || BR.getTokens().isEmpty()) {
+            if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null) {
                 if (!(BR.getBRRuleType().equals("TOTH") || BR.getBRRuleType().equals("EOTH") || BR.getBRRuleType().equals("ICMP") || BR.getBRRuleType().equals("MODI"))) {
                     Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
                     constraintList.add(constraint);
@@ -62,7 +62,13 @@ public class BusinessruleManager {
                     momentstoString.add(moment);
                     tablePackage.addProcedure(momentstoString, procedure);
                     TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
-                    if (!triggers.get(trigger).equals(tablePackage)) {
+                    Boolean b = false;
+                    for (TriggerOnTable x : triggers.keySet()) {  
+                        if (x.equals(trigger) && triggers.get(x).equals(tablePackage)) {
+                            b = true;    
+                        }
+                    }
+                    if (b == false) {
                         triggers.put(trigger, tablePackage);
                     }
                 }

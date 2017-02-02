@@ -5,14 +5,15 @@ import dataAccess.persistence.oracle.toolsdb.BusinessRuleService;
 import dataAccess.persistence.oracle.toolsdb.ProjectService;
 import dataAccess.persistence.oracle.toolsdb.SupportedUnitsService;
 import dataAccess.persistence.oracle.toolsdb.ToolDbService;
-import domainGeneric.dto.BRData;
-import domainGeneric.dto.CodeReturnData;
-import domainGeneric.dto.ProjectData;
-import domainGeneric.dto.TemplateData;
+
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
 import dto.businessrules.BusinessruleType;
 import dto.businessrules.Token;
+import dto.domain.BRData;
+import dto.domain.CodeReturnData;
+import dto.domain.ProjectData;
+import dto.domain.TemplateData;
 import dto.project.Brgqueue;
 import dto.project.Project;
 import dto.supported_units.*;
@@ -227,7 +228,6 @@ public class DataPull {
                     brdata.setComparisonTable(y.getAttribute().getTable().getName());
                     brdata.setComparisonTarget(y.getAttribute().getName());
                 } else {
-                    System.out.println("TEST: " + y.getId());
                     values.add(y.getValue());
                 }
             }

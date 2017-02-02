@@ -138,8 +138,8 @@ public class Template {
     public String getRuleTypeCompareConstraintCode(String target, String operator, String compareWith) {
         String result = ruleTypeCompareConstraintCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{target}", target);
+        result = result.replaceFirst("\\{operator}", operator);
         result = result.replaceFirst("\\?", compareWith);
         return result;
     }
@@ -148,8 +148,8 @@ public class Template {
     public String getRuleTypeACMPProcedureCode(String target, String operator, String compareWith) {
         String result = ruleTypeCompareTriggerCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\{Operator}", operator);
-        result = result.replaceFirst("\\{Target}", target);
+        result = result.replaceFirst("\\{operator}", operator);
+        result = result.replaceFirst("\\{target}", target);
         result = result.replaceFirst("\\?", compareWith);
         return result;
     }
@@ -157,20 +157,20 @@ public class Template {
     public String getRuleTypeRangeConstraintCode(String target, String first, String operator, String second) {
         String result = ruleTypeRangeConstraintCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{From}", first);
-        result = result.replaceFirst("\\{Operator}", operator);
-        result = result.replaceFirst("\\{To}", second);
+        result = result.replaceFirst("\\{target}", target);
+        result = result.replaceFirst("\\{from}", first);
+        result = result.replaceFirst("\\{operator}", operator);
+        result = result.replaceFirst("\\{to}", second);
         return result;
     }
 
     public String getRuleTypeRNGProcedureCode(String first, String operator, String second, String target) {
         String result = ruleTypeRangeTriggerCode;
         operator = this.translateOperator(operator);
-        result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{Operator}", operator);
-        result = result.replaceFirst("\\{From}", first);
-        result = result.replaceFirst("\\{To}", second);
+        result = result.replaceFirst("\\{target}", target);
+        result = result.replaceFirst("\\{operator}", operator);
+        result = result.replaceFirst("\\{from}", first);
+        result = result.replaceFirst("\\{to}", second);
         return result;
     }
 
@@ -189,8 +189,8 @@ public class Template {
     public String getRuleTypeListConstraintCode(String target, List<String> values, String operator) {
         operator = translateOperator(operator);
         String result = ruleTypeListConstraintCode;
-        result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{target}", target);
+        result = result.replaceFirst("\\{operator}", operator);
         String value = createValuesList(values);
         result = result.replaceFirst("\\?", value);
         return result;
@@ -199,8 +199,8 @@ public class Template {
     public String getRuleTypeLSTProcedureCode(String target, String operator, List<String> values) {
         operator = translateOperator(operator);
         String result = ruleTypeListTriggerCode;
-        result = result.replaceFirst("\\{Target}", target);
-        result = result.replaceFirst("\\{Operator}", operator);
+        result = result.replaceFirst("\\{target}", target);
+        result = result.replaceFirst("\\{operator}", operator);
         String value = createValuesList(values);
         result = result.replaceFirst("\\?", value);
         return result;
