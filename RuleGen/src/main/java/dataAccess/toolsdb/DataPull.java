@@ -221,11 +221,13 @@ public class DataPull {
                 if (y.getAttribute() != null && attributeCount == 0) {
                     attributeCount = attributeCount + 1;
                     brdata.setTablename(y.getAttribute().getTable().getName());
+                    brdata.setTableID(y.getAttribute().getTable().getId());
                     brdata.setTarget(y.getAttribute().getName());
                 } else if(y.getAttribute() != null && attributeCount > 0) {
                     brdata.setComparisonTable(y.getAttribute().getTable().getName());
                     brdata.setComparisonTarget(y.getAttribute().getName());
                 } else {
+                    System.out.println("TEST: " + y.getId());
                     values.add(y.getValue());
                 }
             }

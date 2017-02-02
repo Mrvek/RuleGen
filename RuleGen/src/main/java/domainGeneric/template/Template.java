@@ -220,11 +220,14 @@ public class Template {
 
     private String translateOperator(String operator) {
         String result = operator;
-        for (String i : operatorTranslations.keySet()) {
-            if (i.equals(operator)) {
-                result = operatorTranslations.get(i);
+        if (operatorTranslations != null) {
+            for (String i : operatorTranslations.keySet()) {
+                if (i.equals(operator)) {
+                    result = operatorTranslations.get(i);
+                }
             }
         }
+
         return result;
     }
 
