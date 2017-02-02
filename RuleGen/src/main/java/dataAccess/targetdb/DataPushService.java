@@ -1,6 +1,6 @@
 package dataAccess.targetdb;
 
-import domainGeneric.dto.CodeReturnData;
+import dto.domain.CodeReturnData;
 
 import java.util.List;
 

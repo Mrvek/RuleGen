@@ -22,8 +22,8 @@ public class TemplateService {
         return factory.getInsertMomentCode(databasetype);
     }
 
-    public String getTriggerStartCode(String databasetype) {
-        return factory.getTriggerStartCode(databasetype);
+    public String getTriggerStartCode(String databasetype, String name, String table) {
+        return factory.getTriggerStartCode(databasetype, name, table);
     }
 
     public String getTriggerDeclarationCode(String databasetype) {

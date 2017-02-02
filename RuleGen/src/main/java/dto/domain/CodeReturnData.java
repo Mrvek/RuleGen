@@ -1,4 +1,4 @@
-package domainGeneric.dto;
+package dto.domain;
 
 /**
  * Created by Mitchell on 01/02/2017.

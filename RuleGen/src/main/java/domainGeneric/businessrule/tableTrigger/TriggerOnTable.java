@@ -1,6 +1,6 @@
-package domainGeneric.businessrule.trigger;
+package domainGeneric.businessrule.tableTrigger;
 
-import domainGeneric.businessrule.trigger.tablePackage.TablePackage;
+import domainGeneric.businessrule.tableTrigger.tablePackage.TablePackage;
 import domainGeneric.template.TemplateService;
 import org.json.JSONObject;
 
@@ -40,7 +40,7 @@ public TriggerOnTable(String name, String projectid, String databasetype, String
     }
 
     private String getStartCode() {
-        String code = templateService.getTriggerStartCode(databasetype) + "\n";
+        String code = templateService.getTriggerStartCode(databasetype, name, table) + "\n";
         code += exception.getExceptionTriggerDeclarations();
         return code;
     }

@@ -1,13 +1,9 @@
 package dataAccess.persistence.oracle.toolsdb;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import dataAccess.persistence.oracle.targetdb.StructureDAO;
-import domainGeneric.dto.CodeReturnData;
+import dto.domain.CodeReturnData;
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
 import dto.businessrules.BusinessruleType;

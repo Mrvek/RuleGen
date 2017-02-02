@@ -1,4 +1,4 @@
-package domainGeneric.dto;
+package dto.domain;
 
 import dto.supported_units.PackageTemplate;
 import dto.supported_units.ProcedureTemplate;

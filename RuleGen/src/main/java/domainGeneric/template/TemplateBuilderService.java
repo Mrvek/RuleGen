@@ -1,7 +1,7 @@
 package domainGeneric.template;
 
 import dataAccess.toolsdb.DataPullService;
-import domainGeneric.dto.TemplateData;
+import dto.domain.TemplateData;
 
 import java.util.List;
 

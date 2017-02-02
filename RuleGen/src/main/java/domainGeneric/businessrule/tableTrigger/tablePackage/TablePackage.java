@@ -1,6 +1,7 @@
-package domainGeneric.businessrule.trigger.tablePackage;
+package domainGeneric.businessrule.tableTrigger.tablePackage;
 
-import domainGeneric.businessrule.trigger.TriggerMoment;
+import domainGeneric.businessrule.standaloneTrigger.Trigger;
+import domainGeneric.businessrule.tableTrigger.TriggerMoment;
 import domainGeneric.template.TemplateService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ public class TablePackage {
     private TemplateService templateService;
     private Map<List<TriggerMoment>, Procedure> procedures = new HashMap();
     private boolean supported = false;
+    private List<Trigger> lonelyTriggers = new ArrayList<>();
 
     public TablePackage(String name, String databasetype, String table, String databasename, int tableID) {
         this.name = name;
@@ -58,6 +60,9 @@ public class TablePackage {
         code += "\n/\n";
 
         code += getBodyCode() + "\n/\n";
+        for (Trigger T : lonelyTriggers) {
+            code += T.getCode() + "\n/\n";
+        }
         return code;
     }
 
@@ -110,5 +115,9 @@ public class TablePackage {
 
     public int getTableID() {
         return tableID;
+    }
+
+    public void addStandaloneTrigger(Trigger trigger) {
+        lonelyTriggers.add(trigger);
     }
 }

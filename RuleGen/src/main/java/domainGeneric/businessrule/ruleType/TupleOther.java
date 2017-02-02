@@ -13,7 +13,7 @@ public class TupleOther extends BRRuleType {
 
     @Override
     public String getConstraintCode() {
-        return null;
+        return "I_Passed VARCHAR2;\n" + compareWith;
     }
 
     @Override

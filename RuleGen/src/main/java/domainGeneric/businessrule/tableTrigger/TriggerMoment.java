@@ -1,4 +1,4 @@
-package domainGeneric.businessrule.trigger;
+package domainGeneric.businessrule.tableTrigger;
 
 /**
  * Created by Mitchell on 27/01/2017.

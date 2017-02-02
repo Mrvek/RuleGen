@@ -1,4 +1,4 @@
-package domainGeneric.businessrule.trigger;
+package domainGeneric.businessrule.tableTrigger;
 
 
 

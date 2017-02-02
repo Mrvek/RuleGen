@@ -1,6 +1,6 @@
 package domainGeneric.template;
 
-import domainGeneric.dto.TemplateData;
+import dto.domain.TemplateData;
 import dto.supported_units.PackageTemplate;
 import dto.supported_units.ProcedureTemplate;
 import dto.supported_units.RuletypeTemplate;
@@ -73,9 +73,9 @@ public class TemplateManager {
         return t.getInsertMomentCode();
     }
 
-    public String getTriggerStartCode(String databasetype) {
+    public String getTriggerStartCode(String databasetype, String name, String table) {
         Template t = templates.get(databasetype);
-        return t.getTriggerStartCode();
+        return t.getTriggerStartCode(name, table);
     }
 
     public String getTriggerDeclarationCode(String databasetype) {

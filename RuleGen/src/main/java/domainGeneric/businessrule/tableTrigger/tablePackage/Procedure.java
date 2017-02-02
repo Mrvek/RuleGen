@@ -1,7 +1,7 @@
-package domainGeneric.businessrule.trigger.tablePackage;
+package domainGeneric.businessrule.tableTrigger.tablePackage;
 
 import domainGeneric.businessrule.ruleType.BRRuleType;
-import domainGeneric.businessrule.trigger.Exception;
+import domainGeneric.businessrule.tableTrigger.Exception;
 import domainGeneric.template.TemplateService;
 import org.json.JSONObject;
 

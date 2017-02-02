@@ -1,7 +1,7 @@
 package domainGeneric.businessrule;
 
 
-import domainGeneric.dto.CodeReturnData;
+import dto.domain.CodeReturnData;
 import org.json.JSONArray;
 
 import java.util.List;

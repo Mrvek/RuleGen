@@ -3,12 +3,13 @@ package domainGeneric.businessrule;
 import dataAccess.toolsdb.DataPullService;
 import domainGeneric.businessrule.constraint.Constraint;
 import domainGeneric.businessrule.ruleType.*;
-import domainGeneric.businessrule.trigger.TriggerOnTable;
-import domainGeneric.businessrule.trigger.tablePackage.Procedure;
-import domainGeneric.businessrule.trigger.tablePackage.TablePackage;
-import domainGeneric.dto.BRData;
-import domainGeneric.dto.CodeReturnData;
-import domainGeneric.dto.ProjectData;
+import domainGeneric.businessrule.standaloneTrigger.Trigger;
+import domainGeneric.businessrule.tableTrigger.TriggerOnTable;
+import domainGeneric.businessrule.tableTrigger.tablePackage.Procedure;
+import domainGeneric.businessrule.tableTrigger.tablePackage.TablePackage;
+import dto.domain.BRData;
+import dto.domain.CodeReturnData;
+import dto.domain.ProjectData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,6 +31,10 @@ public class BusinessruleManager {
 
     public void createBR(int ticket) {
         ProjectData projectData = getAllData(ticket);
+        createBusinessrule(projectData);
+    }
+
+    public void createBusinessrule(ProjectData projectData) {
         this.projectID = projectData.getProjectID();
         this.supportedDatabase = projectData.getSupportedDatabase();
         for (BRData BR : projectData.getBusinessRules()) {
@@ -37,10 +42,15 @@ public class BusinessruleManager {
 
 //            TODO: add check if it's possible to make a constraint of the ruletype (3 ruletypes can't be constraints)
             if (BR.getTriggerMoment() == null || BR.getSeverity() == null || BR.getExceptionMessage() == null || BR.getTokens() == null || BR.getTokens().isEmpty()) {
-                if (!(BR.getBRRuleType().equals("TOTH") || BR.getBRRuleType().equals("EOTH") || BR.getBRRuleType().equals("ICMP")|| BR.getBRRuleType().equals("MODI"))) {
+                if (!(BR.getBRRuleType().equals("TOTH") || BR.getBRRuleType().equals("EOTH") || BR.getBRRuleType().equals("ICMP") || BR.getBRRuleType().equals("MODI"))) {
                     Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
                     constraintList.add(constraint);
                 }
+
+            } else if (ruletype.getShortname().contains("OTH")) {
+                Trigger trigger = new Trigger(nameGen.getTriggerName(BR.getDatabaseshortname(), BR.getTablename()), BR.getPrimarykey(), BR.getDatabasetype(), BR.getTablename(), ruletype, BR.getExceptionMessage(), BR.getTokens());
+                TablePackage tablePackage = createOrGetPackage(BR);
+                tablePackage.addStandaloneTrigger(trigger);
 
             } else {
                 Procedure procedure = new Procedure(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getProcedureName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname()), BR.getSeverity(), BR.getExceptionMessage(), BR.getTokens());
@@ -50,11 +60,11 @@ public class BusinessruleManager {
                 List<String> momentstoString = new ArrayList<>();
                 for (String moment : triggermoments) {
                     momentstoString.add(moment);
-                }
-                tablePackage.addProcedure(momentstoString, procedure);
-                TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
-                if (!triggers.get(trigger).equals(tablePackage)) {
-                    triggers.put(trigger, tablePackage);
+                    tablePackage.addProcedure(momentstoString, procedure);
+                    TriggerOnTable trigger = createOrGetTrigger(BR, tablePackage);
+                    if (!triggers.get(trigger).equals(tablePackage)) {
+                        triggers.put(trigger, tablePackage);
+                    }
                 }
             }
         }
@@ -68,7 +78,7 @@ public class BusinessruleManager {
     private TriggerOnTable createOrGetTrigger(BRData brData, TablePackage apackage) {
         for (TriggerOnTable trigger : triggers.keySet()) {
             if (trigger.getTable().equals(brData.getTablename()))
-                return  trigger;
+                return trigger;
         }
         return new TriggerOnTable(nameGen.getTriggerName(brData.getDatabaseshortname(), brData.getTablename()), String.valueOf(brData.getPrimarykey()), brData.getDatabasetype(), brData.getTablename(), apackage);
     }

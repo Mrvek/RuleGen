@@ -13,7 +13,7 @@ public class AttributeOther extends BRRuleType {
 
     @Override
     public String getConstraintCode() {
-        return templateService.getRuleTypeOtherConstraintCode(databasetype, booleanStatement);
+        return "I_Passed VARCHAR2;\n" + booleanStatement;
     }
 
     @Override

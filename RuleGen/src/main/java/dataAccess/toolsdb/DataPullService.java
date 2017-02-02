@@ -2,9 +2,9 @@ package dataAccess.toolsdb;
 
 
 
-import domainGeneric.dto.CodeReturnData;
-import domainGeneric.dto.ProjectData;
-import domainGeneric.dto.TemplateData;
+import dto.domain.CodeReturnData;
+import dto.domain.ProjectData;
+import dto.domain.TemplateData;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DataPullService {
     private DataPull puller = new DataPull();
-    public domainGeneric.dto.ProjectData getData(int ticket) {
+    public dto.domain.ProjectData getData(int ticket) {
         ProjectData result = puller.getBusinessRule(ticket);
         return result;
     }

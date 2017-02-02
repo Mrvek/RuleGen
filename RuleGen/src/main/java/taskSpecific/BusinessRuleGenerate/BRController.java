@@ -4,7 +4,7 @@ import dataAccess.toolsdb.DataPullService;
 import dataAccess.targetdb.DataPushService;
 import domainGeneric.businessrule.BusinessruleService;
 
-import domainGeneric.dto.CodeReturnData;
+import dto.domain.CodeReturnData;
 import org.json.JSONArray;
 import taskSpecific.TemplateUpdate.UpdateService;
 
