@@ -17,6 +17,7 @@ public class TemplateBuilderService {
         if (templates.isEmpty()) {
             return false;
         } else {
+            TemplateManager.resetTemplates();
             templates.forEach((td) -> {
                 System.out.println("\tTemplate found: " + td.getTemplate().getName());
                 TemplateManager.addTemplate(td);

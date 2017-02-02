@@ -11,18 +11,14 @@ import domainGeneric.dto.ProjectData;
 import domainGeneric.dto.TemplateData;
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
-import dto.businessrules.GeneratedTrigger;
 import dto.businessrules.Token;
 import dto.project.Brgqueue;
 import dto.project.Project;
-import dto.supported_units.SupportedDatabases;
-import dto.supported_units.Template;
-import dto.template.TemplateDummy;
+import dto.supported_units.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
  
 /**
  * Created by Mitchell on 18/01/2017.
@@ -32,7 +28,7 @@ public class DataPull {
 //TODO contains push services, refactor classname?
 	
 	
-	//must receive templates from database en get the right ones?
+	//must receive templates from database and get the right ones?
     public List<TemplateData> getNewTemplates(List<String> currentTemplateNames) {
         List<TemplateData> result = new ArrayList<>();
         SupportedUnitsService sus = ToolDbService.getSUService();
@@ -48,21 +44,65 @@ public class DataPull {
             
             result.add(templateData);
         }
-        
+
+//        Data for testing:
+        Template templateDTO = new Template();
+        templateDTO.setName("Oracle 12c");
+        templateDTO.setConstraint_code("ALTER TABLE {table} ADD CONSTRAINT {name} CHECK (?)");
+
+        PackageTemplate packageTemplate = new PackageTemplate();
+        packageTemplate.setHeaderStart("CREATE OR REPLACE PACKAGE {name} AS \n");
+        packageTemplate.setHeaderEnd("END {name};");
+        packageTemplate.setBodyStart("CREATE OR REPLACE PACKAGE_BODY {name} AS");
+        packageTemplate.setBodyEnd("END {name};");
+
+        ProcedureTemplate procedureTemplate = new ProcedureTemplate();
+        procedureTemplate.setSpecification("PROCEDURE {name}({codeParameters}, {exceptionParameters});\n");
+        procedureTemplate.setExcecution("{name}({attribute}, {exceptionParameters});");
+        procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS");
+        procedureTemplate.setBodyDecleration("{PassedName VARCHAR2;");
+        procedureTemplate.setBodyEnd("END {name};");
+
+        TriggerTemplate triggerTemplate = new TriggerTemplate();
+        triggerTemplate.setInsertMoment("CASE\n \tWHEN INSERTING THEN\n");
+        triggerTemplate.setUpdateMoment("\tWHEN UPDATING THEN\n");
+        triggerTemplate.setDeleteMoment("\tWHEN DELETING THEN\n");
+        triggerTemplate.setStart("CREATE OR REPLACE TRIGGER {name}\nBEFORE\nINSERT OR UPDATE OR DELETE\nON {table}\nFOR EACH ROW\n");
+        triggerTemplate.setDecleration("DECLARE\n e_ErrorStack VARCHAR2;\n e_WarningStack VARCHAR2\n e_Error EXCEPTION\n e_warning EXCEPTION\nBEGIN\n");
+        triggerTemplate.setEnd("END;");
+        triggerTemplate.setExceptionExceptStart("EXCEPTION\n");
+        triggerTemplate.setExceptionExceptError("WHEN {errorException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {errorStack});\n");
+        triggerTemplate.setExceptionRaiseError("IF ({errorStack} IS NULL) THEN\n\traise {errorException};\nEND IF;");
+        triggerTemplate.setExceptionExceptWarning("WHEN {warningException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {warningStack});\n");
+        triggerTemplate.setExceptionRaiseWarning("IF ({warningStack} IS NULL) THEN\n\traise {warningException};\nEND IF;");
+        triggerTemplate.setAddStringToExceptionStack("\t{exceptionStack} = {exceptionStack} || '{message}';\n");
+        triggerTemplate.setExceptionParameters("VARCHAR2 {errorStack}, VARCHAR2 {warningStack}");
+        triggerTemplate.setExceptionTriggerDeclaration("TEST");
+
+        RuletypeTemplate ACMP = new RuletypeTemplate();
+        ACMP.getBusinessruleType().setType("ATTRIBUTE_COMPARE_RULE");
+        ACMP.setConstraintCode();
+        ACMP.setParameterCode();
+        ACMP.setProcedureCode();
+
+
+
+        ArrayList<RuletypeTemplate> ruletypeTemplates = new ArrayList<>();
+        RuletypeTemplate LST = new RuletypeTemplate();
+        RuletypeTemplate AOTH = new RuletypeTemplate();
+        RuletypeTemplate RNG = new RuletypeTemplate();
+        RuletypeTemplate EOTH = new RuletypeTemplate();
+        RuletypeTemplate ICMP = new RuletypeTemplate();
+        RuletypeTemplate MODI = new RuletypeTemplate();
+        RuletypeTemplate TCMP = new RuletypeTemplate();
+        RuletypeTemplate TOTH = new RuletypeTemplate();
+
+
+        TemplateData templateData = new TemplateData(templateDTO, triggerTemplate, ruletypeTemplates, procedureTemplate, packageTemplate);
         return result;
     }
 
-//    private void config() {
-//        /** config (re)moved? */
-//        if (config == null) {
-//            config = new DBConfig();
-//        }
-//    }
-
     public ProjectData getBusinessRule(int ticketId) {
-    	//TODO Comparison table moet er komen en gevuld worden en ingevuld worden als comparisontarget aanwezig
-    	//TODO BR data ook een nieuwe attribute komen genaam 
-        
         BusinessRuleService brs = ToolDbService.getBRService();
         ProjectService prs = ToolDbService.getPService();
         
@@ -123,8 +163,6 @@ public class DataPull {
     }
 
     public boolean pushCode(List<CodeReturnData> code) {
-//        TODO: push code to the DB.table_trigger (find a way to get the table_id and supportedDatabases. BRData DTO might be changed)
-    	//TODO Figure out if that todo above here it's last sentence still makes sense.
     	// is secretly a push thing, don't tell the classname
     	BusinessRuleService bs = ToolDbService.getBRService();
     	boolean check = bs.insertTableTriggers(code);

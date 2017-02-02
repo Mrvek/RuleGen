@@ -318,8 +318,8 @@ public class Template {
 
     public String getExceptionWarningCode(String errorStackName, String errorExceptionName) {
         String code = exceptionWarningCode;
-        code = code.replaceAll("\\{errorStack}", errorStackName);
-        code = code.replaceAll("\\{errorException}", errorExceptionName);
+        code = code.replaceAll("\\{warningStack}", errorStackName);
+        code = code.replaceAll("\\{warningException}", errorExceptionName);
         return code;
     }
 
