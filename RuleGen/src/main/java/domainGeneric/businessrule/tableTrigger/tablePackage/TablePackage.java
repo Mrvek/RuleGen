@@ -70,9 +70,9 @@ public class TablePackage {
         String code = templateService.getPackageHeaderStartCode(databasetype, name);
         if (!supported) {
             return "";
-        }else { code += "\n";}
+        }
         for (Procedure p : procedures.values()) {
-            code += p.getPackageSpecificationCode() + "\n";
+            code += p.getPackageSpecificationCode();
         }
         code += templateService.getPackageEndCode(databasetype, name);
         return code;

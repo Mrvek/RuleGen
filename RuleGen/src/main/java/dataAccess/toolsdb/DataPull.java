@@ -61,7 +61,7 @@ public class DataPull {
         ProcedureTemplate procedureTemplate = new ProcedureTemplate();
         procedureTemplate.setSpecification("PROCEDURE {name}({codeParameters}, {exceptionParameters});\n");
         procedureTemplate.setExcecution("{name}({attribute}, {exceptionParameters});");
-        procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS");
+        procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS\n");
         procedureTemplate.setBodyDecleration("{PassedName VARCHAR2;");
         procedureTemplate.setBodyEnd("END {name};");
 
@@ -74,10 +74,10 @@ public class DataPull {
         triggerTemplate.setEnd("END;");
         triggerTemplate.setExceptionExceptStart("EXCEPTION\n");
         triggerTemplate.setExceptionExceptError("WHEN {errorException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {errorStack});\n");
-        triggerTemplate.setExceptionRaiseError("IF ({errorStack} IS NULL) THEN\n\traise {errorException};\nEND IF;");
+        triggerTemplate.setExceptionRaiseError("IF ({errorStack} IS NOT NULL) THEN\n\traise {errorException};\nEND IF;");
         triggerTemplate.setExceptionExceptWarning("WHEN {warningException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {warningStack});\n");
-        triggerTemplate.setExceptionRaiseWarning("IF ({warningStack} IS NULL) THEN\n\traise {warningException};\nEND IF;");
-        triggerTemplate.setAddStringToExceptionStack("\tIF (I_Passed is null) THEN\n\t{exceptionStack} = {exceptionStack} || '{message}';\nEND IF;\n");
+        triggerTemplate.setExceptionRaiseWarning("IF ({warningStack} IS NOT NULL) THEN\n\traise {warningException};\nEND IF;");
+        triggerTemplate.setAddStringToExceptionStack("\tIF (I_Passed IS FALSE) THEN\n\t{exceptionStack} = {exceptionStack} || '{message}';\nEND IF;\n");
         triggerTemplate.setExceptionParameters("VARCHAR2 {errorStack}, VARCHAR2 {warningStack}");
         triggerTemplate.setExceptionTriggerDeclaration("TEST");
 
