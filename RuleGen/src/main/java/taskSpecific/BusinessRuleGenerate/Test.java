@@ -25,7 +25,7 @@ public class Test {
 
     @org.junit.Test
     public void TestController() {
-        String result = controller.Generate(brIds, projectId).toString();
+        String result = controller.Generate(Integer.parseInt(projectId)).toString();
         JSONArray array = new JSONArray();
         JSONObject obj = new JSONObject();
         obj.put("project","74");
