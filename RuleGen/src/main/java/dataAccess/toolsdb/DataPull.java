@@ -11,6 +11,7 @@ import domainGeneric.dto.ProjectData;
 import domainGeneric.dto.TemplateData;
 import dto.businessrules.BusinessValues;
 import dto.businessrules.Businessrule;
+import dto.businessrules.BusinessruleType;
 import dto.businessrules.Token;
 import dto.project.Brgqueue;
 import dto.project.Project;
@@ -75,30 +76,107 @@ public class DataPull {
         triggerTemplate.setExceptionRaiseError("IF ({errorStack} IS NULL) THEN\n\traise {errorException};\nEND IF;");
         triggerTemplate.setExceptionExceptWarning("WHEN {warningException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {warningStack});\n");
         triggerTemplate.setExceptionRaiseWarning("IF ({warningStack} IS NULL) THEN\n\traise {warningException};\nEND IF;");
-        triggerTemplate.setAddStringToExceptionStack("\t{exceptionStack} = {exceptionStack} || '{message}';\n");
+        triggerTemplate.setAddStringToExceptionStack("\tIF (I_Passed is null) THEN\n\t{exceptionStack} = {exceptionStack} || '{message}';\nEND IF;\n");
         triggerTemplate.setExceptionParameters("VARCHAR2 {errorStack}, VARCHAR2 {warningStack}");
         triggerTemplate.setExceptionTriggerDeclaration("TEST");
 
-        RuletypeTemplate ACMP = new RuletypeTemplate();
-        ACMP.getBusinessruleType().setType("ATTRIBUTE_COMPARE_RULE");
-        ACMP.setConstraintCode();
-        ACMP.setParameterCode();
-        ACMP.setProcedureCode();
-
-
-
         ArrayList<RuletypeTemplate> ruletypeTemplates = new ArrayList<>();
-        RuletypeTemplate LST = new RuletypeTemplate();
-        RuletypeTemplate AOTH = new RuletypeTemplate();
-        RuletypeTemplate RNG = new RuletypeTemplate();
-        RuletypeTemplate EOTH = new RuletypeTemplate();
-        RuletypeTemplate ICMP = new RuletypeTemplate();
-        RuletypeTemplate MODI = new RuletypeTemplate();
-        RuletypeTemplate TCMP = new RuletypeTemplate();
-        RuletypeTemplate TOTH = new RuletypeTemplate();
 
+        RuletypeTemplate ACMP = new RuletypeTemplate();
+        ACMP.setBusinessruleType(new BusinessruleType());
+        ACMP.getBusinessruleType().setType("ATTRIBUTE_COMPARE_RULE");
+        ACMP.setConstraintCode("{target} {operator} ?");
+        ACMP.setParameterCode("{target} novaluetype...");
+        ACMP.setProcedureCode("{target} {operator} ?");
+
+        RuletypeTemplate LST = new RuletypeTemplate();
+        LST.setBusinessruleType(new BusinessruleType());
+        LST.getBusinessruleType().setType("ATTRIBUTE_LIST_RULE");
+        LST.setConstraintCode("{target} {operator} ?");
+        LST.setParameterCode("{target} novaluetype...");
+        LST.setProcedureCode("{target} {operator} ?");
+
+        RuletypeTemplate RNG = new RuletypeTemplate();
+        RNG.setBusinessruleType(new BusinessruleType());
+        RNG.getBusinessruleType().setType("ATTRIBUTE_RANGE_RULE");
+        RNG.setConstraintCode("{target} {operator} ? AND ?");
+        RNG.setParameterCode("{target} novaluetype...");
+        RNG.setProcedureCode("{target} {operator} ? AND ?");
+
+        RuletypeTemplate AOTH = new RuletypeTemplate();
+        AOTH.setBusinessruleType(new BusinessruleType());
+        AOTH.getBusinessruleType().setType("ATTRIBUTE_OTHER_RULE");
+        AOTH.setConstraintCode("?");
+        AOTH.setParameterCode("{target} novaluetype...");
+        AOTH.setProcedureCode("?");
+
+        RuletypeTemplate TCMP = new RuletypeTemplate();
+        TCMP.setBusinessruleType(new BusinessruleType());
+        TCMP.getBusinessruleType().setType("TUPLE_COMPARE_RULE");
+        TCMP.setConstraintCode("{target} {operator} {comparison}");
+        TCMP.setParameterCode("{target} novaluetype...");
+        TCMP.setProcedureCode("{target} {operator} {comparison}");
+
+        RuletypeTemplate TOTH = new RuletypeTemplate();
+        TOTH.setBusinessruleType(new BusinessruleType());
+        TOTH.getBusinessruleType().setType("TUPLE_OTHER_RULE");
+        TOTH.setParameterCode("{target} novaluetype...");
+        TOTH.setProcedureCode("{code}");
+
+        RuletypeTemplate ICMP = new RuletypeTemplate();
+        ICMP.setBusinessruleType(new BusinessruleType());
+        ICMP.getBusinessruleType().setType("INTER-ENTITY COMPARE RULE");
+        ICMP.setParameterCode("{target} novaluetype...");
+        ICMP.setProcedureCode("cursor lc_{compareTable} is\n" +
+                "select {compareTable}.{compareAttribute}\n" +
+                "from {compareTable}\n" +
+                "where {table}.{attribute} = :NEW.{attribute};\n" +
+                "l_{compareAttribute} {compareTable}.{compareAttribute}%type;\n" +
+                "BEGIN\n" +
+                "open lc_{compareTable};\n" +
+                "fetch lc_{compareTable} into l_{compareAttribute};\n" +
+                "close lc_{compareTable};\n" +
+                "I_Passed := {attribute} >= l_{compareAttribute};\n");
+
+        RuletypeTemplate EOTH = new RuletypeTemplate();
+        EOTH.setBusinessruleType(new BusinessruleType());
+        EOTH.getBusinessruleType().setType("ENTITY_OTHER_RULE");
+        EOTH.setParameterCode("{target} novaluetype...");
+        EOTH.setProcedureCode("l_{attribute} pls_integer;\n" +
+                "BEGIN\n" +
+                "select count(*)\n" +
+                "into l_{attribute}\n" +
+                "from {table}\n" +
+                "where {attribute} = :NEW.{attribute};\n" +
+                "I_Passed := l_{attribute} <= {comparison};\n");
+
+        RuletypeTemplate MODI = new RuletypeTemplate();
+        MODI.setBusinessruleType(new BusinessruleType());
+        MODI.getBusinessruleType().setType("MODIFY_RULE");
+        MODI.setParameterCode("{target} novaluetype...");
+        MODI.setProcedureCode("cursor lc_{table}\n" +
+                "select {attribute}\n" +
+                "from {table}\n" +
+                "where {table}.id = :NEW.id;\n" +
+                "l_{attribute} {table}.{attribute}%type;\n" +
+                "BEGIN\n" +
+                "open lc_{table};\n" +
+                "fetch lc_{table} into l_{attribute};" +
+                "close lc_{table};\n" +
+                "I_Passed := l_{attribute} {operator} ?;\n");
+
+        ruletypeTemplates.add(ACMP);
+        ruletypeTemplates.add(AOTH);
+        ruletypeTemplates.add(EOTH);
+        ruletypeTemplates.add(ICMP);
+        ruletypeTemplates.add(LST);
+        ruletypeTemplates.add(MODI);
+        ruletypeTemplates.add(RNG);
+        ruletypeTemplates.add(TCMP);
+        ruletypeTemplates.add(TOTH);
 
         TemplateData templateData = new TemplateData(templateDTO, triggerTemplate, ruletypeTemplates, procedureTemplate, packageTemplate);
+        result.add(templateData);
         return result;
     }
 

@@ -407,9 +407,9 @@ public class Template {
 
     public String getRuleTypeTOTHProcedureCode(String target, String operator, String compareWith) {
         String code = ruleTypeTOTHProcedureCode;
+        code = code.replaceAll("\\{code}", compareWith);
         code = code.replaceAll("\\{target}", target);
         code = code.replaceAll("\\{operator}", operator);
-        code = code.replaceAll("\\{code}", compareWith);
         return code;
     }
 
@@ -417,7 +417,7 @@ public class Template {
         String code =  ruleTypeTCMPProcedureCode;
         code = code.replaceAll("\\{target}", target);
         code = code.replaceAll("\\{operator}", operator);
-        code = code.replaceAll("\\{code}", compareWith);
+        code = code.replaceAll("\\{comparison}", compareWith);
         return code;
     }
 
@@ -425,7 +425,7 @@ public class Template {
         String code = ruleTypeTCMPConstraintCode;
         code = code.replaceAll("\\{target}", target);
         code = code.replaceAll("\\{operator}", operator);
-        code = code.replaceAll("\\{code}", compareWith);
+        code = code.replaceAll("\\{comparison}", compareWith);
         return code;
     }
 
@@ -478,7 +478,7 @@ public class Template {
         String code = ruleTypeEOTHProcedureCode;
         code = code.replaceAll("\\{target}", target);
         code = code.replaceAll("\\{operator}", operator);
-        code = code.replaceAll("\\{code}", compareWith);
+        code = code.replaceAll("\\{comparison}", compareWith);
         return code;
     }
 
