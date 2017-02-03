@@ -126,8 +126,8 @@ public class TemplateService {
         return factory.getExceptionTriggerDeclarationCode(databasetype, warningStackName, warningExceptionName, errorStackName, errorExceptionName);
     }
 
-    public String getProcedureBodyStartCode(String databasetype, String name) {
-        return factory.getProcedureBodyStartCode(databasetype, name);
+    public String getProcedureBodyStartCode(String databasetype, String name, String attribute, String table) {
+        return factory.getProcedureBodyStartCode(databasetype, name, attribute, table);
     }
 
     public String getProcedureBodyDeclarationCode(String databasetype, String passedName) {

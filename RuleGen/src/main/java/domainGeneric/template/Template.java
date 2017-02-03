@@ -365,9 +365,11 @@ public class Template {
         return code;
     }
 
-    public String getProcedureBodyStartCode(String name) {
+    public String getProcedureBodyStartCode(String name, String attribute, String table) {
         String code = procedureBodyStartCode;
         code = code.replaceAll("\\{name}", name);
+        code = code.replaceAll("\\{attribute}", attribute);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 

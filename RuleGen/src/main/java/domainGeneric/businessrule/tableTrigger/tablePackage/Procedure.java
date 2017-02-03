@@ -47,7 +47,7 @@ public class Procedure {
 
     /** Code for creating a standalone procedure or a package_body procedure (ORA)*/
     public String getCode() {
-        String code = templateService.getProcedureBodyStartCode(databasetype, name);
+        String code = templateService.getProcedureBodyStartCode(databasetype, name, attribute, table);
         code += templateService.getProcedureBodyDeclarationCode(databasetype, passedName);
         code += ruletype.getProcedureCode(passedName);
         code += exception.getAddExceptionInProcedureCode(severity, ExceptionMessage, tokens);

@@ -183,9 +183,9 @@ public class TemplateManager {
         return t.getExceptionTrigerDeclarationCode(warningStackName, warningExceptionName, errorStackName, errorExceptionName);
     }
 
-    public String getProcedureBodyStartCode(String databasetype, String name) {
+    public String getProcedureBodyStartCode(String databasetype, String name, String attribute, String table) {
         Template t = templates.get(databasetype);
-        return t.getProcedureBodyStartCode(name);
+        return t.getProcedureBodyStartCode(name, attribute, table);
     }
 
     public String getProcedureBodyDeclarationCode(String databasetype, String passedName) {
