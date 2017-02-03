@@ -73,7 +73,7 @@ public class Procedure {
 
     /** Code for the package specification*/
     public String getPackageSpecificationCode() {
-        String code = templateService.getProcedureSpecification(name, exception.getExceptionProcedureParameters(), ruletype.getParameterCode(), databasetype, table);
+        String code = templateService.getProcedureSpecification(name, exception.getExceptionProcedureParameters(), attribute, databasetype, table);
         return code;
     }
 }
