@@ -60,8 +60,8 @@ public class DataPull {
 
         ProcedureTemplate procedureTemplate = new ProcedureTemplate();
         procedureTemplate.setSpecification("PROCEDURE {name}({attribute} {table}.{attribute}%type, {exceptions});\n");
-        procedureTemplate.setExcecution("{name}(:NEW.{attribute}, {exceptionParameters});");
-        procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS\n");
+        procedureTemplate.setExcecution("{name}(:NEW.{attribute}, e_errorStack VARCHAR2, e_warningStack VARCHAR2);");
+        procedureTemplate.setBodyStart("PROCEDURE {name}({attribute} {table}.{attribute}, {exceptionParameters}) IS\n");
         procedureTemplate.setBodyDecleration("{checkName} VARCHAR2;\n");
         procedureTemplate.setBodyEnd("END {name};");
 

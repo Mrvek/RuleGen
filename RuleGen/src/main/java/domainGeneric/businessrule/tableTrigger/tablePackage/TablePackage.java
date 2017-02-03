@@ -81,7 +81,7 @@ public class TablePackage {
     }
 
     private String getBodyCode() {
-        String code = templateService.getPackageBodyStartCode(databasetype, name);
+        String code = templateService.getPackageBodyStartCode(databasetype, name, table);
         for (Procedure P : procedures.values()) {
             code += "\n" + P.getCode() + "\n";
         }

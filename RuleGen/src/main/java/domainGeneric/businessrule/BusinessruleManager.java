@@ -118,7 +118,7 @@ public class BusinessruleManager {
                 ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget(), BRData.getTablename());
                 break;
             case ("ATTRIBUTE_COMPARE_RULE"):
-                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
+                ruletype = new AttributeCompare(BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTablename());
                 break;
             case ("ATTRIBUTE_RANGE_RULE"):
                 ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getTablename());

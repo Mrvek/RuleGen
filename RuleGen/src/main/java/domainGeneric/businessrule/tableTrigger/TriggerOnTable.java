@@ -31,11 +31,8 @@ public TriggerOnTable(String name, String projectid, String databasetype, String
         String code = getStartCode();
         code += getDeclerationCode();
         code += getInsertMomentCode();
-        code += apackage.getDeclarationCode(TriggerMoment.INSERT);
         code += getUpdateMomentCode();
-        code += apackage.getDeclarationCode(TriggerMoment.UPDATE);
         code += getDeleteMomentCode();
-        code += apackage.getDeclarationCode(TriggerMoment.DELETE);
         code += exception.getExceptionTriggerEnd();
         code += getEndCode() + "\n/";
         Message = "Trigger Succesfully made";

@@ -118,9 +118,9 @@ public class TemplateManager {
         return t.checkPackageSupport();
     }
 
-    public String getPackageBodyStartCode(String databasetype, String name) {
+    public String getPackageBodyStartCode(String databasetype, String name, String table) {
         Template t = templates.get(databasetype);
-        return t.getPakageBodyStartCode(name);
+        return t.getPakageBodyStartCode(name, table);
     }
 
     public String getPackageBodyEndCode(String databasetype, String name) {

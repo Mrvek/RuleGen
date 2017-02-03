@@ -272,9 +272,10 @@ public class Template {
         return packageSupport;
     }
 
-    public String getPakageBodyStartCode(String name) {
+    public String getPakageBodyStartCode(String name, String table) {
         String code = packageBodyStartCode;
         code = code.replaceAll("\\{name}", name);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 

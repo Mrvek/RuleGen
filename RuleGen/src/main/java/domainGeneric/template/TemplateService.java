@@ -74,8 +74,8 @@ public class TemplateService {
         return factory.checkPackageSupport(databasetype);
     }
 
-    public String getPackageBodyStartCode(String databasetype, String name) {
-        return factory.getPackageBodyStartCode(databasetype, name);
+    public String getPackageBodyStartCode(String databasetype, String name, String table) {
+        return factory.getPackageBodyStartCode(databasetype, name, table);
     }
 
     public String getPackageBodyEndCode(String databasetype, String name) {
