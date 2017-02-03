@@ -270,7 +270,7 @@ public class ProjectDAO extends BaseDAO {
                                                         "    ATTRIBUTE.NAME as NAME," +
                                                         "    \"table\".TABLE_ID as TABLE_ID," +
                                                         "    \"table\".DATABASESCHEMA_ID as DATABASESCHEMA_ID," +
-                                                        "    \"table\".NAME as NAME " +
+                                                        "    \"table\".NAME as XNAME " +
                                                         " from \"table\" \"table\"," +
                                                         "    ATTRIBUTE ATTRIBUTE " +
                                                         " where ATTRIBUTE.TABLE_ID=\"table\".TABLE_ID" +
@@ -281,7 +281,7 @@ public class ProjectDAO extends BaseDAO {
             while (dbResultSet.next()) {
                 SupportedDatatypes supdatatype = sus.getSupportedDataTypesByID(dbResultSet.getInt("SUPPORTEDDATATYPES_ID"));
                 DatabaseSchema dbs = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
-                Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("NAME"), dbs);
+                Table table = new Table(dbResultSet.getInt("TABLE_ID"), dbResultSet.getString("XNAME"), dbs);
                 
                 ArrayList<Attribute> atr = this.getAllAttributes(dbResultSet.getInt("TABLE_ID"));
                 for (Attribute x : atr) {
