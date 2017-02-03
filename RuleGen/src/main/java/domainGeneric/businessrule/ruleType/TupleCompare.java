@@ -5,11 +5,13 @@ package domainGeneric.businessrule.ruleType;
  */
 public class TupleCompare extends BRRuleType {
     private String compareWith;
+    private String table;
 
 
-    public TupleCompare(String operator, String databasetype, String compareWith, String target) {
+    public TupleCompare(String operator, String databasetype, String compareWith, String target, String table) {
         super(operator, databasetype, "TCMP", target);
         this.compareWith = compareWith;
+        this.table = table;
     }
 
     @Override
@@ -24,6 +26,6 @@ public class TupleCompare extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeTCMPCode(databasetype, target, compareWith);
+        return templateService.getParameterRuleTypeTCMPCode(databasetype, target, compareWith, table);
     }
 }

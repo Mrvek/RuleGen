@@ -5,10 +5,12 @@ package domainGeneric.businessrule.ruleType;
  */
 public class EntityOther extends BRRuleType {
     private String compareWith;
+    private String table;
 
-    public EntityOther(String operator, String databasetype, String target, String compareWith) {
+    public EntityOther(String operator, String databasetype, String target, String compareWith, String table) {
         super(operator, databasetype, "EOTH", target);
         this.compareWith = compareWith;
+        this.table = table;
     }
 
     @Override
@@ -23,6 +25,6 @@ public class EntityOther extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeEOTHCode(databasetype, target);
+        return templateService.getParameterRuleTypeEOTHCode(databasetype, target, table);
     }
 }

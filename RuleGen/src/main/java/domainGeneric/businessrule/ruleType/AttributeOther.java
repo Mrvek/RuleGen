@@ -5,10 +5,12 @@ package domainGeneric.businessrule.ruleType;
  */
 public class AttributeOther extends BRRuleType {
     private String booleanStatement;
+    private String table;
 
-    public AttributeOther(String operator, String databasetype, String booleanStatement, String target) {
+    public AttributeOther(String operator, String databasetype, String booleanStatement, String target, String table) {
         super(operator, databasetype, "AOTH", target);
         this.booleanStatement = booleanStatement;
+        this.table = table;
     }
 
     @Override
@@ -23,6 +25,6 @@ public class AttributeOther extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeTHRCode(databasetype, target);
+        return templateService.getParameterRuleTypeTHRCode(databasetype, target, table);
     }
 }

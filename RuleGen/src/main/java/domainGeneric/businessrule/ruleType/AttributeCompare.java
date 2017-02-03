@@ -5,10 +5,12 @@ package domainGeneric.businessrule.ruleType;
  */
 public class AttributeCompare extends BRRuleType {
     private String CompareWith;
+    private String table;
 
-    public AttributeCompare(String operator, String databasetype, String target, String compareWith) {
+    public AttributeCompare(String operator, String databasetype, String target, String compareWith, String table) {
         super(operator, databasetype, "ACMP", target);
         CompareWith = compareWith;
+        this.table = table;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class AttributeCompare extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeACMPCode(databasetype, target);
+        return templateService.getParameterRuleTypeACMPCode(databasetype, target, table);
     }
 
 }

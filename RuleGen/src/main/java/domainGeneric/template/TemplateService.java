@@ -82,8 +82,8 @@ public class TemplateService {
         return factory.getPackageBodyEndCode(databasetype, name);
     }
 
-    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String databasetype) {
-        return factory.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode, databasetype);
+    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String databasetype, String table) {
+        return factory.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode, databasetype,table);
     }
 
     public String getTriggerEndCode(String databasetype, String name) {
@@ -138,48 +138,48 @@ public class TemplateService {
         return factory.getProcedureBodyEndCode(databasetype, name);
     }
 
-    public String getParameterRuleTypeACMPCode(String databasetype, String target) {
-        return factory.getRuleTypeACMPCode(databasetype, target);
+    public String getParameterRuleTypeACMPCode(String databasetype, String target, String table) {
+        return factory.getRuleTypeACMPCode(databasetype, target, table);
     }
 
-    public String getParameterRuleTypeLSTCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeLSTCode(databasetype, target);
+    public String getParameterRuleTypeLSTCode(String databasetype, String target, String table) {
+        return factory.getParameterRuleTypeLSTCode(databasetype, target, table);
     }
 
-    public String getParameterRuleTypeTHRCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeOTHCode(databasetype, target);
+    public String getParameterRuleTypeTHRCode(String databasetype, String target, String table) {
+        return factory.getParameterRuleTypeOTHCode(databasetype, target, table);
     }
 
-    public String getParameterRuleTypeRNGCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeRNGCode(databasetype, target);
+    public String getParameterRuleTypeRNGCode(String databasetype, String target, String table) {
+        return factory.getParameterRuleTypeRNGCode(databasetype, target, table);
     }
 
     public String getRuleTypeEOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
         return factory.getRuleTypeEOTHProcedureCode(databasetype, target, operator, compareWith);
     }
 
-    public String getParameterRuleTypeEOTHCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeEOTHCode(databasetype, target);
+    public String getParameterRuleTypeEOTHCode(String databasetype, String target, String table) {
+        return factory.getParameterRuleTypeEOTHCode(databasetype, target, table);
     }
 
     public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable, String targetTable) {
         return factory.getRuleTypeICMPProcedureCode(databasetype, target, operator, compareWithColumn, compareWithTable, targetTable);
     }
 
-    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable) {
-        return factory.getParameterRuleTypeTCMPCode(databasetype, target, compareWithTable);
+    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable, String table) {
+        return factory.getParameterRuleTypeTCMPCode(databasetype, target, compareWithTable, table);
     }
 
-    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn) {
-        return factory.getParameterRuleTypeICMPCode(databasetype, target, compareWithTable, compareWithColumn);
+    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn, String table) {
+        return factory.getParameterRuleTypeICMPCode(databasetype, target, compareWithTable, compareWithColumn, table);
     }
 
     public String getRuleTypeMODIProcedureCode(String databasetype, String target, String operator, String compareWithColumn) {
         return factory.getRuleTypeMODIProcedureCode(databasetype, target, operator, compareWithColumn);
     }
 
-    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn) {
-        return factory.getParameterRuleTypeMODICode(databasetype, target, compareWithColumn);
+    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn, String table) {
+        return factory.getParameterRuleTypeMODICode(databasetype, target, compareWithColumn, table);
     }
 
     public String getRuleTypeTCMPConstraintCode(String databasetype, String target, String operator, String compareWith) {
@@ -194,7 +194,7 @@ public class TemplateService {
         return factory.getRuleTypeTOTHProcedureCode(databasetype, target, operator, compareWith);
     }
 
-    public String getParameterRuleTypeTOTHCode(String databasetype, String target) {
-        return factory.getParameterRuleTypeTOTHCode(databasetype, target);
+    public String getParameterRuleTypeTOTHCode(String databasetype, String target, String table) {
+        return factory.getParameterRuleTypeTOTHCode(databasetype, target, table);
     }
 }

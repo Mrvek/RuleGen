@@ -284,11 +284,12 @@ public class Template {
         return code;
     }
 
-    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode) {
+    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String table) {
         String code = procedureSpecification;
         code = code.replaceAll("\\{name}", name);
-        code = code.replaceAll("\\{exceptionParameters}", exceptionProcedureDeclarations);
-        code = code.replaceAll("\\{codeParameters}", parameterCode);
+        code = code.replaceAll("\\{exceptions}", exceptionProcedureDeclarations);
+        code = code.replaceAll("\\{attribute}", parameterCode);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
@@ -381,33 +382,38 @@ public class Template {
         return code;
     }
 
-    public String getRuleTypeACMPCode(String target) {
+    public String getRuleTypeACMPCode(String target, String table) {
         String code = ruleTypeACMPCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
-    public String getParameterRuleTypeLSTCode(String target) {
+    public String getParameterRuleTypeLSTCode(String target, String table) {
         String code = parameterRuleTypeLSTCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
-    public String getParameterRuleTypeOTHCode(String target) {
+    public String getParameterRuleTypeOTHCode(String target, String table) {
         String code = parameterRuleTypeOTHCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
-    public String getParameterRuleTypeRNGCode(String target) {
+    public String getParameterRuleTypeRNGCode(String target, String table) {
         String code = parameterRuleTypeRNGCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
-    public String getParameterRuleTypeTOTHCode(String target) {
+    public String getParameterRuleTypeTOTHCode(String target, String table) {
         String code =  parameterRuleTypeTOTHCode;
         code = code.replaceAll("\\{atttribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
@@ -435,10 +441,11 @@ public class Template {
         return code;
     }
 
-    public String getParameterRuleTypeMODICode(String target, String compareWithColumn) {
+    public String getParameterRuleTypeMODICode(String target, String table, String compareWithColumn) {
         String code = parameterRuleTypeMODICode;
         code = code.replaceAll("\\{attribute}", target);
         code = code.replaceAll("\\{code}", compareWithColumn);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 
@@ -449,17 +456,19 @@ public class Template {
         return code;
     }
 
-    public String getParameterRuleTypeICMPCode(String target, String compareWithTable, String compareWithColumn) {
+    public String getParameterRuleTypeICMPCode(String target, String table, String compareWithTable, String compareWithColumn) {
         String code = parameterRuleTypeICMPCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         code = code.replaceAll("\\{compareTable}", compareWithTable);
         code = code.replaceAll("\\{compareAttribute}", compareWithColumn);
         return code;
     }
 
-    public String getParameterRuleTypeTCMPCode(String target, String compareWithTable) {
+    public String getParameterRuleTypeTCMPCode(String target, String table, String compareWithTable) {
         String code = parameterRuleTypeTCMPCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         code = code.replaceAll("\\{compareAttribute}", compareWithTable);
         return code;
     }
@@ -474,9 +483,10 @@ public class Template {
         return code;
     }
 
-    public String getParameterRuleTypeEOTHCode(String target) {
+    public String getParameterRuleTypeEOTHCode(String target, String table) {
         String code = parameterRuleTypeEOTHCode;
         code = code.replaceAll("\\{attribute}", target);
+        code = code.replaceAll("\\{table}", table);
         return code;
     }
 

@@ -37,7 +37,7 @@ public TriggerOnTable(String name, String projectid, String databasetype, String
         code += getDeleteMomentCode();
         code += apackage.getDeclarationCode(TriggerMoment.DELETE);
         code += exception.getExceptionTriggerEnd();
-        code += getEndCode();
+        code += getEndCode() + "\n/";
         Message = "Trigger Succesfully made";
         return code;
     }

@@ -5,11 +5,13 @@ package domainGeneric.businessrule.ruleType;
  */
 public class Modify extends BRRuleType {
     private String compareWithColumn;
+    private String table;
 
 
-    public Modify(String operator, String databasetype, String compareWith, String target) {
+    public Modify(String operator, String databasetype, String compareWith, String target, String table) {
         super(operator, databasetype, "MODI", target);
         this.compareWithColumn = compareWith;
+        this.table = table;
     }
 
     @Override
@@ -24,6 +26,6 @@ public class Modify extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeMODICode(databasetype, target, compareWithColumn);
+        return templateService.getParameterRuleTypeMODICode(databasetype, target, compareWithColumn, table);
     }
 }

@@ -128,9 +128,9 @@ public class TemplateManager {
         return t.getPackageBodyEndCode(name);
     }
 
-    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String databasetype) {
+    public String getProcedureSpecification(String name, String exceptionProcedureDeclarations, String parameterCode, String databasetype, String table) {
         Template t = templates.get(databasetype);
-        return t.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode);
+        return t.getProcedureSpecification(name, exceptionProcedureDeclarations, parameterCode, table);
     }
 
     public String getTriggerEndCode(String databasetype, String name) {
@@ -198,29 +198,29 @@ public class TemplateManager {
         return t.getProcedureBodyEndCode(name);
     }
 
-    public String getRuleTypeACMPCode(String databasetype, String target) {
+    public String getRuleTypeACMPCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getRuleTypeACMPCode(target);
+        return t.getRuleTypeACMPCode(target, table);
     }
 
-    public String getParameterRuleTypeLSTCode(String databasetype, String target) {
+    public String getParameterRuleTypeLSTCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeLSTCode(target);
+        return t.getParameterRuleTypeLSTCode(target, table);
     }
 
-    public String getParameterRuleTypeOTHCode(String databasetype, String target) {
+    public String getParameterRuleTypeOTHCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeOTHCode(target);
+        return t.getParameterRuleTypeOTHCode(target, table);
     }
 
-    public String getParameterRuleTypeRNGCode(String databasetype, String target) {
+    public String getParameterRuleTypeRNGCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeRNGCode(target);
+        return t.getParameterRuleTypeRNGCode(target, table);
     }
 
-    public String getParameterRuleTypeTOTHCode(String databasetype, String target) {
+    public String getParameterRuleTypeTOTHCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeTOTHCode(target);
+        return t.getParameterRuleTypeTOTHCode(target, table);
     }
 
     public String getRuleTypeTOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {
@@ -238,9 +238,9 @@ public class TemplateManager {
         return t.getRuleTypeTCMPConstraintCode(target, operator, compareWith);
     }
 
-    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn) {
+    public String getParameterRuleTypeMODICode(String databasetype, String target, String compareWithColumn, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeMODICode(target, compareWithColumn);
+        return t.getParameterRuleTypeMODICode(target, table, compareWithColumn);
     }
 
     public String getRuleTypeMODIProcedureCode(String databasetype, String target, String operator, String compareWithColumn) {
@@ -248,14 +248,14 @@ public class TemplateManager {
         return t.getRuleTypeMODIProcedureCode(target,operator, compareWithColumn);
     }
 
-    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn) {
+    public String getParameterRuleTypeICMPCode(String databasetype, String target, String compareWithTable, String compareWithColumn, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeICMPCode(target, compareWithTable, compareWithColumn);
+        return t.getParameterRuleTypeICMPCode(target, table, compareWithTable, compareWithColumn);
     }
 
-    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable) {
+    public String getParameterRuleTypeTCMPCode(String databasetype, String target, String compareWithTable, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeTCMPCode(target, compareWithTable);
+        return t.getParameterRuleTypeTCMPCode(target, table, compareWithTable);
     }
 
     public String getRuleTypeICMPProcedureCode(String databasetype, String target, String operator, String compareWithColumn, String compareWithTable, String targetTable) {
@@ -263,9 +263,9 @@ public class TemplateManager {
         return t.getRuleTypeICMPProcedureCode(target, operator, compareWithColumn, compareWithTable, targetTable);
     }
 
-    public String getParameterRuleTypeEOTHCode(String databasetype, String target) {
+    public String getParameterRuleTypeEOTHCode(String databasetype, String target, String table) {
         Template t = templates.get(databasetype);
-        return t.getParameterRuleTypeEOTHCode(target);
+        return t.getParameterRuleTypeEOTHCode(target, table);
     }
 
     public String getRuleTypeEOTHProcedureCode(String databasetype, String target, String operator, String compareWith) {

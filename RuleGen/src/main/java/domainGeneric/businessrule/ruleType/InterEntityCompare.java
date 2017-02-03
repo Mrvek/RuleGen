@@ -7,12 +7,14 @@ public class InterEntityCompare extends BRRuleType {
     private String compareWithColumn;
     private String compareWithTable;
     private String targetTable;
+    private String table;
 
-    public InterEntityCompare(String operator, String databasetype, String compareWith, String compareWithTable, String target, String targetTable) {
+    public InterEntityCompare(String operator, String databasetype, String compareWith, String compareWithTable, String target, String targetTable, String table) {
         super(operator, databasetype, "ICMP", target);
         this.compareWithColumn = compareWith;
         this.compareWithTable = compareWithTable;
         this.targetTable = targetTable;
+        this.table = table;
     }
 
     @Override
@@ -27,6 +29,6 @@ public class InterEntityCompare extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeICMPCode(databasetype, target, compareWithTable, compareWithColumn);
+        return templateService.getParameterRuleTypeICMPCode(databasetype, target, compareWithTable, compareWithColumn, table);
     }
 }

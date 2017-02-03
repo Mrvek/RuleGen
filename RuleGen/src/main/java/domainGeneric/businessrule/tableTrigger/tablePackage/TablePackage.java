@@ -1,5 +1,6 @@
 package domainGeneric.businessrule.tableTrigger.tablePackage;
 
+import domainGeneric.businessrule.constraint.Constraint;
 import domainGeneric.businessrule.standaloneTrigger.Trigger;
 import domainGeneric.businessrule.tableTrigger.TriggerMoment;
 import domainGeneric.template.TemplateService;
@@ -24,6 +25,7 @@ public class TablePackage {
     private Map<List<TriggerMoment>, Procedure> procedures = new HashMap();
     private boolean supported = false;
     private List<Trigger> lonelyTriggers = new ArrayList<>();
+    private List<Constraint> constraints = new ArrayList<>();
 
     public TablePackage(String name, String databasetype, String table, String databasename, int tableID) {
         this.name = name;
@@ -41,13 +43,13 @@ public class TablePackage {
     public void addProcedure(List<String> triggerList, Procedure procedure) {
         List<TriggerMoment> triggermoments = new ArrayList<>();
         for (String moment : triggerList) {
-            if (moment.equals("Insert")) {
+            if (moment.equals("INSERT")) {
                 triggermoments.add(TriggerMoment.INSERT);
             }
-            if (moment.equals("Update")) {
+            if (moment.equals("UPDATE")) {
                 triggermoments.add(TriggerMoment.UPDATE);
             }
-            if (moment.equals("Delete")) {
+            if (moment.equals("DELETE")) {
                 triggermoments.add(TriggerMoment.DELETE);
             }
         }
@@ -119,5 +121,22 @@ public class TablePackage {
 
     public void addStandaloneTrigger(Trigger trigger) {
         lonelyTriggers.add(trigger);
+    }
+    public void addConstraint(Constraint constraint) {constraints.add(constraint);}
+
+    public String getTriggerCodes() {
+        String code = "";
+        for (Constraint C : constraints) {
+            code += C.getCode() + "\n/\n";
+        }
+        return code;
+    }
+
+    public String getConstraintCodes() {
+        String code = "";
+        for (Trigger T : lonelyTriggers) {
+            code += T.getCode() + "\n/\n";
+        }
+        return code;
     }
 }

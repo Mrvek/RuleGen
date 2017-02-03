@@ -45,6 +45,8 @@ public class BusinessruleManager {
                 if (!(BR.getBRRuleType().equals("TOTH") || BR.getBRRuleType().equals("EOTH") || BR.getBRRuleType().equals("ICMP") || BR.getBRRuleType().equals("MODI"))) {
                     Constraint constraint = new Constraint(String.valueOf(BR.getPrimarykey()), ruletype, BR.getDatabasetype(), BR.getTarget(), BR.getTablename(), nameGen.getConstraintName(BR.getDatabaseshortname(), BR.getTablename(), ruletype.getShortname(), BR.getTarget()));
                     constraintList.add(constraint);
+                    TablePackage tablePackage = createOrGetPackage(BR);
+                    tablePackage.addConstraint(constraint);
                 }
 
             } else if (ruletype.getShortname().contains("OTH")) {
@@ -104,31 +106,31 @@ public class BusinessruleManager {
 
         switch (BRData.getBRRuleType()) {
             case ("TUPLE_COMPARE_RULE"):
-                ruletype = new TupleCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getTarget());
+                ruletype = new TupleCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getTarget(), BRData.getTablename());
                 break;
             case ("TUPLE_OTHER_RULE"):
-                ruletype = new TupleOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
+                ruletype = new TupleOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget(), BRData.getTablename());
                 break;
             case ("INTER-ENTITY_RULE"):
-                ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable(), BRData.getTarget(), BRData.getTablename());
+                ruletype = new InterEntityCompare(BRData.getOperator(), BRData.getDatabasetype(), BRData.getComparisonTarget(), BRData.getComparisonTable(), BRData.getTarget(), BRData.getTablename(), BRData.getTablename());
                 break;
             case ("ENTITY_OTHER_RULE"):
-                ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget());
+                ruletype = new EntityOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getComparisonTarget(), BRData.getTablename());
                 break;
             case ("ATTRIBUTE_COMPARE_RULE"):
                 ruletype = new AttributeCompare(BRData.getTarget(), BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0));
                 break;
             case ("ATTRIBUTE_RANGE_RULE"):
-                ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget());
+                ruletype = new AttributeRange(BRData.getValue(0), BRData.getValue(1), BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getTablename());
                 break;
             case ("ATTRIBUTE_LIST_RULE"):
-                ruletype = new AttributeList(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getValues());
+                ruletype = new AttributeList(BRData.getOperator(), BRData.getDatabasetype(), BRData.getTarget(), BRData.getValues(), BRData.getTablename());
                 break;
             case ("ATTRIBUTE_OTHER_RULE"):
-                ruletype = new AttributeOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
+                ruletype = new AttributeOther(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget(), BRData.getTablename());
                 break;
             case ("MODIFY_RULE"):
-                ruletype = new Modify(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget());
+                ruletype = new Modify(BRData.getOperator(), BRData.getDatabasetype(), BRData.getValue(0), BRData.getTarget(), BRData.getTablename());
                 break;
         }
         return ruletype;
@@ -141,7 +143,10 @@ public class BusinessruleManager {
             TablePackage tablePackage = triggers.get(trigger);
 
             String code = tablePackage.getCode();
-            code += trigger.getCode();
+            code += trigger.getCode() + "\n";
+
+            code += tablePackage.getTriggerCodes() + "\n";
+            code += tablePackage.getConstraintCodes() + "\n";
 
             CodeReturnData Listvalue = new CodeReturnData(tablePackage.getTableID(), this.supportedDatabase, code);
             result.add(Listvalue);

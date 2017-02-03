@@ -59,10 +59,10 @@ public class DataPull {
         packageTemplate.setBodyEnd("END {name};");
 
         ProcedureTemplate procedureTemplate = new ProcedureTemplate();
-        procedureTemplate.setSpecification("PROCEDURE {name}({codeParameters}, {exceptionParameters});\n");
-        procedureTemplate.setExcecution("{name}({attribute}, {exceptionParameters});");
+        procedureTemplate.setSpecification("PROCEDURE {name}({attribute} {table}.{attribute}%type, {exceptions});\n");
+        procedureTemplate.setExcecution("{name}(:NEW.{attribute}, {exceptionParameters});");
         procedureTemplate.setBodyStart("PROCEDURE {name}({attribute}, {exceptionParameters}) IS\n");
-        procedureTemplate.setBodyDecleration("{PassedName} VARCHAR2;\n");
+        procedureTemplate.setBodyDecleration("{checkName} VARCHAR2;\n");
         procedureTemplate.setBodyEnd("END {name};");
 
         TriggerTemplate triggerTemplate = new TriggerTemplate();
@@ -77,9 +77,9 @@ public class DataPull {
         triggerTemplate.setExceptionRaiseError("IF ({errorStack} IS NOT NULL) THEN\n\traise {errorException};\nEND IF;");
         triggerTemplate.setExceptionExceptWarning("WHEN {warningException} THEN\n\tRAISE_APPLICATION_ERROR(20100, {warningStack});\n");
         triggerTemplate.setExceptionRaiseWarning("IF ({warningStack} IS NOT NULL) THEN\n\traise {warningException};\nEND IF;");
-        triggerTemplate.setAddStringToExceptionStack("\tIF (I_Passed IS FALSE) THEN\n\t{exceptionStack} = {exceptionStack} || '{message}';\nEND IF;\n");
-        triggerTemplate.setExceptionParameters("VARCHAR2 {errorStack}, VARCHAR2 {warningStack}");
-        triggerTemplate.setExceptionTriggerDeclaration("TEST");
+        triggerTemplate.setAddStringToExceptionStack("\tIF (I_Passed IS FALSE) THEN\n\t{exceptionStack} := {exceptionStack} || '{message}';\nEND IF;\n");
+        triggerTemplate.setExceptionParameters("{errorStack}, {warningStack}");
+        triggerTemplate.setExceptionTriggerDeclaration("");
 
         ArrayList<RuletypeTemplate> ruletypeTemplates = new ArrayList<>();
 
@@ -87,47 +87,47 @@ public class DataPull {
         ACMP.setBusinessruleType(new BusinessruleType());
         ACMP.getBusinessruleType().setType("ATTRIBUTE_COMPARE_RULE");
         ACMP.setConstraintCode("{attribute} {operator} ?");
-        ACMP.setParameterCode("{attribute} novaluetype...");
+        ACMP.setParameterCode("{attribute} {table}.{attribute}%type");
         ACMP.setProcedureCode("I_Passed := {attribute} {operator} ?;\n");
 
         RuletypeTemplate LST = new RuletypeTemplate();
         LST.setBusinessruleType(new BusinessruleType());
         LST.getBusinessruleType().setType("ATTRIBUTE_LIST_RULE");
         LST.setConstraintCode("{attribute} {operator} ?");
-        LST.setParameterCode("{attribute} novaluetype...");
+        LST.setParameterCode("{attribute} {table}.{attribute}%type");
         LST.setProcedureCode("I_Passed := {attribute} {operator} ?;\n");
 
         RuletypeTemplate RNG = new RuletypeTemplate();
         RNG.setBusinessruleType(new BusinessruleType());
         RNG.getBusinessruleType().setType("ATTRIBUTE_RANGE_RULE");
         RNG.setConstraintCode("{attribute} {operator} {from} AND {to}");
-        RNG.setParameterCode("{attribute} novaluetype...");
+        RNG.setParameterCode("{attribute} {table}.{attribute}%type");
         RNG.setProcedureCode("I_Passed := {attribute} {operator} {from} AND {to};\n");
 
         RuletypeTemplate AOTH = new RuletypeTemplate();
         AOTH.setBusinessruleType(new BusinessruleType());
         AOTH.getBusinessruleType().setType("ATTRIBUTE_OTHER_RULE");
         AOTH.setConstraintCode("?");
-        AOTH.setParameterCode("{attribute} novaluetype...");
+        AOTH.setParameterCode("{attribute} {table}.{attribute}%type");
         AOTH.setProcedureCode("?");
 
         RuletypeTemplate TCMP = new RuletypeTemplate();
         TCMP.setBusinessruleType(new BusinessruleType());
         TCMP.getBusinessruleType().setType("TUPLE_COMPARE_RULE");
         TCMP.setConstraintCode("{attribute} {operator} {comparison}");
-        TCMP.setParameterCode("{attribute} novaluetype...");
+        TCMP.setParameterCode("{attribute} {table}.{attribute}%type");
         TCMP.setProcedureCode("I_Passed := {attribute} {operator} {comparison};\n");
 
         RuletypeTemplate TOTH = new RuletypeTemplate();
         TOTH.setBusinessruleType(new BusinessruleType());
         TOTH.getBusinessruleType().setType("TUPLE_OTHER_RULE");
-        TOTH.setParameterCode("{attribute} novaluetype...");
+        TOTH.setParameterCode("{attribute} {table}.{attribute}%type");
         TOTH.setProcedureCode("{code}");
 
         RuletypeTemplate ICMP = new RuletypeTemplate();
         ICMP.setBusinessruleType(new BusinessruleType());
         ICMP.getBusinessruleType().setType("INTER-ENTITY COMPARE RULE");
-        ICMP.setParameterCode("{attribute} novaluetype...");
+        ICMP.setParameterCode("{attribute} {table}.{attribute}%type");
         ICMP.setProcedureCode("cursor lc_{compareTable} is\n" +
                 "select {compareTable}.{compareAttribute}\n" +
                 "from {compareTable}\n" +
@@ -142,7 +142,7 @@ public class DataPull {
         RuletypeTemplate EOTH = new RuletypeTemplate();
         EOTH.setBusinessruleType(new BusinessruleType());
         EOTH.getBusinessruleType().setType("ENTITY_OTHER_RULE");
-        EOTH.setParameterCode("{attribute} novaluetype...");
+        EOTH.setParameterCode("{attribute} {table}.{attribute}%type");
         EOTH.setProcedureCode("l_{attribute} pls_integer;\n" +
                 "BEGIN\n" +
                 "select count(*)\n" +
@@ -154,7 +154,7 @@ public class DataPull {
         RuletypeTemplate MODI = new RuletypeTemplate();
         MODI.setBusinessruleType(new BusinessruleType());
         MODI.getBusinessruleType().setType("MODIFY_RULE");
-        MODI.setParameterCode("{attribute} novaluetype...");
+        MODI.setParameterCode("{attribute} {table}.{attribute}%type");
         MODI.setProcedureCode("cursor lc_{table}\n" +
                 "select {attribute}\n" +
                 "from {table}\n" +

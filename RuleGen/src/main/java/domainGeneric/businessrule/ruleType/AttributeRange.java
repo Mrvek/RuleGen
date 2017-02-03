@@ -6,11 +6,13 @@ package domainGeneric.businessrule.ruleType;
 public class AttributeRange extends BRRuleType {
     private String from;
     private String to;
+    private String table;
 
-    public AttributeRange(String from, String to, String operator, String databasetype, String target) {
+    public AttributeRange(String from, String to, String operator, String databasetype, String target, String table) {
         super(operator, databasetype, "ARNG", target);
         this.from = from;
         this.to = to;
+        this.table = table;
     }
 
     @Override
@@ -25,6 +27,6 @@ public class AttributeRange extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeRNGCode(databasetype, target);
+        return templateService.getParameterRuleTypeRNGCode(databasetype, target, table);
     }
 }

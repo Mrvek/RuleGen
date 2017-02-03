@@ -8,11 +8,13 @@ import java.util.List;
 public class AttributeList extends BRRuleType {
     private List<String> values;
     private String operator;
+    private String table;
 
-    public AttributeList(String operator, String databasetype, String target, List<String> values) {
+    public AttributeList(String operator, String databasetype, String target, List<String> values, String table) {
         super(operator, databasetype, "ALIS", target);
         this.values = values;
         this.operator = operator;
+        this.table = table;
     }
 
     @Override
@@ -27,6 +29,6 @@ public class AttributeList extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeLSTCode(databasetype, target);
+        return templateService.getParameterRuleTypeLSTCode(databasetype, target, table);
     }
 }

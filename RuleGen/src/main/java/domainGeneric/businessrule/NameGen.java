@@ -24,7 +24,7 @@ public class NameGen {
                 tableName + "_" +
                 ruleType ;
         int versionNumber = getVersionNumber(name);
-        name += name + "_" + versionNumber;
+        name += "_" + versionNumber;
         return name;
     }
 
@@ -44,7 +44,7 @@ public class NameGen {
                 target + "_" +
                 "CNS";
         int versionNumber = getVersionNumber(name);
-        name += name + "_" + versionNumber;
+        name += "_" + versionNumber;
         return name;
     }
 

@@ -40,7 +40,7 @@ public class Exception {
     }
 
     public String getExceptionProcedureParameters() {
-        return warningStackName + ", " + errorStackName;
+        return warningStackName + "VARCHAR2, " + errorStackName + "VARCHAR2";
     }
 
     public String getAddExceptionInProcedureCode(String severity, String message, Map<String, String> tokens) {

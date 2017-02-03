@@ -5,10 +5,12 @@ package domainGeneric.businessrule.ruleType;
  */
 public class TupleOther extends BRRuleType {
     private String compareWith;
+    private String table;
 
-    public TupleOther(String operator, String databasetype, String target, String compareWith) {
+    public TupleOther(String operator, String databasetype, String target, String compareWith, String table) {
         super(operator, databasetype, "TOTH", target);
         this.compareWith = compareWith;
+        this.table = table;
     }
 
     @Override
@@ -23,6 +25,6 @@ public class TupleOther extends BRRuleType {
 
     @Override
     public String getParameterCode() {
-        return templateService.getParameterRuleTypeTOTHCode(databasetype, target);
+        return templateService.getParameterRuleTypeTOTHCode(databasetype, target, table);
     }
 }
