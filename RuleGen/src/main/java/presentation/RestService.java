@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import presentation.Rest.BRDataFetch;
 import presentation.Rest.ProjectDataFetch;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static spark.Spark.after;
@@ -31,10 +33,16 @@ public class RestService {
             boolean answer = new BRDataFetch().pushcode(request.splat()[0]);
             return answer;
         });
-
+        get("/check", (request, response) -> {
+        	Date date = new Date();
+        	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm:ss a");
+        	String formattedDate = sdf.format(date);
+        	System.out.println("Connection check done at: "+formattedDate);
+            return "Connection established at: " + formattedDate;
+        });
 
         get("/project/*/new", (request, response) -> {
-        	System.out.println("Starting engines on project: " + request.splat()[0]);
+        	System.out.println("Started filling tables for ToolsDB of project: " + request.splat()[0]);
             JSONArray answer = new ProjectDataFetch().initialise(request.splat()[0]);
             return answer;
         });

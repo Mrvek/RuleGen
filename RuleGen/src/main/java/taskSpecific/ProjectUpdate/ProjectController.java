@@ -23,15 +23,15 @@ import java.util.ArrayList;
 public class ProjectController {
     //TODO SYSOUT REMOVAL
     public JSONArray initialiseProject(int project_id) {
-    	System.out.println("IS IT WORKING AS INTENDED 0?");
+    	System.out.println("Starting Project Service");
     	Project project = ToolDbService.getPService().getProject(project_id);
-        System.out.println("IS IT WORKING AS INTENDED 1?");
+        System.out.println("Starting Analysis Service");
         TargetAnalysisService tac = new TargetAnalysisService(project); 
-        System.out.println("IS IT WORKING AS INTENDED 2?");
+        System.out.println("Starting Analysis on target database");
         ArrayList<Table> targetTables = tac.getTargetDatabaseStructure(project.getSupporteddatabase());
-        System.out.println("IS IT WORKING AS INTENDED 3?");
+        System.out.println("Starting to push tables to ToolsDB");
         ToolDbService.getPService().updateProject(project_id, targetTables);
-        System.out.println("IS IT WORKING AS INTENDED 4?");
+        System.out.println("Completed push to ToolsDB?");
         return null;
     }
     

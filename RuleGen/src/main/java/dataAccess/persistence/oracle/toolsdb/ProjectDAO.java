@@ -312,18 +312,18 @@ public class ProjectDAO extends BaseDAO {
             ps.setInt(1, project_id);
             ResultSet dbResultSet = ps.executeQuery();
             while (dbResultSet.next()) {
-            	System.out.println("voor toevoegen supdatabases");
+            	System.out.println("Adding support database to Project");
                 SupportedDatabases sdb = sus.getSupportedDatabaseById(dbResultSet.getInt("SUPPORTEDDATABASES_ID"));
-                System.out.println("voor toevoegen schema");
+                System.out.println("Adding DatabaseSchema to Project");
                 DatabaseSchema ds = this.getDatabaseSchema(dbResultSet.getInt("DATABASESCHEMA_ID"));
-                System.out.println("voor toevoegen project");
+                System.out.println("Combine into Project");
                 Project project = new Project(dbResultSet.getInt("PROJECT_ID"),
                                               dbResultSet.getString("PROJECTNAME"),
                                               dbResultSet.getString("ABBREVIATION"),
                                               Integer.toString(dbResultSet.getInt("USERNAME")),
                                                sdb, ds);
                 
-                System.out.println("na toevoegen project");
+                System.out.println("Returning Project");
                 return project;
             }
             

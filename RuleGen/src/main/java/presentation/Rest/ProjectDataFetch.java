@@ -12,7 +12,7 @@ public class ProjectDataFetch {
     public JSONArray initialise(String projectid_s) {
         int projectId = Integer.parseInt(projectid_s);
         //TODO REMOVE SYSOUT
-        System.out.println("Starting engines on project: " + projectId);
+        System.out.println("Starting fetch on project: " + projectId);
         JSONArray result = new ProjectController().initialiseProject(projectId);
         return result;
     }

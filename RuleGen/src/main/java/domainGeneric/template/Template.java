@@ -205,17 +205,35 @@ public class Template {
         result = result.replaceFirst("\\?", value);
         return result;
     }
-
+    public static boolean isParsable(String input){
+        boolean parsable = true;
+        try{
+            Integer.parseInt(input);
+        }catch(NumberFormatException e){
+            parsable = false;
+        }
+        return parsable;
+    }
+	//Returns list value and adds quotes if it's string, if it is an number or NULL then no quotes.
     private String createValuesList(List<String> values) {
         String value = "";
         for (String V : values) {
             if (value.isEmpty()) {
-                value += V;
+            	if (isParsable(V) || V == "NULL" ){
+            		value += V;
+            	}else{
+            		value += "'" + V + "'";
+            	}
             } else {
-                value += "," + V;
+            	if (isParsable(V) || V == "NULL" ){
+            		value += "," + V;
+            	}else{
+            		value += "," + "'" + V + "'";
+            	}
             }
         }
-        return value;
+        //Adds () to make sure it's valid list
+        return ("("+value+")");
     }
 
     private String translateOperator(String operator) {
